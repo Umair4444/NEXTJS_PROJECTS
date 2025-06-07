@@ -1,4 +1,4 @@
-import HeroSection from "@/components/HeroSection";
+import HeroSection from "@/components/HeroSec";
 import FeatureBlogs from "@/components/FeaatureBlogs";
 import { posts } from "@/components/FeatureBlogsData";
 import TrendingTopics from "@/components/TrendingTopics";
