@@ -1,10 +1,16 @@
-import HeroSection from "@/components/heroSection";
-import Image from "next/image";
+import HeroSection from "@/components/HeroSection";
+import FeatureBlogs from "@/components/FeaatureBlogs";
+import { posts } from "@/components/FeatureBlogsData";
+import TrendingTopics from "@/components/TrendingTopics";
+import { topics } from "@/components/TrendingTopicsData";
+
 
 export default function Home() {
   return (
-    <main>
+    <main className="">
       <HeroSection />
+      <FeatureBlogs posts={posts} />
+      <TrendingTopics topics={topics} />
     </main>
   );
 }
