@@ -1,5 +1,4 @@
 "use client";
-
 import Link from "next/link";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
@@ -48,7 +47,7 @@ export default function Navbar() {
             placeholder="Search articles..."
             className="w-64 text-sm border-gray-300 dark:border-gray-700"
           />
-          <ThemeProvider  />
+          <ThemeProvider />
         </div>
 
         {/* Mobile Menu Button */}
