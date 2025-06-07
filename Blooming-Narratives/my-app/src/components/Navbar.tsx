@@ -23,7 +23,7 @@ export default function Navbar() {
           href="/"
           className="text-2xl font-bold text-blue-600 dark:text-blue-400"
         >
-          Blogify
+          Blooming Narratives
         </Link>
 
         {/* Desktop Navigation */}
