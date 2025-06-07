@@ -1,0 +1,87 @@
+// "use client";
+
+// import React, { useState } from "react";
+// import Image from "next/image";
+// import { useDispatch, useSelector } from "react-redux";
+// import { addToCart } from "@/app/Redux-toolkit/feature/cartSlice";
+// import { RootState } from "@/app/Redux-toolkit/store";
+// import { IProduct } from "@/app/utils/Types";
+
+// const Page = ({ params }: { params: { item: string } }) => {
+//   const dispatch = useDispatch();
+
+//   // Retrieve products from Redux store
+//   const products = useSelector((state: RootState) => state.product);
+
+//   // Find the specific product based on `params.item`
+//   const find = products.find((item: any) => item.id == params.item);
+
+//   // If the product is not found, return a message
+//   if (!find) return <div>Product not found!</div>;
+
+//   // Initialize the cart item state
+//   const [cartItem, setCartItem] = useState({
+//     id: find.id,
+//     title: find.title,
+//     image: find.image,
+//     slug: find.slug,
+//     price: find.price,
+//     category: find.category,
+//     description: find.description,
+//     flavors: find.flavors,
+//     topping: find.topping,
+//     quantity: 1,
+//     discount: find.discount,
+//     // uuid: find.uuid,
+//   });
+
+//   const handleAddToCart = () => {
+//     dispatch(addToCart(cartItem)); // Dispatch action to add item to cart
+//   };
+
+//   return (
+//     <div className="bg-white text-black flex py-10">
+//       <div className="px-3 grid grid-flow-col gap-14 py-3 w-2/3 justify-items-center items-center">
+//         <div className="w-full grid">
+//           <Image src={find.image} alt={find.title} className="w-full" />
+//         </div>
+//         <div className="grid self-start justify-self-start py-4 text-xl gap-4">
+//           <div>Name: {find.title}</div>
+//           <div>{find.description}</div>
+//           <div>Ingredients:</div>
+//           <div>Ratings:</div>
+//           <div>Reviews:</div>
+//         </div>
+//         <div className="grid grid-flow-col w-fit gap-4 self-center justify-self-center my-3">
+//           <div>
+//             <button
+//               type="button"
+//               onClick={() => setCartItem({ ...cartItem, quantity: Math.max(cartItem.quantity - 1, 1) })}
+//               className="px-4 text-lg bg-slate-400 text-white"
+//             >
+//               -
+//             </button>
+//           </div>
+//           <div>{cartItem.quantity}</div>
+//           <div>
+//             <button
+//               type="button"
+//               onClick={() => setCartItem({ ...cartItem, quantity: cartItem.quantity + 1 })}
+//               className="px-4 text-lg bg-slate-400 text-white"
+//             >
+//               +
+//             </button>
+//             <button
+//               className="px-5 py-2 mx-5 border-2 bg-blue-500 text-white"
+//               onClick={handleAddToCart}
+//             >
+//               Add to cart
+//             </button>
+//           </div>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default Page;
