@@ -127,14 +127,20 @@ export default function Dashboard() {
             onScroll={handleScroll}
           >
             <ul className="space-y-2">
-              {todos?.map((todo) => (
-                <li
-                  key={todo.id}
-                  className="bg-white px-4 py-2 rounded-lg shadow-sm list-disc list-inside marker:text-red-500 marker:text-xl capitalize text-black"
-                >
-                  {todo.task}
+              {Array.isArray(todos) && todos.length > 0 ? (
+                todos.map((todo) => (
+                  <li
+                    key={todo.id}
+                    className="bg-white px-4 py-2 rounded-lg shadow-sm list-disc list-inside marker:text-red-500 marker:text-xl capitalize text-black"
+                  >
+                    {todo.task}
+                  </li>
+                ))
+              ) : (
+                <li className="text-center text-white/70 italic">
+                  No tasks yet.
                 </li>
-              ))}
+              )}
             </ul>
           </div>
         </CardContent>
