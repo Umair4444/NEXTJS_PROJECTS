@@ -127,7 +127,7 @@ export default function Dashboard() {
             onScroll={handleScroll}
           >
             <ul className="space-y-2">
-              {todos.map((todo) => (
+              {todos?.map((todo) => (
                 <li
                   key={todo.id}
                   className="bg-white px-4 py-2 rounded-lg shadow-sm list-disc list-inside marker:text-red-500 marker:text-xl capitalize text-black"
