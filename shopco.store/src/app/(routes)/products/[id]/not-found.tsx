@@ -70,7 +70,7 @@ export default function ProductNotFound() {
           <div className="mb-12">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">Product Not Found!</h1>
             <p className="text-xl text-gray-600 mb-6 max-w-2xl mx-auto">
-              Sorry, the product you're looking for is no longer available, out of stock, or may have been moved to a
+              Sorry, the product you&apos;re looking for is no longer available, out of stock, or may have been moved to a
               different location.
             </p>
             <p className="text-gray-500">This could happen if the product was discontinued or the link is outdated.</p>
