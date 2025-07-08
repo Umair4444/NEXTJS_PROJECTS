@@ -98,7 +98,7 @@ export default function ContactPage() {
     {
       question: "How can I track my order?",
       answer:
-        "Once your order ships, you'll receive a tracking number via email. You can also track orders in your account dashboard.",
+        "Once your order ships, you&apos;ll receive a tracking number via email. You can also track orders in your account dashboard.",
     },
     {
       question: "Do you ship internationally?",
@@ -124,7 +124,7 @@ export default function ContactPage() {
         <div className="max-w-7xl mx-auto px-4 text-center">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Get in Touch</h1>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Have a question or need help? We're here to assist you. Reach out to us through any of the methods below.
+            Have a question or need help? We&apos;re here to assist you. Reach out to us through any of the methods below.
           </p>
         </div>
       </section>
@@ -161,7 +161,7 @@ export default function ContactPage() {
                 <CardHeader>
                   <CardTitle className="text-2xl">Send us a Message</CardTitle>
                   <CardDescription>
-                    Fill out the form below and we'll get back to you as soon as possible.
+                    Fill out the form below and we&apos;ll get back to you as soon as possible.
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -365,7 +365,7 @@ export default function ContactPage() {
                   <CardContent className="p-6">
                     <h3 className="font-semibold text-lg mb-3">How can I track my order?</h3>
                     <p className="text-gray-600 leading-relaxed">
-                      Once your order ships, you'll receive a tracking number via email. You can also track orders in
+                      Once your order ships, you&apos;ll receive a tracking number via email. You can also track orders in
                       your account dashboard.
                     </p>
                   </CardContent>
@@ -388,7 +388,7 @@ export default function ContactPage() {
                   <CardContent className="p-6">
                     <h3 className="font-semibold text-lg mb-3">How do I start a return?</h3>
                     <p className="text-gray-600 leading-relaxed">
-                      Log into your account, go to order history, and click "Return Items" next to your order. Follow
+                      Log into your account, go to order history, and click  &quot;Return Items &quot; next to your order. Follow
                       the prompts to print a return label.
                     </p>
                   </CardContent>
@@ -397,7 +397,7 @@ export default function ContactPage() {
                   <CardContent className="p-6">
                     <h3 className="font-semibold text-lg mb-3">When will I receive my refund?</h3>
                     <p className="text-gray-600 leading-relaxed">
-                      Refunds are processed within 5-7 business days after we receive your returned items. You'll
+                      Refunds are processed within 5-7 business days after we receive your returned items. You&apos;ll
                       receive an email confirmation when processed.
                     </p>
                   </CardContent>

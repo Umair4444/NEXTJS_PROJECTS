@@ -16,7 +16,7 @@ export default function CartPage() {
         <div className="text-center">
           <ShoppingBag className="w-16 h-16 mx-auto text-gray-400 mb-4" />
           <h1 className="text-2xl font-bold mb-4">Your cart is empty</h1>
-          <p className="text-gray-600 mb-8">Looks like you haven't added anything to your cart yet.</p>
+          <p className="text-gray-600 mb-8">Looks like you haven&apos;t added anything to your cart yet.</p>
           <Button asChild size="lg" className="rounded-full">
             <Link href="/products">Continue Shopping</Link>
           </Button>

@@ -92,10 +92,10 @@ export default function BrandNotFound() {
           <div className="mb-12">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">Brand Not Found</h1>
             <p className="text-xl text-gray-600 mb-6 max-w-2xl mx-auto">
-              We couldn't find the brand you're looking for. It may have been removed, renamed, or the link might be
+              We couldn&apos;t find the brand you&apos;re looking for. It may have been removed, renamed, or the link might be
               incorrect.
             </p>
-            <p className="text-gray-500">Don't worry! We have over 200+ amazing brands for you to explore.</p>
+            <p className="text-gray-500">Don&apos;t worry! We have over 200+ amazing brands for you to explore.</p>
           </div>
 
           {/* Action Buttons */}
@@ -235,7 +235,7 @@ export default function BrandNotFound() {
       {/* Help Section */}
       <section className="py-16 bg-black text-white">
         <div className="max-w-4xl mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold mb-6">Can't Find What You're Looking For?</h2>
+          <h2 className="text-3xl font-bold mb-6">Can&apos;t Find What You&apos;re Looking For?</h2>
           <p className="text-xl text-gray-300 mb-8">
             Our team is here to help you discover the perfect brand for your style.
           </p>

@@ -209,7 +209,7 @@ export default function UserPage() {
               <Card>
                 <CardHeader>
                   <CardTitle>Wishlist</CardTitle>
-                  <CardDescription>Items you've saved for later</CardDescription>
+                  <CardDescription>Items you&apos;ve saved for later</CardDescription>
                 </CardHeader>
                 <CardContent>
                   <div className="text-center py-8">

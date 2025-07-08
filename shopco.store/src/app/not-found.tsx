@@ -16,8 +16,8 @@ import { Input } from "@/components/ui/input";
 export default function NotFound() {
   const popularCategories = [
     { name: "New Arrivals", href: "/products?new=true" },
-    { name: "Men's Clothing", href: "/products?category=men" },
-    { name: "Women's Clothing", href: "/products?category=women" },
+    { name: "Men&apos;s Clothing", href: "/products?category=men" },
+    { name: "Women&apos;s Clothing", href: "/products?category=women" },
     { name: "Sale Items", href: "/products?sale=true" },
     { name: "Accessories", href: "/products?category=accessories" },
     { name: "Top Brands", href: "/brands" },
@@ -79,9 +79,9 @@ export default function NotFound() {
               Oops! Page Not Found
             </h1>
             <p className="text-xl text-gray-600 mb-6 max-w-2xl mx-auto">
-              The page you're looking for seems to have wandered off like a
-              fashion trend from last season. Don't worry, we'll help you find
-              what you're looking for!
+              The page you&apos;re looking for seems to have wandered off like a
+              fashion trend from last season. Don&apos;t worry, we&apos;ll help you find
+              what you&apos;re looking for!
             </p>
             <p className="text-gray-500">
               Error Code: 404 | The requested page could not be found

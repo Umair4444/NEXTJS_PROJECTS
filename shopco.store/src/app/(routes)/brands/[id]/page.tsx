@@ -28,9 +28,9 @@ export default function BrandPage() {
     notFound()
   }
 
-  // Filter products by brand (in a real app, you'd have brand info in products)
+  // Filter products by brand (in a real app, you&apos;d have brand info in products)
   const brandProducts = useMemo(() => {
-    // For demo purposes, we'll show some products as if they belong to this brand
+    // For demo purposes, we&apos;ll show some products as if they belong to this brand
     const filtered = products.filter((product) => {
       const matchesSearch = product.name.toLowerCase().includes(searchQuery.toLowerCase())
       const matchesCategory = selectedCategories.length === 0 || selectedCategories.includes(product.category)
@@ -225,7 +225,7 @@ export default function BrandPage() {
             </p>
             <p className="text-center leading-relaxed mt-6">
               With a focus on {brand.specialties.join(", ").toLowerCase()}, {brand.name} continues to set trends and
-              redefine what it means to be stylish in today's world. Their commitment to quality and customer
+              redefine what it means to be stylish in today&apos;s world. Their commitment to quality and customer
               satisfaction has made them a trusted name in the fashion industry.
             </p>
           </div>

@@ -72,7 +72,7 @@ export default function AboutPage() {
           <div className="text-center max-w-4xl mx-auto">
             <h1 className="text-4xl md:text-6xl font-bold mb-6">About SHOP.CO</h1>
             <p className="text-xl text-gray-600 leading-relaxed">
-              We're more than just a fashion retailer. We're a community of style enthusiasts dedicated to helping you
+              We&apos;re more than just a fashion retailer. We&apos;re a community of style enthusiasts dedicated to helping you
               express your unique personality through carefully curated clothing that makes you feel confident and
               authentic.
             </p>
@@ -164,7 +164,7 @@ export default function AboutPage() {
                 </div>
                 <h3 className="text-2xl font-bold mb-4">Our Vision</h3>
                 <p className="text-gray-600 leading-relaxed">
-                  To become the world's most trusted and beloved fashion destination, where style meets sustainability,
+                  To become the world&apos;s most trusted and beloved fashion destination, where style meets sustainability,
                   and where every customer feels confident, valued, and inspired to be their authentic self.
                 </p>
               </CardContent>
@@ -249,11 +249,11 @@ export default function AboutPage() {
               <h2 className="text-3xl md:text-4xl font-bold mb-6">Committed to Sustainability</h2>
               <div className="space-y-4 text-gray-600 leading-relaxed">
                 <p>
-                  We believe fashion should be beautiful, not just in appearance, but in its impact on the world. That's
-                  why we're committed to sustainable practices throughout our supply chain.
+                  We believe fashion should be beautiful, not just in appearance, but in its impact on the world. That&apos;s
+                  why we&apos;re committed to sustainable practices throughout our supply chain.
                 </p>
                 <p>
-                  From partnering with eco-conscious brands to implementing carbon-neutral shipping options, we're
+                  From partnering with eco-conscious brands to implementing carbon-neutral shipping options, we&apos;re
                   constantly working to reduce our environmental footprint while maintaining the quality and style you
                   love.
                 </p>

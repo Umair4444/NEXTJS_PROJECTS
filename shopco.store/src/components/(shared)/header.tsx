@@ -44,8 +44,8 @@ export function Header() {
                   <DropdownMenuItem asChild>
                     <Link href="/products">All Products</Link>
                   </DropdownMenuItem>
-                  <DropdownMenuItem>Men's Clothing</DropdownMenuItem>
-                  <DropdownMenuItem>Women's Clothing</DropdownMenuItem>
+                  <DropdownMenuItem>Men&apos;s Clothing</DropdownMenuItem>
+                  <DropdownMenuItem>Women&apos;s Clothing</DropdownMenuItem>
                   <DropdownMenuItem>Accessories</DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>

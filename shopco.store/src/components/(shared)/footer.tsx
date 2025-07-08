@@ -27,7 +27,7 @@ export function Footer() {
           <div className="md:col-span-1">
             <h3 className="text-2xl font-bold mb-4">SHOP.CO</h3>
             <p className="text-gray-600 mb-6">
-              We have clothes that suits your style and which you're proud to wear. From women to men.
+              We have clothes that suits your style and which you&apos;re proud to wear. From women to men.
             </p>
             <div className="flex gap-3">
               <div className="w-7 h-7 bg-white border border-gray-300 rounded flex items-center justify-center">
