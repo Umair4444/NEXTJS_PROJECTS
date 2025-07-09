@@ -1,20 +1,27 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useState } from "react"
-import Link from "next/link"
-import { Minus, Plus, ShoppingBag, Trash2 } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
-import { Badge } from "@/components/ui/badge"
+import { useState } from "react";
+import Link from "next/link";
+import { Minus, Plus, ShoppingBag, Trash2 } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+import { Badge } from "@/components/ui/badge";
+import Image from "next/image";
 
 interface CartSidebarProps {
-  children: React.ReactNode
+  children: React.ReactNode;
 }
 
 export function CartSidebar({ children }: CartSidebarProps) {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
   const [cartItems, setCartItems] = useState([
     {
       id: 1,
@@ -37,22 +44,29 @@ export function CartSidebar({ children }: CartSidebarProps) {
       quantity: 1,
       image: "/placeholder.svg?height=60&width=60",
     },
-  ])
+  ]);
 
   const updateQuantity = (id: number, newQuantity: number) => {
     if (newQuantity === 0) {
-      removeItem(id)
-      return
+      removeItem(id);
+      return;
     }
-    setCartItems((items) => items.map((item) => (item.id === id ? { ...item, quantity: newQuantity } : item)))
-  }
+    setCartItems((items) =>
+      items.map((item) =>
+        item.id === id ? { ...item, quantity: newQuantity } : item
+      )
+    );
+  };
 
   const removeItem = (id: number) => {
-    setCartItems((items) => items.filter((item) => item.id !== id))
-  }
+    setCartItems((items) => items.filter((item) => item.id !== id));
+  };
 
-  const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0)
-  const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0)
+  const subtotal = cartItems.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0
+  );
+  const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
@@ -69,7 +83,9 @@ export function CartSidebar({ children }: CartSidebarProps) {
         {cartItems.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-full text-center">
             <ShoppingBag className="h-16 w-16 text-gray-300 mb-4" />
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">Your cart is empty</h3>
+            <h3 className="text-lg font-semibold text-gray-900 mb-2">
+              Your cart is empty
+            </h3>
             <p className="text-gray-600 mb-6">Add some items to get started!</p>
             <Button asChild onClick={() => setIsOpen(false)}>
               <Link href="/products">Start Shopping</Link>
@@ -83,7 +99,9 @@ export function CartSidebar({ children }: CartSidebarProps) {
                 {cartItems.map((item) => (
                   <div key={item.id} className="flex items-center space-x-3">
                     <div className="w-16 h-16 bg-gray-100 rounded-lg overflow-hidden flex-shrink-0">
-                      <img
+                      <Image
+                        width={500}
+                        height={500}
                         src={item.image || "/placeholder.svg"}
                         alt={item.name}
                         className="w-full h-full object-cover"
@@ -91,24 +109,34 @@ export function CartSidebar({ children }: CartSidebarProps) {
                     </div>
 
                     <div className="flex-1 min-w-0">
-                      <h3 className="text-sm font-medium text-gray-900 truncate">{item.name}</h3>
-                      <p className="text-sm font-bold text-gray-900">${item.price}</p>
+                      <h3 className="text-sm font-medium text-gray-900 truncate">
+                        {item.name}
+                      </h3>
+                      <p className="text-sm font-bold text-gray-900">
+                        ${item.price}
+                      </p>
 
                       <div className="flex items-center space-x-2 mt-2">
                         <Button
                           variant="outline"
                           size="icon"
                           className="h-6 w-6 bg-transparent"
-                          onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                          onClick={() =>
+                            updateQuantity(item.id, item.quantity - 1)
+                          }
                         >
                           <Minus className="h-3 w-3" />
                         </Button>
-                        <span className="text-sm font-medium w-8 text-center">{item.quantity}</span>
+                        <span className="text-sm font-medium w-8 text-center">
+                          {item.quantity}
+                        </span>
                         <Button
                           variant="outline"
                           size="icon"
                           className="h-6 w-6 bg-transparent"
-                          onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                          onClick={() =>
+                            updateQuantity(item.id, item.quantity + 1)
+                          }
                         >
                           <Plus className="h-3 w-3" />
                         </Button>
@@ -124,7 +152,9 @@ export function CartSidebar({ children }: CartSidebarProps) {
                     </div>
 
                     <div className="text-right">
-                      <p className="text-sm font-bold text-gray-900">${(item.price * item.quantity).toFixed(2)}</p>
+                      <p className="text-sm font-bold text-gray-900">
+                        ${(item.price * item.quantity).toFixed(2)}
+                      </p>
                     </div>
                   </div>
                 ))}
@@ -139,19 +169,30 @@ export function CartSidebar({ children }: CartSidebarProps) {
               </div>
 
               <div className="space-y-2">
-                <Button className="w-full" asChild onClick={() => setIsOpen(false)}>
+                <Button
+                  className="w-full"
+                  asChild
+                  onClick={() => setIsOpen(false)}
+                >
                   <Link href="/checkout">Checkout</Link>
                 </Button>
-                <Button variant="outline" className="w-full bg-transparent" asChild onClick={() => setIsOpen(false)}>
+                <Button
+                  variant="outline"
+                  className="w-full bg-transparent"
+                  asChild
+                  onClick={() => setIsOpen(false)}
+                >
                   <Link href="/cart">View Cart</Link>
                 </Button>
               </div>
 
-              <p className="text-xs text-gray-600 text-center">Shipping and taxes calculated at checkout</p>
+              <p className="text-xs text-gray-600 text-center">
+                Shipping and taxes calculated at checkout
+              </p>
             </div>
           </div>
         )}
       </SheetContent>
     </Sheet>
-  )
+  );
 }

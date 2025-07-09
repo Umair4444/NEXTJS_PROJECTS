@@ -1,20 +1,27 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { CreditCard, Truck, Shield, ArrowLeft } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
-import { Checkbox } from "@/components/ui/checkbox"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Separator } from "@/components/ui/separator"
-import Link from "next/link"
+import { useState } from "react";
+import { CreditCard, Truck, Shield, ArrowLeft } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Checkbox } from "@/components/ui/checkbox";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Separator } from "@/components/ui/separator";
+import Link from "next/link";
+import Image from "next/image";
 
 export default function CheckoutPage() {
-  const [shippingMethod, setShippingMethod] = useState("standard")
-  const [paymentMethod, setPaymentMethod] = useState("card")
+  const [shippingMethod, setShippingMethod] = useState("standard");
+  const [paymentMethod, setPaymentMethod] = useState("card");
 
   const orderItems = [
     {
@@ -31,12 +38,20 @@ export default function CheckoutPage() {
       quantity: 1,
       image: "/placeholder.svg?height=60&width=60",
     },
-  ]
+  ];
 
-  const subtotal = orderItems.reduce((sum, item) => sum + item.price * item.quantity, 0)
-  const shippingCost = shippingMethod === "express" ? 15.99 : shippingMethod === "overnight" ? 29.99 : 0
-  const tax = subtotal * 0.08
-  const total = subtotal + shippingCost + tax
+  const subtotal = orderItems.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0
+  );
+  const shippingCost =
+    shippingMethod === "express"
+      ? 15.99
+      : shippingMethod === "overnight"
+      ? 29.99
+      : 0;
+  const tax = subtotal * 0.08;
+  const total = subtotal + shippingCost + tax;
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -76,7 +91,11 @@ export default function CheckoutPage() {
                 </div>
                 <div>
                   <Label htmlFor="email">Email</Label>
-                  <Input id="email" type="email" placeholder="john@example.com" />
+                  <Input
+                    id="email"
+                    type="email"
+                    placeholder="john@example.com"
+                  />
                 </div>
                 <div>
                   <Label htmlFor="phone">Phone</Label>
@@ -118,14 +137,19 @@ export default function CheckoutPage() {
                 <CardTitle>Shipping Method</CardTitle>
               </CardHeader>
               <CardContent>
-                <RadioGroup value={shippingMethod} onValueChange={setShippingMethod}>
+                <RadioGroup
+                  value={shippingMethod}
+                  onValueChange={setShippingMethod}
+                >
                   <div className="flex items-center space-x-2 p-3 border rounded-lg">
                     <RadioGroupItem value="standard" id="standard" />
                     <div className="flex-1">
                       <Label htmlFor="standard" className="font-medium">
                         Standard Shipping
                       </Label>
-                      <p className="text-sm text-gray-600">5-7 business days • Free</p>
+                      <p className="text-sm text-gray-600">
+                        5-7 business days • Free
+                      </p>
                     </div>
                   </div>
                   <div className="flex items-center space-x-2 p-3 border rounded-lg">
@@ -134,7 +158,9 @@ export default function CheckoutPage() {
                       <Label htmlFor="express" className="font-medium">
                         Express Shipping
                       </Label>
-                      <p className="text-sm text-gray-600">2-3 business days • $15.99</p>
+                      <p className="text-sm text-gray-600">
+                        2-3 business days • $15.99
+                      </p>
                     </div>
                   </div>
                   <div className="flex items-center space-x-2 p-3 border rounded-lg">
@@ -143,7 +169,9 @@ export default function CheckoutPage() {
                       <Label htmlFor="overnight" className="font-medium">
                         Overnight Shipping
                       </Label>
-                      <p className="text-sm text-gray-600">Next business day • $29.99</p>
+                      <p className="text-sm text-gray-600">
+                        Next business day • $29.99
+                      </p>
                     </div>
                   </div>
                 </RadioGroup>
@@ -159,7 +187,10 @@ export default function CheckoutPage() {
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                <RadioGroup value={paymentMethod} onValueChange={setPaymentMethod}>
+                <RadioGroup
+                  value={paymentMethod}
+                  onValueChange={setPaymentMethod}
+                >
                   <div className="flex items-center space-x-2">
                     <RadioGroupItem value="card" id="card" />
                     <Label htmlFor="card">Credit/Debit Card</Label>
@@ -174,7 +205,10 @@ export default function CheckoutPage() {
                   <div className="space-y-4 pt-4">
                     <div>
                       <Label htmlFor="cardNumber">Card Number</Label>
-                      <Input id="cardNumber" placeholder="1234 5678 9012 3456" />
+                      <Input
+                        id="cardNumber"
+                        placeholder="1234 5678 9012 3456"
+                      />
                     </div>
                     <div className="grid grid-cols-2 gap-4">
                       <div>
@@ -215,17 +249,25 @@ export default function CheckoutPage() {
                   {orderItems.map((item) => (
                     <div key={item.id} className="flex items-center space-x-3">
                       <div className="w-12 h-12 bg-gray-100 rounded-lg overflow-hidden flex-shrink-0">
-                        <img
+                        <Image
+                          width={500}
+                          height={500}
                           src={item.image || "/placeholder.svg"}
                           alt={item.name}
                           className="w-full h-full object-cover"
                         />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium text-gray-900 truncate">{item.name}</p>
-                        <p className="text-sm text-gray-600">Qty: {item.quantity}</p>
+                        <p className="text-sm font-medium text-gray-900 truncate">
+                          {item.name}
+                        </p>
+                        <p className="text-sm text-gray-600">
+                          Qty: {item.quantity}
+                        </p>
                       </div>
-                      <p className="text-sm font-medium">${(item.price * item.quantity).toFixed(2)}</p>
+                      <p className="text-sm font-medium">
+                        ${(item.price * item.quantity).toFixed(2)}
+                      </p>
                     </div>
                   ))}
                 </div>
@@ -240,7 +282,11 @@ export default function CheckoutPage() {
                   </div>
                   <div className="flex justify-between">
                     <span>Shipping</span>
-                    <span>{shippingCost === 0 ? "Free" : `$${shippingCost.toFixed(2)}`}</span>
+                    <span>
+                      {shippingCost === 0
+                        ? "Free"
+                        : `$${shippingCost.toFixed(2)}`}
+                    </span>
                   </div>
                   <div className="flex justify-between">
                     <span>Tax</span>
@@ -259,7 +305,8 @@ export default function CheckoutPage() {
                 </Button>
 
                 <p className="text-xs text-gray-600 text-center">
-                  By placing your order, you agree to our Terms of Service and Privacy Policy.
+                  By placing your order, you agree to our Terms of Service and
+                  Privacy Policy.
                 </p>
               </CardContent>
             </Card>
@@ -267,5 +314,5 @@ export default function CheckoutPage() {
         </div>
       </div>
     </div>
-  )
+  );
 }

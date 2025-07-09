@@ -17,6 +17,7 @@ import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
+import Image from "next/image";
 
 export default function MyAccountPage() {
   const [activeTab, setActiveTab] = useState("overview");
@@ -268,7 +269,9 @@ export default function MyAccountPage() {
                         className="flex items-center space-x-4 p-4 border rounded-lg"
                       >
                         <div className="w-16 h-16 bg-gray-100 rounded-lg overflow-hidden flex-shrink-0">
-                          <img
+                          <Image
+                            width={500}
+                            height={500}
                             src={item.image || "/placeholder.svg"}
                             alt={item.name}
                             className="w-full h-full object-cover"

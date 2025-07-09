@@ -1,13 +1,29 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import Link from "next/link"
-import { Heart, ShoppingCart, Trash2, Share2, Filter, Grid, List, ArrowLeft } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Checkbox } from "@/components/ui/checkbox"
+import { useState } from "react";
+import Link from "next/link";
+import {
+  Heart,
+  ShoppingCart,
+  Trash2,
+  Share2,
+  Filter,
+  Grid,
+  List,
+  ArrowLeft,
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Checkbox } from "@/components/ui/checkbox";
+import Image from "next/image";
 
 export default function WishlistPage() {
   const [wishlistItems, setWishlistItems] = useState([
@@ -89,93 +105,108 @@ export default function WishlistPage() {
       category: "Electronics",
       dateAdded: "2024-01-03",
     },
-  ])
+  ]);
 
-  const [selectedItems, setSelectedItems] = useState<number[]>([])
-  const [viewMode, setViewMode] = useState<"grid" | "list">("grid")
-  const [sortBy, setSortBy] = useState("dateAdded")
-  const [filterBy, setFilterBy] = useState("all")
+  const [selectedItems, setSelectedItems] = useState<number[]>([]);
+  const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
+  const [sortBy, setSortBy] = useState("dateAdded");
+  const [filterBy, setFilterBy] = useState("all");
 
   const removeFromWishlist = (id: number) => {
-    setWishlistItems((items) => items.filter((item) => item.id !== id))
-    setSelectedItems((selected) => selected.filter((itemId) => itemId !== id))
-  }
+    setWishlistItems((items) => items.filter((item) => item.id !== id));
+    setSelectedItems((selected) => selected.filter((itemId) => itemId !== id));
+  };
 
   const addToCart = (id: number) => {
     // Add to cart logic here
-    console.log("Added to cart:", id)
-  }
+    console.log("Added to cart:", id);
+  };
 
   const toggleSelectItem = (id: number) => {
     setSelectedItems((selected) =>
-      selected.includes(id) ? selected.filter((itemId) => itemId !== id) : [...selected, id],
-    )
-  }
+      selected.includes(id)
+        ? selected.filter((itemId) => itemId !== id)
+        : [...selected, id]
+    );
+  };
 
   const selectAllItems = () => {
     if (selectedItems.length === filteredItems.length) {
-      setSelectedItems([])
+      setSelectedItems([]);
     } else {
-      setSelectedItems(filteredItems.map((item) => item.id))
+      setSelectedItems(filteredItems.map((item) => item.id));
     }
-  }
+  };
 
   const removeSelectedItems = () => {
-    setWishlistItems((items) => items.filter((item) => !selectedItems.includes(item.id)))
-    setSelectedItems([])
-  }
+    setWishlistItems((items) =>
+      items.filter((item) => !selectedItems.includes(item.id))
+    );
+    setSelectedItems([]);
+  };
 
   const addSelectedToCart = () => {
-    selectedItems.forEach((id) => addToCart(id))
-    setSelectedItems([])
-  }
+    selectedItems.forEach((id) => addToCart(id));
+    setSelectedItems([]);
+  };
 
   // Filter and sort items
   const filteredItems = wishlistItems
     .filter((item) => {
-      if (filterBy === "all") return true
-      if (filterBy === "inStock") return item.inStock
-      if (filterBy === "outOfStock") return !item.inStock
-      if (filterBy === "onSale") return item.originalPrice !== null
-      return item.category === filterBy
+      if (filterBy === "all") return true;
+      if (filterBy === "inStock") return item.inStock;
+      if (filterBy === "outOfStock") return !item.inStock;
+      if (filterBy === "onSale") return item.originalPrice !== null;
+      return item.category === filterBy;
     })
     .sort((a, b) => {
       switch (sortBy) {
         case "name":
-          return a.name.localeCompare(b.name)
+          return a.name.localeCompare(b.name);
         case "priceLow":
-          return a.price - b.price
+          return a.price - b.price;
         case "priceHigh":
-          return b.price - a.price
+          return b.price - a.price;
         case "rating":
-          return b.rating - a.rating
+          return b.rating - a.rating;
         case "dateAdded":
         default:
-          return new Date(b.dateAdded).getTime() - new Date(a.dateAdded).getTime()
+          return (
+            new Date(b.dateAdded).getTime() - new Date(a.dateAdded).getTime()
+          );
       }
-    })
+    });
 
   const renderStars = (rating: number) => {
     return [...Array(5)].map((_, i) => (
-      <span key={i} className={`text-sm ${i < Math.floor(rating) ? "text-yellow-400" : "text-gray-300"}`}>
+      <span
+        key={i}
+        className={`text-sm ${
+          i < Math.floor(rating) ? "text-yellow-400" : "text-gray-300"
+        }`}
+      >
         ★
       </span>
-    ))
-  }
+    ));
+  };
 
   if (wishlistItems.length === 0) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <Heart className="h-24 w-24 text-gray-300 mx-auto mb-6" />
-          <h1 className="text-2xl font-bold text-gray-900 mb-4">Your wishlist is empty</h1>
-          <p className="text-gray-600 mb-8">Save items you love to your wishlist and shop them later.</p>
+          <h1 className="text-2xl font-bold text-gray-900 mb-4">
+            Your wishlist is empty
+          </h1>
+          <p className="text-gray-600 mb-8">
+            Save items you love to your wishlist and shop them later.
+          </p>
           <Button asChild>
             <Link href="/products">Start Shopping</Link>
           </Button>
         </div>
       </div>
-    )
+    );
   }
 
   return (
@@ -195,7 +226,9 @@ export default function WishlistPage() {
                 <Heart className="h-8 w-8 mr-3 text-red-500" />
                 My Wishlist
               </h1>
-              <p className="text-gray-600">{wishlistItems.length} items saved</p>
+              <p className="text-gray-600">
+                {wishlistItems.length} items saved
+              </p>
             </div>
             <Button variant="outline" className="hidden md:flex bg-transparent">
               <Share2 className="h-4 w-4 mr-2" />
@@ -211,7 +244,10 @@ export default function WishlistPage() {
               <div className="flex items-center space-x-2">
                 <Checkbox
                   id="selectAll"
-                  checked={selectedItems.length === filteredItems.length && filteredItems.length > 0}
+                  checked={
+                    selectedItems.length === filteredItems.length &&
+                    filteredItems.length > 0
+                  }
                   onCheckedChange={selectAllItems}
                 />
                 <label htmlFor="selectAll" className="text-sm font-medium">
@@ -220,11 +256,19 @@ export default function WishlistPage() {
               </div>
               {selectedItems.length > 0 && (
                 <div className="flex space-x-2">
-                  <Button variant="outline" size="sm" onClick={addSelectedToCart}>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={addSelectedToCart}
+                  >
                     <ShoppingCart className="h-4 w-4 mr-1" />
                     Add to Cart
                   </Button>
-                  <Button variant="outline" size="sm" onClick={removeSelectedItems}>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={removeSelectedItems}
+                  >
                     <Trash2 className="h-4 w-4 mr-1" />
                     Remove
                   </Button>
@@ -286,11 +330,16 @@ export default function WishlistPage() {
         {viewMode === "grid" ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {filteredItems.map((item) => (
-              <Card key={item.id} className="group hover:shadow-lg transition-shadow">
+              <Card
+                key={item.id}
+                className="group hover:shadow-lg transition-shadow"
+              >
                 <CardContent className="p-0">
                   <div className="relative">
                     <div className="aspect-square bg-gray-100 rounded-t-lg overflow-hidden">
-                      <img
+                      <Image
+                        width={500}
+                        height={500}
                         src={item.image || "/placeholder.svg"}
                         alt={item.name}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
@@ -307,7 +356,11 @@ export default function WishlistPage() {
                       {item.badge && (
                         <Badge
                           className={`${
-                            item.badge === "Sale" ? "bg-red-500" : item.badge === "New" ? "bg-green-500" : "bg-blue-500"
+                            item.badge === "Sale"
+                              ? "bg-red-500"
+                              : item.badge === "New"
+                              ? "bg-green-500"
+                              : "bg-blue-500"
                           }`}
                         >
                           {item.badge}
@@ -324,7 +377,10 @@ export default function WishlistPage() {
                     </div>
                     {!item.inStock && (
                       <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center rounded-t-lg">
-                        <Badge variant="secondary" className="bg-white text-gray-900">
+                        <Badge
+                          variant="secondary"
+                          className="bg-white text-gray-900"
+                        >
                           Out of Stock
                         </Badge>
                       </div>
@@ -339,20 +395,32 @@ export default function WishlistPage() {
                     </Link>
 
                     <div className="flex items-center mb-2">
-                      <div className="flex items-center">{renderStars(item.rating)}</div>
-                      <span className="text-sm text-gray-600 ml-2">({item.reviews})</span>
+                      <div className="flex items-center">
+                        {renderStars(item.rating)}
+                      </div>
+                      <span className="text-sm text-gray-600 ml-2">
+                        ({item.reviews})
+                      </span>
                     </div>
 
                     <div className="flex items-center justify-between mb-4">
                       <div className="flex items-center space-x-2">
-                        <span className="text-lg font-bold text-gray-900">${item.price}</span>
+                        <span className="text-lg font-bold text-gray-900">
+                          ${item.price}
+                        </span>
                         {item.originalPrice && (
-                          <span className="text-sm text-gray-500 line-through">${item.originalPrice}</span>
+                          <span className="text-sm text-gray-500 line-through">
+                            ${item.originalPrice}
+                          </span>
                         )}
                       </div>
                     </div>
 
-                    <Button className="w-full" disabled={!item.inStock} onClick={() => addToCart(item.id)}>
+                    <Button
+                      className="w-full"
+                      disabled={!item.inStock}
+                      onClick={() => addToCart(item.id)}
+                    >
                       <ShoppingCart className="h-4 w-4 mr-2" />
                       {item.inStock ? "Add to Cart" : "Out of Stock"}
                     </Button>
@@ -373,7 +441,9 @@ export default function WishlistPage() {
                     />
 
                     <div className="w-24 h-24 bg-gray-100 rounded-lg overflow-hidden flex-shrink-0">
-                      <img
+                      <Image
+                        width={500}
+                        height={500}
                         src={item.image || "/placeholder.svg"}
                         alt={item.name}
                         className="w-full h-full object-cover"
@@ -389,19 +459,28 @@ export default function WishlistPage() {
                             </h3>
                           </Link>
                           <div className="flex items-center mt-1">
-                            <div className="flex items-center">{renderStars(item.rating)}</div>
-                            <span className="text-sm text-gray-600 ml-2">({item.reviews} reviews)</span>
+                            <div className="flex items-center">
+                              {renderStars(item.rating)}
+                            </div>
+                            <span className="text-sm text-gray-600 ml-2">
+                              ({item.reviews} reviews)
+                            </span>
                           </div>
                           <p className="text-sm text-gray-600 mt-1">
-                            Added on {new Date(item.dateAdded).toLocaleDateString()}
+                            Added on{" "}
+                            {new Date(item.dateAdded).toLocaleDateString()}
                           </p>
                         </div>
 
                         <div className="text-right">
                           <div className="flex items-center space-x-2 mb-2">
-                            <span className="text-xl font-bold text-gray-900">${item.price}</span>
+                            <span className="text-xl font-bold text-gray-900">
+                              ${item.price}
+                            </span>
                             {item.originalPrice && (
-                              <span className="text-sm text-gray-500 line-through">${item.originalPrice}</span>
+                              <span className="text-sm text-gray-500 line-through">
+                                ${item.originalPrice}
+                              </span>
                             )}
                           </div>
                           {item.badge && (
@@ -410,8 +489,8 @@ export default function WishlistPage() {
                                 item.badge === "Sale"
                                   ? "bg-red-500"
                                   : item.badge === "New"
-                                    ? "bg-green-500"
-                                    : "bg-blue-500"
+                                  ? "bg-green-500"
+                                  : "bg-blue-500"
                               }`}
                             >
                               {item.badge}
@@ -422,7 +501,10 @@ export default function WishlistPage() {
                     </div>
 
                     <div className="flex flex-col space-y-2">
-                      <Button disabled={!item.inStock} onClick={() => addToCart(item.id)}>
+                      <Button
+                        disabled={!item.inStock}
+                        onClick={() => addToCart(item.id)}
+                      >
                         <ShoppingCart className="h-4 w-4 mr-2" />
                         {item.inStock ? "Add to Cart" : "Out of Stock"}
                       </Button>
@@ -445,8 +527,12 @@ export default function WishlistPage() {
         {filteredItems.length === 0 && wishlistItems.length > 0 && (
           <div className="text-center py-12">
             <Filter className="h-16 w-16 text-gray-300 mx-auto mb-4" />
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">No items match your filters</h3>
-            <p className="text-gray-600 mb-4">Try adjusting your filters to see more items.</p>
+            <h3 className="text-lg font-semibold text-gray-900 mb-2">
+              No items match your filters
+            </h3>
+            <p className="text-gray-600 mb-4">
+              Try adjusting your filters to see more items.
+            </p>
             <Button variant="outline" onClick={() => setFilterBy("all")}>
               Clear Filters
             </Button>
@@ -454,5 +540,5 @@ export default function WishlistPage() {
         )}
       </div>
     </div>
-  )
+  );
 }

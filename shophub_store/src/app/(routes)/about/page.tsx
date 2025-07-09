@@ -1,6 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Users, Target, Award, Heart } from "lucide-react";
+import Image from "next/image";
 
 export default function AboutPage() {
   const stats = [
@@ -41,7 +42,7 @@ export default function AboutPage() {
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-4xl md:text-5xl font-bold mb-6">About ShopHub</h1>
           <p className="text-xl text-blue-100 max-w-3xl mx-auto">
-            We're passionate about bringing you the best products at unbeatable
+            We&apos;re passionate about bringing you the best products at unbeatable
             prices, with exceptional customer service that makes shopping a joy.
           </p>
         </div>
@@ -78,7 +79,7 @@ export default function AboutPage() {
                 Our Story
               </h2>
               <p className="text-gray-600 text-lg">
-                How we started and where we're going
+                How we started and where we&apos;re going
               </p>
             </div>
 
@@ -95,7 +96,7 @@ export default function AboutPage() {
                 </p>
                 <p className="text-gray-600 mb-6">
                   We believe that shopping should be easy, enjoyable, and
-                  trustworthy. That's why we carefully curate every product in
+                  trustworthy. That&apos;s why we carefully curate every product in
                   our catalog and work directly with manufacturers to ensure the
                   best prices and quality.
                 </p>
@@ -107,7 +108,9 @@ export default function AboutPage() {
                 </div>
               </div>
               <div className="aspect-square bg-gray-100 rounded-lg overflow-hidden">
-                <img
+                <Image
+                  width={500}
+                  height={500}
                   src="/placeholder.svg?height=500&width=500"
                   alt="Our warehouse"
                   className="w-full h-full object-cover"
@@ -126,7 +129,7 @@ export default function AboutPage() {
               Our Mission & Values
             </h2>
             <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-              We're driven by core values that guide everything we do
+              We&apos;re driven by core values that guide everything we do
             </p>
           </div>
 
@@ -194,7 +197,9 @@ export default function AboutPage() {
               <Card key={index} className="text-center">
                 <CardContent className="p-6">
                   <div className="aspect-square bg-gray-100 rounded-full overflow-hidden mb-4 mx-auto w-32 h-32">
-                    <img
+                    <Image
+                      width={500}
+                      height={500}
                       src={member.image || "/placeholder.svg"}
                       alt={member.name}
                       className="w-full h-full object-cover"

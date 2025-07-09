@@ -1,18 +1,19 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Star, ShoppingCart, Heart, Share2, Minus, Plus } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { useState } from "react";
+import { Star, ShoppingCart, Heart, Share2, Minus, Plus } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import Image from "next/image";
 
 interface ProductDetailProps {
-  productId: string
+  productId: string;
 }
 
 export function ProductDetail({ productId }: ProductDetailProps) {
-  const [quantity, setQuantity] = useState(1)
-  const [selectedImage, setSelectedImage] = useState(0)
+  const [quantity, setQuantity] = useState(1);
+  const [selectedImage, setSelectedImage] = useState(0);
 
   const product = {
     id: productId,
@@ -46,7 +47,7 @@ export function ProductDetail({ productId }: ProductDetailProps) {
       Connectivity: "Bluetooth 5.0, 3.5mm jack",
       Battery: "30 hours playback",
     },
-  }
+  };
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -54,7 +55,9 @@ export function ProductDetail({ productId }: ProductDetailProps) {
         {/* Product Images */}
         <div className="space-y-4">
           <div className="aspect-square bg-gray-100 rounded-lg overflow-hidden">
-            <img
+            <Image
+              width={500}
+              height={500}
               src={product.images[selectedImage] || "/placeholder.svg"}
               alt={product.name}
               className="w-full h-full object-cover"
@@ -66,10 +69,14 @@ export function ProductDetail({ productId }: ProductDetailProps) {
                 key={index}
                 onClick={() => setSelectedImage(index)}
                 className={`aspect-square bg-gray-100 rounded-lg overflow-hidden border-2 ${
-                  selectedImage === index ? "border-blue-500" : "border-transparent"
+                  selectedImage === index
+                    ? "border-blue-500"
+                    : "border-transparent"
                 }`}
               >
-                <img
+                <Image
+                  width={500}
+                  height={500}
                   src={image || "/placeholder.svg"}
                   alt={`${product.name} ${index + 1}`}
                   className="w-full h-full object-cover"
@@ -82,8 +89,12 @@ export function ProductDetail({ productId }: ProductDetailProps) {
         {/* Product Info */}
         <div className="space-y-6">
           <div>
-            {product.badge && <Badge className="mb-2 bg-blue-500">{product.badge}</Badge>}
-            <h1 className="text-3xl font-bold text-gray-900 mb-4">{product.name}</h1>
+            {product.badge && (
+              <Badge className="mb-2 bg-blue-500">{product.badge}</Badge>
+            )}
+            <h1 className="text-3xl font-bold text-gray-900 mb-4">
+              {product.name}
+            </h1>
 
             <div className="flex items-center mb-4">
               <div className="flex items-center">
@@ -91,7 +102,9 @@ export function ProductDetail({ productId }: ProductDetailProps) {
                   <Star
                     key={i}
                     className={`h-5 w-5 ${
-                      i < Math.floor(product.rating) ? "text-yellow-400 fill-current" : "text-gray-300"
+                      i < Math.floor(product.rating)
+                        ? "text-yellow-400 fill-current"
+                        : "text-gray-300"
                     }`}
                   />
                 ))}
@@ -102,12 +115,18 @@ export function ProductDetail({ productId }: ProductDetailProps) {
             </div>
 
             <div className="flex items-center space-x-4 mb-6">
-              <span className="text-3xl font-bold text-gray-900">${product.price}</span>
+              <span className="text-3xl font-bold text-gray-900">
+                ${product.price}
+              </span>
               {product.originalPrice && (
-                <span className="text-xl text-gray-500 line-through">${product.originalPrice}</span>
+                <span className="text-xl text-gray-500 line-through">
+                  ${product.originalPrice}
+                </span>
               )}
               {product.originalPrice && (
-                <Badge variant="destructive">Save ${(product.originalPrice - product.price).toFixed(2)}</Badge>
+                <Badge variant="destructive">
+                  Save ${(product.originalPrice - product.price).toFixed(2)}
+                </Badge>
               )}
             </div>
           </div>
@@ -118,11 +137,19 @@ export function ProductDetail({ productId }: ProductDetailProps) {
             <div className="flex items-center space-x-4">
               <span className="font-medium">Quantity:</span>
               <div className="flex items-center border rounded-lg">
-                <Button variant="ghost" size="icon" onClick={() => setQuantity(Math.max(1, quantity - 1))}>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                >
                   <Minus className="h-4 w-4" />
                 </Button>
                 <span className="px-4 py-2 font-medium">{quantity}</span>
-                <Button variant="ghost" size="icon" onClick={() => setQuantity(quantity + 1)}>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => setQuantity(quantity + 1)}
+                >
                   <Plus className="h-4 w-4" />
                 </Button>
               </div>
@@ -167,12 +194,16 @@ export function ProductDetail({ productId }: ProductDetailProps) {
 
           <TabsContent value="description" className="mt-6">
             <div className="prose max-w-none">
-              <p className="text-gray-600 leading-relaxed">{product.description}</p>
+              <p className="text-gray-600 leading-relaxed">
+                {product.description}
+              </p>
               <p className="text-gray-600 leading-relaxed mt-4">
-                These premium wireless headphones deliver exceptional audio quality with deep bass and crystal-clear
-                highs. The active noise cancellation technology blocks out ambient noise, allowing you to focus on your
-                music, calls, or podcasts. With a comfortable over-ear design and premium materials, these headphones
-                are perfect for long listening sessions.
+                These premium wireless headphones deliver exceptional audio
+                quality with deep bass and crystal-clear highs. The active noise
+                cancellation technology blocks out ambient noise, allowing you
+                to focus on your music, calls, or podcasts. With a comfortable
+                over-ear design and premium materials, these headphones are
+                perfect for long listening sessions.
               </p>
             </div>
           </TabsContent>
@@ -201,15 +232,21 @@ export function ProductDetail({ productId }: ProductDetailProps) {
                     <div className="flex items-center mb-2">
                       <div className="flex items-center">
                         {[...Array(5)].map((_, i) => (
-                          <Star key={i} className="h-4 w-4 text-yellow-400 fill-current" />
+                          <Star
+                            key={i}
+                            className="h-4 w-4 text-yellow-400 fill-current"
+                          />
                         ))}
                       </div>
                       <span className="ml-2 font-medium">John Doe</span>
-                      <span className="ml-2 text-sm text-gray-500">2 days ago</span>
+                      <span className="ml-2 text-sm text-gray-500">
+                        2 days ago
+                      </span>
                     </div>
                     <p className="text-gray-600">
-                      Great headphones! The sound quality is amazing and the noise cancellation works perfectly. Very
-                      comfortable for long listening sessions.
+                      Great headphones! The sound quality is amazing and the
+                      noise cancellation works perfectly. Very comfortable for
+                      long listening sessions.
                     </p>
                   </div>
                 ))}
@@ -219,5 +256,5 @@ export function ProductDetail({ productId }: ProductDetailProps) {
         </Tabs>
       </div>
     </div>
-  )
+  );
 }

@@ -1,7 +1,8 @@
-import Link from "next/link"
-import { Star, ShoppingCart } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
+import Link from "next/link";
+import { Star, ShoppingCart } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import Image from "next/image";
 
 const relatedProducts = [
   {
@@ -36,20 +37,27 @@ const relatedProducts = [
     reviews: 94,
     image: "/placeholder.svg?height=300&width=300",
   },
-]
+];
 
 export function RelatedProducts() {
   return (
     <section className="py-16 bg-gray-50">
       <div className="container mx-auto px-4">
-        <h2 className="text-2xl font-bold text-gray-900 mb-8">Related Products</h2>
+        <h2 className="text-2xl font-bold text-gray-900 mb-8">
+          Related Products
+        </h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {relatedProducts.map((product) => (
-            <Card key={product.id} className="group hover:shadow-lg transition-shadow">
+            <Card
+              key={product.id}
+              className="group hover:shadow-lg transition-shadow"
+            >
               <CardContent className="p-0">
                 <div className="aspect-square bg-gray-100 rounded-t-lg overflow-hidden">
-                  <img
+                  <Image
+                    width={500}
+                    height={500}
                     src={product.image || "/placeholder.svg"}
                     alt={product.name}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
@@ -69,16 +77,22 @@ export function RelatedProducts() {
                         <Star
                           key={i}
                           className={`h-4 w-4 ${
-                            i < Math.floor(product.rating) ? "text-yellow-400 fill-current" : "text-gray-300"
+                            i < Math.floor(product.rating)
+                              ? "text-yellow-400 fill-current"
+                              : "text-gray-300"
                           }`}
                         />
                       ))}
                     </div>
-                    <span className="text-sm text-gray-600 ml-2">({product.reviews})</span>
+                    <span className="text-sm text-gray-600 ml-2">
+                      ({product.reviews})
+                    </span>
                   </div>
 
                   <div className="flex items-center justify-between mb-4">
-                    <span className="text-lg font-bold text-gray-900">${product.price}</span>
+                    <span className="text-lg font-bold text-gray-900">
+                      ${product.price}
+                    </span>
                   </div>
 
                   <Button className="w-full">
@@ -92,5 +106,5 @@ export function RelatedProducts() {
         </div>
       </div>
     </section>
-  )
+  );
 }
