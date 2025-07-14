@@ -11,6 +11,7 @@ import {
   Eye,
   ArrowRight,
 } from "lucide-react";
+import Image from "next/image";
 
 import { featuredCars } from "../lib/featuredCarsData";
 
@@ -64,7 +65,9 @@ export default function FeaturedCars() {
               <CardContent className="p-0">
                 {/* Car Image */}
                 <div className="relative overflow-hidden bg-brand-gray-50 h-48">
-                  <img
+                  <Image
+                    width={500}
+                    height={500}
                     src={car.image}
                     alt={car.name}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"

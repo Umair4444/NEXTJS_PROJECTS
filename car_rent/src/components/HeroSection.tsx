@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { MapPin, Calendar, Clock, Users } from "lucide-react";
+import Image from "next/image";
 
 export default function HeroSection() {
   const [pickupLocation, setPickupLocation] = useState("");
@@ -169,7 +170,9 @@ export default function HeroSection() {
           <div className="relative w-full max-w-lg mx-auto mt-10">
             {/* Image */}
             <div className="relative z-10">
-              <img
+              <Image
+                width={500}
+                height={500}
                 src="/food.jpg"
                 alt="Premium Car"
                 className="w-full h-auto rounded-xl"

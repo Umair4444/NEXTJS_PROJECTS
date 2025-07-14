@@ -8,6 +8,7 @@ import {
   mainServices,
   vehicleCategories,
 } from "@/lib/servicesData";
+import Image from "next/image";
 
 export default function Services() {
   return (
@@ -16,7 +17,9 @@ export default function Services() {
       <section className="bg-gradient-to-br from-brand-blue to-brand-blue-dark text-white py-20">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <Badge className="bg-white text-brand-orange hover:bg-brand-orange hover:text-white mb-6">Our Services</Badge>
+            <Badge className="bg-white text-brand-orange hover:bg-brand-orange hover:text-white mb-6">
+              Our Services
+            </Badge>
             <h1 className="text-5xl font-bold mb-6">
               Comprehensive{" "}
               <span className="text-brand-orange">Car Rental</span> Solutions
@@ -111,7 +114,9 @@ export default function Services() {
                 className="hover:shadow-xl transition-shadow border-0 overflow-hidden"
               >
                 <div className="h-48 bg-brand-gray-200 overflow-hidden">
-                  <img
+                  <Image
+                    width={500}
+                    height={500}
                     src={category.image}
                     alt={category.category}
                     className="w-full h-full object-cover"
