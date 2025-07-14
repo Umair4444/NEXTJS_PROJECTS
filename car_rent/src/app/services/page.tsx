@@ -46,7 +46,7 @@ export default function Services() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 relative">
             {mainServices.map((service, index) => (
               <Card
                 key={index}
@@ -80,11 +80,11 @@ export default function Services() {
                     ))}
                   </ul>
                   <div className="flex items-center justify-between mb-6">
-                    <span className="text-2xl font-bold text-brand-orange">
+                    <span className="text-xl font-bold text-brand-orange text-nowrap">
                       {service.price}
                     </span>
                   </div>
-                  <Button className="w-full bg-brand-blue hover:bg-brand-blue/90">
+                  <Button className="w-full absolute bottom-0 left-0 bg-brand-blue hover:bg-brand-blue/90">
                     Learn More
                   </Button>
                 </CardContent>
@@ -313,7 +313,7 @@ export default function Services() {
             </Button>
             <Button
               variant="outline"
-              className="border-white text-white hover:bg-white hover:text-brand-blue px-8 py-3 text-lg"
+              className="border-white text-brand-orange hover:bg-white hover:text-white hover:bg-brand-orange px-8 py-3 text-lg"
             >
               <Phone className="mr-2 w-5 h-5" />
               Call Us: (555) 123-4567

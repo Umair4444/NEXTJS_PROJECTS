@@ -64,13 +64,13 @@ export default function HeroSection() {
                       Pickup Location
                     </label>
                     <div className="relative">
-                      <MapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 text-brand-gray-400 w-4 h-4" />
+                      <MapPin className="absolute left-2 top-1/2 transform -translate-y-1/2 text-brand-gray-400 w-4 h-4" />
                       <input
                         type="text"
                         placeholder="Enter pickup location"
                         value={pickupLocation}
                         onChange={(e) => setPickupLocation(e.target.value)}
-                        className="w-full pl-10 pr-4 py-3 border border-brand-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-blue focus:border-transparent"
+                        className="w-full pl-6 pr-4 py-3 border border-brand-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-blue focus:border-transparent"
                       />
                     </div>
                   </div>
@@ -81,13 +81,13 @@ export default function HeroSection() {
                       Drop-off Location
                     </label>
                     <div className="relative">
-                      <MapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 text-brand-gray-400 w-4 h-4" />
+                      <MapPin className="absolute left-2 top-1/2 transform -translate-y-1/2 text-brand-gray-400 w-4 h-4" />
                       <input
                         type="text"
                         placeholder="Enter drop-off location"
                         value={dropoffLocation}
                         onChange={(e) => setDropoffLocation(e.target.value)}
-                        className="w-full pl-10 pr-4 py-3 border border-brand-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-blue focus:border-transparent"
+                        className="w-full pl-6 pr-4 py-3 border border-brand-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-blue focus:border-transparent"
                       />
                     </div>
                   </div>
@@ -173,7 +173,7 @@ export default function HeroSection() {
               <Image
                 width={500}
                 height={500}
-                src="/food.jpg"
+                src="/car.jpg"
                 alt="Premium Car"
                 className="w-full h-auto rounded-xl"
                 style={{
