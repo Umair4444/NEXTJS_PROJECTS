@@ -2,6 +2,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { CheckCircle } from "lucide-react";
 import { milestones, stats, team, values } from "@/lib/aboutData";
+import Image from "next/image";
 
 export default function About() {
   return (
@@ -10,14 +11,16 @@ export default function About() {
       <section className="bg-gradient-to-br from-brand-blue to-brand-blue-dark text-white py-20">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <Badge className="bg-white text-brand-orange hover:bg-brand-orange hover:text-white mb-6">Our Story</Badge>
+            <Badge className="bg-white text-brand-orange hover:bg-brand-orange hover:text-white mb-6">
+              Our Story
+            </Badge>
             <h1 className="text-5xl font-bold mb-6">
               About <span className="text-brand-orange">CarRent</span>
             </h1>
             <p className="text-xl text-blue-100 leading-relaxed">
-              For over 5 years, we've been dedicated to providing exceptional
-              car rental experiences. Our mission is to make transportation
-              accessible, reliable, and enjoyable for everyone.
+              For over 5 years, we&apos;ve been dedicated to providing
+              exceptional car rental experiences. Our mission is to make
+              transportation accessible, reliable, and enjoyable for everyone.
             </p>
           </div>
         </div>
@@ -73,7 +76,9 @@ export default function About() {
               </div>
             </div>
             <div className="relative">
-              <img
+              <Image
+                width={500}
+                height={500}
                 src="/placeholder.svg"
                 alt="Our Mission"
                 className="w-full h-auto rounded-2xl shadow-xl"
@@ -172,7 +177,9 @@ export default function About() {
               >
                 <CardContent className="p-8">
                   <div className="w-24 h-24 bg-brand-gray-200 rounded-full mx-auto mb-6 overflow-hidden">
-                    <img
+                    <Image
+                      width={500}
+                      height={500}
                       src={member.image}
                       alt={member.name}
                       className="w-full h-full object-cover"

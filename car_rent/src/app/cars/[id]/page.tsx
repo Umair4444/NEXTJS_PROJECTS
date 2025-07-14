@@ -13,8 +13,6 @@ import {
   ArrowLeft,
   CheckCircle,
   MapPin,
-  Calendar,
-  Clock,
   Shield,
   Phone,
   MessageCircle,
@@ -24,6 +22,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { carsData } from "@/lib/singleCarsData";
+import Image from "next/image";
 
 export default function CarDetail() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -174,7 +173,9 @@ export default function CarDetail() {
                   className="h-96 bg-brand-gray-100 cursor-pointer"
                   onClick={() => setIsImageModalOpen(true)}
                 >
-                  <img
+                  <Image
+                    width={500}
+                    height={500}
                     src={car["1"].images[currentImageIndex]}
                     alt={car["1"].name}
                     className="w-full h-full object-cover"
@@ -216,7 +217,9 @@ export default function CarDetail() {
                           : "border-transparent"
                       }`}
                     >
-                      <img
+                      <Image
+                        width={500}
+                        height={500}
                         src={image}
                         alt={`${car["1"].name} ${index + 1}`}
                         className="w-full h-full object-cover"
@@ -484,7 +487,9 @@ export default function CarDetail() {
             >
               <X className="w-6 h-6" />
             </button>
-            <img
+            <Image
+              width={500}
+              height={500}
               src={car["1"].images[currentImageIndex]}
               alt={car["1"].name}
               className="max-w-full max-h-full object-contain"

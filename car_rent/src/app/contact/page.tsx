@@ -50,7 +50,9 @@ export default function Contact() {
       <section className="bg-gradient-to-br from-brand-blue to-brand-blue-dark text-white py-20">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <Badge className="bg-white text-brand-orange hover:bg-brand-orange hover:text-white mb-6">Get In Touch</Badge>
+            <Badge className="bg-white text-brand-orange hover:bg-brand-orange hover:text-white mb-6">
+              Get In Touch
+            </Badge>
             <h1 className="text-5xl font-bold mb-6">
               Contact <span className="text-brand-orange">CarRent</span>
             </h1>
@@ -105,8 +107,8 @@ export default function Contact() {
                 Send us a <span className="text-brand-blue">Message</span>
               </h2>
               <p className="text-brand-gray-600 mb-8">
-                Fill out the form below and we'll get back to you as soon as
-                possible.
+                Fill out the form below and we&apos;ll get back to you as soon
+                as possible.
               </p>
 
               {isSubmitted && (
@@ -117,7 +119,7 @@ export default function Contact() {
                       Message sent successfully!
                     </p>
                     <p className="text-green-700 text-sm">
-                      We'll get back to you within 2 hours.
+                      We&apos;ll get back to you within 2 hours.
                     </p>
                   </div>
                 </div>
@@ -394,7 +396,7 @@ export default function Contact() {
           </div>
           <div className="text-center mt-12">
             <p className="text-brand-gray-600 mb-4">
-              Still have questions? We're here to help!
+              Still have questions? We&apos;re here to help!
             </p>
             <Button className="bg-brand-blue hover:bg-brand-blue/90">
               <MessageCircle className="w-4 h-4 mr-2" />

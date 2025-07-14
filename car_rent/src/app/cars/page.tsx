@@ -16,6 +16,7 @@ import {
   Settings,
   MapPin,
 } from "lucide-react";
+import Image from "next/image";
 
 export default function Cars() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -208,7 +209,9 @@ export default function Cars() {
                 <CardContent className="p-0">
                   {/* Car Image */}
                   <div className="relative overflow-hidden bg-brand-gray-50 h-48">
-                    <img
+                    <Image
+                      width={500}
+                      height={500}
                       src={car.image}
                       alt={car.name}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
