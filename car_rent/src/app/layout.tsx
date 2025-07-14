@@ -1,12 +1,10 @@
 import "./globals.css";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { Toaster as Sonner } from "@/components/ui/sonner";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 
 export const metadata = {
-  title: "My App",
-  description: "Converted from CRA to Next.js App Router",
+  title: "Premium Car Rental Service",
+  description: "Book cars online with ease and flexibility through our car rental platform.",
 };
 
 export default function RootLayout({
