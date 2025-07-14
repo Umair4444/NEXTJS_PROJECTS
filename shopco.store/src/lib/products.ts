@@ -32,7 +32,7 @@ export const products: Product[] = [
     description:
       "This graphic t-shirt which is perfect for any occasion. Crafted from a soft and breathable fabric, it offers superior comfort and style.",
     category: "T-Shirts",
-    sizes: ["Small", "Medium", "Large", "X-Large"],
+    sizes: ["Small", "Medium", "Large", "X-Large","XXL"],
     colors: ["Black", "White", "Navy"],
     isNew: true,
   },

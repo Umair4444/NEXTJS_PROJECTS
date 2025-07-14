@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { Filter, SlidersHorizontal } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -24,6 +24,14 @@ import {
 } from "@/components/ui/sheet";
 import { ProductCard } from "@/components/(products)/product-card";
 import { products } from "@/lib/products";
+import { useSanityStore } from "@/hooks/useSanity";
+
+// const { productList, fetchProductList } = useSanityStore();
+
+// useEffect(() => {
+//   // fetchProductList();
+//   // console.log(">>>>>>", productList);
+// }, []);
 
 export default function ProductsPage() {
   const [searchQuery, setSearchQuery] = useState("");

@@ -122,7 +122,7 @@ export function ProductCard({ product }: ProductCardProps) {
 
         <Button
           onClick={handleAddToCart}
-          className="w-full mt-3 opacity-0 group-hover:opacity-100 transition-opacity"
+          className="w-full mt-3 rounded-md group-hover:opacity-100 transition-opacity"
           disabled={isAddingToCart}
         >
           {isAddingToCart ? (
