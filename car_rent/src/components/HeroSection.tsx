@@ -173,7 +173,7 @@ export default function HeroSection() {
               <Image
                 width={500}
                 height={500}
-                src="/car.jpg"
+                src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=600&h=400&fit=crop&auto=format&q=80"
                 alt="Premium Car"
                 className="w-full h-auto rounded-xl"
                 style={{

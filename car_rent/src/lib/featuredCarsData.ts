@@ -3,7 +3,8 @@ export const featuredCars = [
     id: 1,
     name: "Tesla Model S",
     category: "Luxury",
-    image: "/placeholder.svg",
+    image:
+      "https://images.unsplash.com/photo-1560958089-b8a1929cea89?w=400&h=250&fit=crop&auto=format&q=80",
     rating: 4.9,
     reviews: 127,
     price: 89,
@@ -20,7 +21,8 @@ export const featuredCars = [
     id: 2,
     name: "BMW X5",
     category: "SUV",
-    image: "/placeholder.svg",
+    image:
+      "https://images.unsplash.com/photo-1555215695-3004980ad54e?w=400&h=250&fit=crop&auto=format&q=80",
     rating: 4.8,
     reviews: 89,
     price: 75,
@@ -37,7 +39,8 @@ export const featuredCars = [
     id: 3,
     name: "Audi A4",
     category: "Sedan",
-    image: "/placeholder.svg",
+    image:
+      "https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?w=400&h=250&fit=crop&auto=format&q=80",
     rating: 4.7,
     reviews: 156,
     price: 55,
@@ -54,7 +57,8 @@ export const featuredCars = [
     id: 4,
     name: "Mercedes C-Class",
     category: "Luxury",
-    image: "/placeholder.svg",
+    image:
+      "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?w=400&h=250&fit=crop&auto=format&q=80",
     rating: 4.9,
     reviews: 203,
     price: 79,
@@ -71,7 +75,8 @@ export const featuredCars = [
     id: 5,
     name: "Toyota Camry",
     category: "Economy",
-    image: "/placeholder.svg",
+    image:
+      "https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?w=400&h=250&fit=crop&auto=format&q=80",
     rating: 4.6,
     reviews: 95,
     price: 39,
@@ -88,7 +93,8 @@ export const featuredCars = [
     id: 6,
     name: "Porsche 911",
     category: "Sports",
-    image: "/placeholder.svg",
+    image:
+      "https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=400&h=250&fit=crop&auto=format&q=80",
     rating: 5.0,
     reviews: 67,
     price: 149,

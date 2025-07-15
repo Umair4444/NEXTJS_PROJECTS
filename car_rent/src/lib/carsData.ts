@@ -3,7 +3,8 @@ export const cars = [
     id: 1,
     name: "Tesla Model S",
     category: "Luxury",
-    image: "/placeholder.svg",
+    image:
+      "https://images.unsplash.com/photo-1560958089-b8a1929cea89?w=400&h=250&fit=crop&auto=format&q=80",
     rating: 4.9,
     reviews: 127,
     price: 89,
@@ -23,7 +24,8 @@ export const cars = [
     id: 2,
     name: "BMW X5",
     category: "SUV",
-    image: "/placeholder.svg",
+    image:
+      "https://images.unsplash.com/photo-1555215695-3004980ad54e?w=400&h=250&fit=crop&auto=format&q=80",
     rating: 4.8,
     reviews: 89,
     price: 75,
@@ -43,7 +45,8 @@ export const cars = [
     id: 3,
     name: "Audi A4",
     category: "Sedan",
-    image: "/placeholder.svg",
+    image:
+      "https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?w=400&h=250&fit=crop&auto=format&q=80",
     rating: 4.7,
     reviews: 156,
     price: 55,
@@ -63,7 +66,8 @@ export const cars = [
     id: 4,
     name: "Mercedes C-Class",
     category: "Luxury",
-    image: "/placeholder.svg",
+    image:
+      "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?w=400&h=250&fit=crop&auto=format&q=80",
     rating: 4.9,
     reviews: 203,
     price: 79,
@@ -83,7 +87,8 @@ export const cars = [
     id: 5,
     name: "Toyota Camry",
     category: "Economy",
-    image: "/placeholder.svg",
+    image:
+      "https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?w=400&h=250&fit=crop&auto=format&q=80",
     rating: 4.6,
     reviews: 95,
     price: 39,
@@ -123,7 +128,8 @@ export const cars = [
     id: 7,
     name: "Honda CR-V",
     category: "SUV",
-    image: "/placeholder.svg",
+    image:
+      "https://images.unsplash.com/photo-1493238792000-8113da705763?w=400&h=250&fit=crop&auto=format&q=80",
     rating: 4.5,
     reviews: 134,
     price: 59,
@@ -143,7 +149,8 @@ export const cars = [
     id: 8,
     name: "Ford Mustang",
     category: "Sports",
-    image: "/placeholder.svg",
+    image:
+      "https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=400&h=250&fit=crop&auto=format&q=80",
     rating: 4.7,
     reviews: 89,
     price: 85,
@@ -161,19 +168,13 @@ export const cars = [
   },
 ];
 
-export const categories = [
-  "All",
-  "Economy",
-  "Sedan",
-  "SUV",
-  "Luxury",
-  "Sports",
-];
-export const locations = ["All", "Downtown", "Airport", "Mall"];
-export const priceRanges = [
-  "All",
-  "Under $50",
-  "$50 - $80",
-  "$80 - $120",
-  "Over $120",
-];
+
+  export const categories = ["All", "Economy", "Sedan", "SUV", "Luxury", "Sports"];
+  export const locations = ["All", "Downtown", "Airport", "Mall"];
+  export const priceRanges = [
+    "All",
+    "Under $50",
+    "$50 - $80",
+    "$80 - $120",
+    "Over $120",
+  ];

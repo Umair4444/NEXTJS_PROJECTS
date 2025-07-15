@@ -1,6 +1,7 @@
 import HeroSection from "@/components/HeroSection";
 import FeaturedCars from "@/components/FeaturedCars";
 import ServicesSection from "@/components/ServicesSection";
+import TestimonialsSection from "@/components/TestimonialSection";
 
 export default function Index() {
   return (
@@ -8,6 +9,7 @@ export default function Index() {
       <HeroSection />
       <FeaturedCars />
       <ServicesSection />
+      <TestimonialsSection />
     </div>
   );
 }

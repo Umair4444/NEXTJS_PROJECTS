@@ -4,19 +4,19 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { cars, categories, locations, priceRanges } from "@/lib/carsData";
+import Image from "next/image";
 import {
-  Search,
-  Filter,
-  ArrowUpDown,
-  Heart,
-  Eye,
-  Star,
   Users,
   Fuel,
   Settings,
+  Star,
+  Heart,
+  Eye,
+  Search,
+  Filter,
   MapPin,
+  ArrowUpDown,
 } from "lucide-react";
-import Image from "next/image";
 
 export default function Cars() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -79,12 +79,12 @@ export default function Cars() {
     });
 
   return (
-    <div className="min-h-screen mt-24">
+    <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors mt-28 lg:mt-24">
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-brand-blue to-brand-blue-dark text-white py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-5xl font-bold mb-6">
+            <h1 className="text-5xl font-bold mb-6 text-white">
               Our <span className="text-brand-orange">Car Fleet</span>
             </h1>
             <p className="text-xl text-blue-100 leading-relaxed">
@@ -96,18 +96,18 @@ export default function Cars() {
       </section>
 
       {/* Search and Filters */}
-      <section className="py-8 bg-white border-b border-brand-gray-100">
+      <section className="py-8 bg-white dark:bg-gray-900 border-b border-brand-gray-100 dark:border-gray-800 transition-colors">
         <div className="container mx-auto px-4">
           {/* Search Bar */}
-          <div className="flex flex-col lg:flex-row gap-4 mb-6">
-            <div className="flex-1 relative">
+          <div className="flex flex-col lg:flex-row lg:items-center gap-4 mb-6">
+            <div className="flex-1 relative ">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-brand-gray-400 w-5 h-5" />
               <input
                 type="text"
                 placeholder="Search for cars..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 border border-brand-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-blue focus:border-transparent"
+                className="w-full pl-10 pr-4 py-2 border border-brand-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-blue focus:border-transparent"
               />
             </div>
             <Button className="bg-brand-blue hover:bg-brand-blue/90 px-8">
@@ -188,7 +188,7 @@ export default function Cars() {
       </section>
 
       {/* Results */}
-      <section className="py-8 bg-brand-gray-50">
+      <section className="py-8 bg-brand-gray-50 dark:bg-gray-800 transition-colors">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between mb-8">
             <h2 className="text-2xl font-semibold text-brand-gray-900">
