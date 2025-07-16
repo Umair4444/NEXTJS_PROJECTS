@@ -3,41 +3,7 @@ import { Star, ShoppingCart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
-
-const relatedProducts = [
-  {
-    id: 2,
-    name: "Smart Fitness Watch",
-    price: 199.99,
-    rating: 4.8,
-    reviews: 89,
-    image: "/placeholder.svg?height=300&width=300",
-  },
-  {
-    id: 3,
-    name: "Premium Coffee Maker",
-    price: 149.99,
-    rating: 4.6,
-    reviews: 156,
-    image: "/placeholder.svg?height=300&width=300",
-  },
-  {
-    id: 4,
-    name: "Ergonomic Office Chair",
-    price: 299.99,
-    rating: 4.7,
-    reviews: 203,
-    image: "/placeholder.svg?height=300&width=300",
-  },
-  {
-    id: 5,
-    name: "Portable Power Bank",
-    price: 39.99,
-    rating: 4.4,
-    reviews: 94,
-    image: "/placeholder.svg?height=300&width=300",
-  },
-];
+import { products as relatedProducts } from "@/lib/productGrid";
 
 export function RelatedProducts() {
   return (

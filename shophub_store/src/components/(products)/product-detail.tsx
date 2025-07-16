@@ -6,7 +6,8 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Image from "next/image";
-
+import image1 from "@/assets/bluetooth_speaker.webp";
+import image2 from "@/assets/Wireless Charging Pad.webp";
 interface ProductDetailProps {
   productId: string;
 }
@@ -22,12 +23,7 @@ export function ProductDetail({ productId }: ProductDetailProps) {
     originalPrice: 99.99,
     rating: 4.5,
     reviews: 128,
-    images: [
-      "/placeholder.svg?height=500&width=500",
-      "/placeholder.svg?height=500&width=500",
-      "/placeholder.svg?height=500&width=500",
-      "/placeholder.svg?height=500&width=500",
-    ],
+    images: [image1, image2, image1, image2],
     badge: "Best Seller",
     description:
       "Experience premium sound quality with these wireless Bluetooth headphones. Featuring active noise cancellation, 30-hour battery life, and comfortable over-ear design.",

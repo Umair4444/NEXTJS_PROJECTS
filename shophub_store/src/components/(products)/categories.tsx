@@ -1,29 +1,7 @@
 import Link from "next/link";
 import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
-
-const categories = [
-  {
-    name: "Electronics",
-    image: "/placeholder.svg?height=200&width=300",
-    count: "1,234 items",
-  },
-  {
-    name: "Fashion",
-    image: "/placeholder.svg?height=200&width=300",
-    count: "2,567 items",
-  },
-  {
-    name: "Home & Garden",
-    image: "/placeholder.svg?height=200&width=300",
-    count: "890 items",
-  },
-  {
-    name: "Sports",
-    image: "/placeholder.svg?height=200&width=300",
-    count: "456 items",
-  },
-];
+import { categories } from "@/lib/categoriesData";
 
 export function Categories() {
   return (

@@ -4,69 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
-
-const products = [
-  {
-    id: 1,
-    name: "Wireless Bluetooth Headphones",
-    price: 79.99,
-    originalPrice: 99.99,
-    rating: 4.5,
-    reviews: 128,
-    image: "/placeholder.svg?height=300&width=300",
-    badge: "Best Seller",
-  },
-  {
-    id: 2,
-    name: "Smart Fitness Watch",
-    price: 199.99,
-    originalPrice: null,
-    rating: 4.8,
-    reviews: 89,
-    image: "/placeholder.svg?height=300&width=300",
-    badge: "New",
-  },
-  {
-    id: 3,
-    name: "Premium Coffee Maker",
-    price: 149.99,
-    originalPrice: 179.99,
-    rating: 4.6,
-    reviews: 156,
-    image: "/placeholder.svg?height=300&width=300",
-    badge: "Sale",
-  },
-  {
-    id: 4,
-    name: "Ergonomic Office Chair",
-    price: 299.99,
-    originalPrice: null,
-    rating: 4.7,
-    reviews: 203,
-    image: "/placeholder.svg?height=300&width=300",
-    badge: null,
-  },
-  {
-    id: 5,
-    name: "Portable Power Bank",
-    price: 39.99,
-    originalPrice: 49.99,
-    rating: 4.4,
-    reviews: 94,
-    image: "/placeholder.svg?height=300&width=300",
-    badge: "Sale",
-  },
-  {
-    id: 6,
-    name: "Wireless Charging Pad",
-    price: 29.99,
-    originalPrice: null,
-    rating: 4.3,
-    reviews: 67,
-    image: "/placeholder.svg?height=300&width=300",
-    badge: null,
-  },
-];
+import { products } from "@/lib/featureProducts";
 
 export function FeaturedProducts() {
   return (
