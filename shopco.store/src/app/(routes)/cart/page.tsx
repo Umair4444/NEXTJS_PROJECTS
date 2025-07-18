@@ -51,7 +51,6 @@ export default function CartPage() {
         {/* Order Summary */}
         <div className="lg:col-span-1">
           <OrderSummary />
-          {/* <OrderSummary/> */}
         </div>
       </div>
     </div>

@@ -20,7 +20,7 @@ async function uploadData() {
   for (const product of products) {
     try {
       const doc = await client.create(product);
-      console.log(`Uploaded: ${doc._id}`);
+      // console.log(`Uploaded: ${doc._id}`);
     } catch (err: any) {
       console.error("Upload error:", err.message);
     }
