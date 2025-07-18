@@ -1,31 +1,37 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { useParams,notFound } from "next/navigation"
-import Image from "next/image"
-import { Heart, Star, Minus, Plus, ShoppingCart } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { Separator } from "@/components/ui/separator"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { useCart } from "@/hooks/use-cart"
-import { useWishlist } from "@/hooks/use-wishlist"
-import { getProductById } from "@/lib/products"
-import { cn } from "@/lib/utils"
+import { useState } from "react";
+import { useParams, notFound } from "next/navigation";
+import Image from "next/image";
+import { Heart, Star, Minus, Plus, ShoppingCart } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Separator } from "@/components/ui/separator";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useCart } from "@/hooks/use-cart";
+import { useWishlist } from "@/hooks/use-wishlist";
+import { getProductById } from "@/lib/products";
+import { cn } from "@/lib/utils";
 
 export default function ProductPage() {
-  const params = useParams()
-  const product = getProductById(params.id as string)
-  const [selectedImage, setSelectedImage] = useState(0)
-  const [selectedSize, setSelectedSize] = useState("")
-  const [selectedColor, setSelectedColor] = useState("")
-  const [quantity, setQuantity] = useState(1)
+  const params = useParams();
+  const product = getProductById(params.id as string);
+  // console.log("prod", product);
+  const [selectedImage, setSelectedImage] = useState(0);
+  const [selectedSize, setSelectedSize] = useState("");
+  const [selectedColor, setSelectedColor] = useState("");
+  const [quantity, setQuantity] = useState(1);
+  // console.log("qtys", quantity);
 
-  const { addItem: addToCart } = useCart()
-  const { addItem: addToWishlist, removeItem: removeFromWishlist, isInWishlist } = useWishlist()
+  const { addItem: addToCart } = useCart();
+  const {
+    addItem: addToWishlist,
+    removeItem: removeFromWishlist,
+    isInWishlist,
+  } = useWishlist();
 
- if (!product) {
-    notFound()
+  if (!product) {
+    notFound();
   }
 
   const handleAddToCart = () => {
@@ -37,12 +43,13 @@ export default function ProductPage() {
       image: product.image,
       size: selectedSize,
       color: selectedColor,
-    })
-  }
+      quantity: quantity, // ✅ Include quantity here
+    });
+  };
 
   const handleWishlistToggle = () => {
     if (isInWishlist(product.id)) {
-      removeFromWishlist(product.id)
+      removeFromWishlist(product.id);
     } else {
       addToWishlist({
         id: product.id,
@@ -51,12 +58,9 @@ export default function ProductPage() {
         originalPrice: product.originalPrice,
         image: product.image,
         rating: product.rating,
-      })
+      });
     }
-  }
-
-    console.log('>>>>',selectedSize)
-    console.log('>>>>',selectedSize)
+  };
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">
@@ -79,7 +83,9 @@ export default function ProductPage() {
                 onClick={() => setSelectedImage(index)}
                 className={cn(
                   "flex-shrink-0 w-20 h-20 bg-gray-100 rounded-lg overflow-hidden border-2",
-                  selectedImage === index ? "border-black" : "border-transparent",
+                  selectedImage === index
+                    ? "border-black"
+                    : "border-transparent"
                 )}
               >
                 <Image
@@ -109,7 +115,7 @@ export default function ProductPage() {
                         ? "fill-yellow-400 text-yellow-400"
                         : i < product.rating
                           ? "fill-yellow-400/50 text-yellow-400"
-                          : "fill-gray-200 text-gray-200",
+                          : "fill-gray-200 text-gray-200"
                     )}
                   />
                 ))}
@@ -122,14 +128,20 @@ export default function ProductPage() {
               <span className="text-3xl font-bold">${product.price}</span>
               {product.originalPrice && (
                 <>
-                  <span className="text-2xl text-gray-400 line-through">${product.originalPrice}</span>
+                  <span className="text-2xl text-gray-400 line-through">
+                    ${product.originalPrice}
+                  </span>
                   {product.discount && (
-                    <Badge className="bg-red-100 text-red-600 hover:bg-red-100">-{product.discount}%</Badge>
+                    <Badge className="bg-red-100 text-red-600 hover:bg-red-100">
+                      -{product.discount}%
+                    </Badge>
                   )}
                 </>
               )}
             </div>
-            <p className="text-gray-600 leading-relaxed">{product.description}</p>
+            <p className="text-gray-600 leading-relaxed">
+              {product.description}
+            </p>
           </div>
 
           <Separator />
@@ -147,7 +159,7 @@ export default function ProductPage() {
                       "px-6 py-3 border rounded-full transition-colors",
                       selectedSize === size
                         ? "border-black bg-black text-white"
-                        : "border-gray-300 hover:border-gray-400",
+                        : "border-gray-300 hover:border-gray-400"
                     )}
                   >
                     {size}
@@ -170,7 +182,7 @@ export default function ProductPage() {
                       "px-6 py-3 border rounded-full transition-colors",
                       selectedColor === color
                         ? "border-black bg-black text-white"
-                        : "border-gray-300 hover:border-gray-400",
+                        : "border-gray-300 hover:border-gray-400"
                     )}
                   >
                     {color}
@@ -193,14 +205,21 @@ export default function ProductPage() {
                   <Minus className="w-4 h-4" />
                 </button>
                 <span className="px-6 py-3 font-semibold">{quantity}</span>
-                <button onClick={() => setQuantity(quantity + 1)} className="p-3 hover:bg-gray-100 rounded-r-full">
+                <button
+                  onClick={() => setQuantity(quantity + 1)}
+                  className="p-3 hover:bg-gray-100 rounded-r-full"
+                >
                   <Plus className="w-4 h-4" />
                 </button>
               </div>
             </div>
 
             <div className="flex gap-4">
-              <Button onClick={handleAddToCart} className="flex-1 rounded-full h-12" size="lg">
+              <Button
+                onClick={handleAddToCart}
+                className="flex-1 rounded-full h-12"
+                size="lg"
+              >
                 <ShoppingCart className="w-5 h-5 mr-2" />
                 Add to Cart
               </Button>
@@ -209,7 +228,12 @@ export default function ProductPage() {
                 onClick={handleWishlistToggle}
                 className="rounded-full h-12 px-6 bg-transparent"
               >
-                <Heart className={cn("w-5 h-5", isInWishlist(product.id) ? "fill-red-500 text-red-500" : "")} />
+                <Heart
+                  className={cn(
+                    "w-5 h-5",
+                    isInWishlist(product.id) ? "fill-red-500 text-red-500" : ""
+                  )}
+                />
               </Button>
             </div>
           </div>
@@ -245,14 +269,17 @@ export default function ProductPage() {
                     <div className="flex items-center gap-4 mb-2">
                       <div className="flex items-center">
                         {[...Array(5)].map((_, i) => (
-                          <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                          <Star
+                            key={i}
+                            className="w-4 h-4 fill-yellow-400 text-yellow-400"
+                          />
                         ))}
                       </div>
                       <span className="font-semibold">Customer {review}</span>
                     </div>
                     <p className="text-gray-600">
-                      Great quality product! Exactly as described and fits perfectly. Would definitely recommend to
-                      others.
+                      Great quality product! Exactly as described and fits
+                      perfectly. Would definitely recommend to others.
                     </p>
                   </div>
                 ))}
@@ -261,22 +288,35 @@ export default function ProductPage() {
           </TabsContent>
           <TabsContent value="faq" className="mt-8">
             <div>
-              <h3 className="text-xl font-semibold mb-4">Frequently Asked Questions</h3>
+              <h3 className="text-xl font-semibold mb-4">
+                Frequently Asked Questions
+              </h3>
               <div className="space-y-4">
                 <div>
-                  <h4 className="font-semibold mb-2">What is your return policy?</h4>
+                  <h4 className="font-semibold mb-2">
+                    What is your return policy?
+                  </h4>
                   <p className="text-gray-600">
-                    We offer a 30-day return policy for all unworn items with tags attached.
+                    We offer a 30-day return policy for all unworn items with
+                    tags attached.
                   </p>
                 </div>
                 <div>
-                  <h4 className="font-semibold mb-2">How do I care for this product?</h4>
-                  <p className="text-gray-600">Machine wash cold with like colors. Tumble dry low or hang to dry.</p>
+                  <h4 className="font-semibold mb-2">
+                    How do I care for this product?
+                  </h4>
+                  <p className="text-gray-600">
+                    Machine wash cold with like colors. Tumble dry low or hang
+                    to dry.
+                  </p>
                 </div>
                 <div>
-                  <h4 className="font-semibold mb-2">Is this product true to size?</h4>
+                  <h4 className="font-semibold mb-2">
+                    Is this product true to size?
+                  </h4>
                   <p className="text-gray-600">
-                    Yes, this product runs true to size. Check our size guide for measurements.
+                    Yes, this product runs true to size. Check our size guide
+                    for measurements.
                   </p>
                 </div>
               </div>
@@ -285,5 +325,5 @@ export default function ProductPage() {
         </Tabs>
       </div>
     </div>
-  )
+  );
 }

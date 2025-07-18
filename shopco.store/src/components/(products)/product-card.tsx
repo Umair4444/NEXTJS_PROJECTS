@@ -1,35 +1,39 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import Image from "next/image"
-import Link from "next/link"
-import { Heart, Star } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { LoadingSpinner } from "@/components/(spinners)/spinner"
-import { useWishlist } from "@/hooks/use-wishlist"
-import { useCart } from "@/hooks/use-cart"
-import type { Product } from "@/lib/products"
-import { cn } from "@/lib/utils"
+import { useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { Heart, Star } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { LoadingSpinner } from "@/components/(spinners)/spinner";
+import { useWishlist } from "@/hooks/use-wishlist";
+import { useCart } from "@/hooks/use-cart";
+import type { Product } from "@/lib/products";
+import { cn } from "@/lib/utils";
 
 interface ProductCardProps {
-  product: Product
+  product: Product;
 }
 
 export function ProductCard({ product }: ProductCardProps) {
-  const [isAddingToCart, setIsAddingToCart] = useState(false)
-  const [isTogglingWishlist, setIsTogglingWishlist] = useState(false)
+  const [isAddingToCart, setIsAddingToCart] = useState(false);
+  const [isTogglingWishlist, setIsTogglingWishlist] = useState(false);
 
-  const { addItem: addToWishlist, removeItem: removeFromWishlist, isInWishlist } = useWishlist()
-  const { addItem: addToCart } = useCart()
+  const {
+    addItem: addToWishlist,
+    removeItem: removeFromWishlist,
+    isInWishlist,
+  } = useWishlist();
+  const { addItem: addToCart } = useCart();
 
   const handleWishlistToggle = async () => {
-    setIsTogglingWishlist(true)
+    setIsTogglingWishlist(true);
     // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 500))
+    await new Promise((resolve) => setTimeout(resolve, 500));
 
     if (isInWishlist(product.id)) {
-      removeFromWishlist(product.id)
+      removeFromWishlist(product.id);
     } else {
       addToWishlist({
         id: product.id,
@@ -38,15 +42,15 @@ export function ProductCard({ product }: ProductCardProps) {
         originalPrice: product.originalPrice,
         image: product.image,
         rating: product.rating,
-      })
+      });
     }
-    setIsTogglingWishlist(false)
-  }
+    setIsTogglingWishlist(false);
+  };
 
   const handleAddToCart = async () => {
-    setIsAddingToCart(true)
+    setIsAddingToCart(true);
     // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 800))
+    await new Promise((resolve) => setTimeout(resolve, 500));
 
     addToCart({
       id: product.id,
@@ -54,19 +58,19 @@ export function ProductCard({ product }: ProductCardProps) {
       price: product.price,
       originalPrice: product.originalPrice,
       image: product.image,
-    })
-    setIsAddingToCart(false)
-  }
+    });
+    setIsAddingToCart(false);
+  };
 
   return (
-    <div className="group relative">
-      <div className="relative bg-gray-100 rounded-2xl overflow-hidden aspect-[3/4]">
+    <div className={`group relative`}>
+      <div className="relative bg-gray-100 rounded-2xl overflow-hidden aspect-[1.2]">
         <Link href={`/products/${product.id}`}>
           <Image
             src={product.image || "/placeholder.svg"}
             alt={product.name}
             fill
-            className="object-cover group-hover:scale-105 transition-transform duration-300"
+            className="object-cover group-hover:scale-105 transition-transform duration-300 object-right-top"
           />
         </Link>
         <Button
@@ -80,18 +84,27 @@ export function ProductCard({ product }: ProductCardProps) {
             <LoadingSpinner size="sm" />
           ) : (
             <Heart
-              className={cn("w-4 h-4", isInWishlist(product.id) ? "fill-red-500 text-red-500" : "text-gray-600")}
+              className={cn(
+                "w-4 h-4",
+                isInWishlist(product.id)
+                  ? "fill-red-500 text-red-500"
+                  : "text-gray-600"
+              )}
             />
           )}
         </Button>
         {product.discount && (
-          <Badge className="absolute top-3 left-3 bg-red-500 hover:bg-red-600">-{product.discount}%</Badge>
+          <Badge className="absolute top-3 left-3 bg-red-500 hover:bg-red-600">
+            -{product.discount}%
+          </Badge>
         )}
       </div>
 
       <div className="mt-4 space-y-2">
         <Link href={`/products/${product.id}`}>
-          <h3 className="font-bold text-lg hover:text-gray-600 transition-colors">{product.name}</h3>
+          <h3 className="font-bold text-lg hover:text-gray-600 transition-colors">
+            {product.name}
+          </h3>
         </Link>
 
         <div className="flex items-center gap-2">
@@ -105,7 +118,7 @@ export function ProductCard({ product }: ProductCardProps) {
                     ? "fill-yellow-400 text-yellow-400"
                     : i < product.rating
                       ? "fill-yellow-400/50 text-yellow-400"
-                      : "fill-gray-200 text-gray-200",
+                      : "fill-gray-200 text-gray-200"
                 )}
               />
             ))}
@@ -116,7 +129,9 @@ export function ProductCard({ product }: ProductCardProps) {
         <div className="flex items-center gap-2">
           <span className="text-2xl font-bold">${product.price}</span>
           {product.originalPrice && (
-            <span className="text-xl text-gray-400 line-through">${product.originalPrice}</span>
+            <span className="text-xl text-gray-400 line-through">
+              ${product.originalPrice}
+            </span>
           )}
         </div>
 
@@ -136,5 +151,5 @@ export function ProductCard({ product }: ProductCardProps) {
         </Button>
       </div>
     </div>
-  )
+  );
 }

@@ -1,44 +1,76 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ProductCard } from "@/components/(products)/product-card";
 import { getNewArrivals, getTopSelling } from "@/lib/products";
 import model from "@/images/model.png";
+import { client } from "@/sanity/lib/client";
+import { urlFor } from "@/sanity/lib/image";
+import { useHeroStore } from "@/hooks/useHero";
+import { useEffect } from "react";
 
-export default function HomePage() {
+// use this to fetch data directly from sanity
+// const query = ` *[_type == "hero"]{
+//           _id,
+//           title,
+//             content,
+//             buttontext,
+//           "poster": poster.asset->url
+// }`;
+
+export default async function HomePage() {
   const newArrivals = getNewArrivals();
   const topSelling = getTopSelling();
+
+  // use this for server rendering
+  // const hero = await client.fetch(query);
+  // const hero = await fetchHero(); // ✅ Server-side fetching
+  // if (!hero || hero.length === 0) return <p>No hero data found.</p>;
+
+  // use this for client rendering
+  const { hero, fetchHero } = useHeroStore();
+  useEffect(() => {
+    fetchHero(); // Fetch data when the component is mounted
+  }, [fetchHero]);
 
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
       <section className="relative bg-gray-100 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 py-12 md:py-20">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="space-y-8">
-              <h1 className="text-4xl md:text-6xl font-bold leading-tight">
-                FIND CLOTHES THAT MATCHES YOUR STYLE
-              </h1>
-              <p className="text-gray-600 text-lg max-w-md">
-                Browse through our diverse range of meticulously crafted
-                garments, designed to bring out your individuality and cater to
-                your sense of style.
-              </p>
-              <Button asChild size="lg" className="rounded-full px-12">
-                <Link href="/products">Shop Now</Link>
-              </Button>
+          {hero.map((block: any) => (
+            <div
+              className="grid md:grid-cols-2 gap-12 items-center"
+              key={block._id}
+            >
+              <div className="space-y-8">
+                <h1 className="text-4xl md:text-6xl font-bold leading-tight">
+                  {/* FIND CLOTHES THAT MATCHES YOUR STYLE */}
+                  {block.title}
+                </h1>
+                <p className="text-gray-600 text-lg max-w-md">
+                  {/* Browse through our diverse range of meticulously crafted
+                  garments, designed to bring out your individuality and cater
+                  to your sense of style. */}
+                  {block.content}
+                </p>
+                <Button asChild size="lg" className="rounded-full px-12">
+                  <Link href="/products">{block.buttontext}</Link>
+                </Button>
+              </div>
+              <div className="relative">
+                <Image
+                  src={urlFor(block.poster).url()}
+                  alt="Trendy fashionable couple"
+                  width={600}
+                  height={600}
+                  className="rounded-lg object-cover"
+                  priority
+                />
+              </div>
             </div>
-            <div className="relative">
-              <Image
-                src={model}
-                alt="Trendy fashionable couple"
-                width={600}
-                height={600}
-                className="rounded-lg object-cover"
-                priority
-              />
-            </div>
-          </div>
+          ))}
         </div>
 
         {/* Stats Section */}
@@ -93,7 +125,10 @@ export default function HomePage() {
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {newArrivals.slice(0, 4).map((product) => (
-              <ProductCard key={product.id} product={product} />
+              <ProductCard
+                key={product.id}
+                product={product}
+              />
             ))}
           </div>
           <div className="text-center mt-12">
@@ -101,7 +136,7 @@ export default function HomePage() {
               variant="outline"
               size="lg"
               className="rounded-full px-12 bg-transparent"
-              asChild
+              // asChild
             >
               <Link href="/products">View All</Link>
             </Button>
