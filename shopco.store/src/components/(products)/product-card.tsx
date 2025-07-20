@@ -9,8 +9,8 @@ import { Badge } from "@/components/ui/badge";
 import { LoadingSpinner } from "@/components/(spinners)/spinner";
 import { useWishlist } from "@/hooks/use-wishlist";
 import { useCart } from "@/hooks/use-cart";
-import type { Product } from "@/lib/products";
 import { cn } from "@/lib/utils";
+import { Product } from "@/hooks/sanityTypes";
 
 interface ProductCardProps {
   product: Product;
@@ -32,11 +32,11 @@ export function ProductCard({ product }: ProductCardProps) {
     // Simulate API call
     await new Promise((resolve) => setTimeout(resolve, 500));
 
-    if (isInWishlist(product.id)) {
-      removeFromWishlist(product.id);
+    if (isInWishlist(product._id)) {
+      removeFromWishlist(product._id);
     } else {
       addToWishlist({
-        id: product.id,
+        id: product._id,
         name: product.name,
         price: product.price,
         originalPrice: product.originalPrice,
@@ -53,7 +53,7 @@ export function ProductCard({ product }: ProductCardProps) {
     await new Promise((resolve) => setTimeout(resolve, 500));
 
     addToCart({
-      id: product.id,
+      id: product._id,
       name: product.name,
       price: product.price,
       originalPrice: product.originalPrice,
@@ -65,7 +65,7 @@ export function ProductCard({ product }: ProductCardProps) {
   return (
     <div className={`group relative`}>
       <div className="relative bg-gray-100 rounded-2xl overflow-hidden aspect-[1.2]">
-        <Link href={`/products/${product.id}`}>
+        <Link href={`/products/${product._id}`}>
           <Image
             src={product.image || "/placeholder.svg"}
             alt={product.name}
@@ -86,7 +86,7 @@ export function ProductCard({ product }: ProductCardProps) {
             <Heart
               className={cn(
                 "w-4 h-4",
-                isInWishlist(product.id)
+                isInWishlist(product._id)
                   ? "fill-red-500 text-red-500"
                   : "text-gray-600"
               )}
@@ -101,7 +101,7 @@ export function ProductCard({ product }: ProductCardProps) {
       </div>
 
       <div className="mt-4 space-y-2">
-        <Link href={`/products/${product.id}`}>
+        <Link href={`/products/${product._id}`}>
           <h3 className="font-bold text-lg hover:text-gray-600 transition-colors">
             {product.name}
           </h3>

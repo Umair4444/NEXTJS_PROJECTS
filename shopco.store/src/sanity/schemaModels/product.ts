@@ -98,9 +98,9 @@ export default defineType({
 
     defineField({
       name: "faq",
-      type: "reference",
       title: "FAQ",
-      to: [{ type: "faq" }],
+      type: "array", // or "reference" if it's only one FAQ
+      of: [{ type: "reference", to: [{ type: "faq" }] }],
     }),
 
     defineField({

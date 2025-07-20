@@ -6,7 +6,11 @@ import { useCart } from "@/hooks/use-cart";
 import { Trash2, Minus, Plus } from "lucide-react";
 
 const CartItem = ({ item }: any) => {
+  // destructuring
   const { updateQuantity, removeItem } = useCart();
+  // calling each function seperately
+  // const removeItem = useCart((state) => state.removeItem);
+  // const updateQuantity = useCart((state) => state.updateQuantity);
 
   return (
     <div
