@@ -76,13 +76,13 @@ export function Header() {
                       </DropdownMenuContent>
                     </DropdownMenu>
                     <Link
-                      href="/products?sale=true"
+                      href="/products?isonsale=true"
                       className="hover:text-gray-600"
                     >
                       On Sale
                     </Link>
                     <Link
-                      href="/products?new=true"
+                      href="/products?isnew=true"
                       className="hover:text-gray-600"
                     >
                       New Arrivals

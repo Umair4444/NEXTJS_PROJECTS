@@ -24,7 +24,7 @@ const TopSelling = () => {
             className="rounded-full px-12 bg-transparent"
             asChild
           >
-            <Link href="/products">View All</Link>
+            <Link href="/products?isnew=true">View All</Link>
           </Button>
         </div>
       </div>

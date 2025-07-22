@@ -2,7 +2,7 @@ import React from "react";
 import { ProductCard } from "../(cards)/ProductCard";
 import { Button } from "../ui/button";
 import Link from "next/link";
-import { getNewArrivals } from "@/dummyData/products";
+import { getNewArrivals, products } from "@/dummyData/products";
 
 const NewArrival = () => {
   const newArrivals = getNewArrivals();
@@ -26,7 +26,7 @@ const NewArrival = () => {
             className="rounded-full px-12 bg-transparent"
             // asChild
           >
-            <Link href="/products">View All</Link>
+            <Link href={`/products?isonsale=true`}>View All</Link>
           </Button>
         </div>
       </div>

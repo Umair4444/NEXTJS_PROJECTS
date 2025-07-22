@@ -12,14 +12,13 @@ interface ProductPageProps {
 }
 
 export default function ProductPage({ params }: ProductPageProps) {
-  // // FOR FETCHING DATA FROM DUMMYDATA FILR WORKS OFFLINE
+  // FOR FETCHING DATA FROM DUMMYDATA FILR WORKS OFFLINE
   // const productfind = getProductById(params.id);
 
   const { products, fetchAll } = useSanityStore();
   useEffect(() => {
     fetchAll(); // Fetch all data on mount
   }, []);
-
   const productfind = products.find((product) => product.slug == params.id);
 
   if (!productfind) {

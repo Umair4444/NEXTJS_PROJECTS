@@ -18,12 +18,18 @@ import FilterContent from "@/components/(filters)/ContentFilter";
 import SortFilter from "@/components/(filters)/SortFilter";
 import { useSanityStore } from "@/hooks/useSanityStore";
 // import { products } from "@/dummyData/products";
+import { useSearchParams } from "next/navigation";
 
 export default function ProductsPage() {
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [priceRange, setPriceRange] = useState([0, 500]);
   const [sortBy, setSortBy] = useState("name");
   const [searchQuery, setSearchQuery] = useState("");
+
+  const searchParams = useSearchParams();
+  const isOnSale = searchParams.get("isonsale") === "true";
+  const isNew = searchParams.get("isnew") === "true";
+
   // for fetching data from sanity store
   const { products, fetchAll } = useSanityStore();
   useEffect(() => {
@@ -43,6 +49,9 @@ export default function ProductsPage() {
         .toLowerCase()
         .includes(searchQuery.toLowerCase());
 
+      const matchSale =
+        !searchParams.has("isonsale") || product.isOnSale === isOnSale;
+      const matchNew = !searchParams.has("isnew") || product.isNew === isNew;
       const matchesCategory =
         selectedCategories.length === 0 ||
         (product.typeCategories &&
@@ -53,7 +62,13 @@ export default function ProductsPage() {
       const matchesPrice =
         product.price >= priceRange[0] && product.price <= priceRange[1];
 
-      return matchesSearch && matchesCategory && matchesPrice;
+      return (
+        matchesSearch &&
+        matchesCategory &&
+        matchesPrice &&
+        matchNew &&
+        matchSale
+      );
     });
 
     // Sort
@@ -71,7 +86,15 @@ export default function ProductsPage() {
     });
 
     return filtered;
-  }, [products, searchQuery, selectedCategories, priceRange, sortBy]);
+  }, [
+    products,
+    searchQuery,
+    selectedCategories,
+    priceRange,
+    sortBy,
+    isNew,
+    isOnSale,
+  ]);
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">
       <div className="flex flex-col lg:flex-row gap-8">
