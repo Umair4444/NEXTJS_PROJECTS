@@ -101,7 +101,10 @@ export const useCart = create<CartStore>()(
       // ✅ Add or update item with quantity and variant matching
       addItem: (item) =>
         set((state) => {
-          const existingItem = state.items.find( (i) => i.id === item.id && i.size === item.size && i.color === item.color );
+          const existingItem = state.items.find(
+            (i) =>
+              i.id === item.id && i.size === item.size && i.color === item.color
+          );
 
           if (existingItem) {
             return {

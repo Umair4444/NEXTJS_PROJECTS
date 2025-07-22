@@ -1,11 +1,12 @@
 import React from "react";
-import { ProductCard } from "../(products)/product-card";
+import { ProductCard } from "../(cards)/ProductCard";
 import { Button } from "../ui/button";
 import Link from "next/link";
-import { getNewArrivals } from "@/lib/products";
+import { getNewArrivals } from "@/dummyData/products";
 
 const NewArrival = () => {
   const newArrivals = getNewArrivals();
+  console.log(newArrivals);
 
   return (
     <>
@@ -15,7 +16,7 @@ const NewArrival = () => {
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {newArrivals.slice(0, 4).map((product) => (
-            <ProductCard key={product.id} product={product} />
+            <ProductCard key={product._id} product={product} />
           ))}
         </div>
         <div className="text-center mt-12">

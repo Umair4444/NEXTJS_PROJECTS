@@ -5,7 +5,7 @@ import { Heart, ShoppingCart, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useWishlist } from "@/hooks/use-wishlist";
 import { useCart } from "@/hooks/use-cart";
-import { ProductCard } from "@/components/(products)/product-card";
+import { ProductCard } from "@/components/(cards)/ProductCard";
 
 export default function WishlistPage() {
   const { items, removeItem, clearWishlist } = useWishlist();
@@ -13,7 +13,7 @@ export default function WishlistPage() {
 
   const handleAddToCart = (item: any) => {
     addToCart({
-      id: item.id,
+      id: item._id,
       name: item.name,
       price: item.price,
       originalPrice: item.originalPrice,

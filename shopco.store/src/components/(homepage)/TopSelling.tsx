@@ -1,6 +1,6 @@
-import { getTopSelling } from "@/lib/products";
+import { getTopSelling } from "@/dummyData/products";
 import Link from "next/link";
-import { ProductCard } from "../(products)/product-card";
+import { ProductCard } from "../(cards)/ProductCard";
 import { Button } from "../ui/button";
 
 const TopSelling = () => {
@@ -14,7 +14,7 @@ const TopSelling = () => {
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {topSelling.slice(0, 4).map((product) => (
-            <ProductCard key={product.id} product={product} />
+            <ProductCard key={product._id} product={product} />
           ))}
         </div>
         <div className="text-center mt-12">

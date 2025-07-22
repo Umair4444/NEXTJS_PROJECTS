@@ -8,7 +8,6 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { LoadingSpinner } from "@/components/(spinners)/spinner";
 import { useWishlist } from "@/hooks/use-wishlist";
-import { useCart } from "@/hooks/use-cart";
 import { cn } from "@/lib/utils";
 import { Product } from "@/hooks/sanityTypes";
 
@@ -17,7 +16,6 @@ interface ProductCardProps {
 }
 
 export function ProductCard({ product }: ProductCardProps) {
-  const [isAddingToCart, setIsAddingToCart] = useState(false);
   const [isTogglingWishlist, setIsTogglingWishlist] = useState(false);
 
   const {
@@ -25,7 +23,6 @@ export function ProductCard({ product }: ProductCardProps) {
     removeItem: removeFromWishlist,
     isInWishlist,
   } = useWishlist();
-  const { addItem: addToCart } = useCart();
 
   const handleWishlistToggle = async () => {
     setIsTogglingWishlist(true);
@@ -36,7 +33,7 @@ export function ProductCard({ product }: ProductCardProps) {
       removeFromWishlist(product._id);
     } else {
       addToWishlist({
-        id: product._id,
+        _id: product._id,
         name: product.name,
         price: product.price,
         originalPrice: product.originalPrice,
@@ -47,25 +44,10 @@ export function ProductCard({ product }: ProductCardProps) {
     setIsTogglingWishlist(false);
   };
 
-  const handleAddToCart = async () => {
-    setIsAddingToCart(true);
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 500));
-
-    addToCart({
-      id: product._id,
-      name: product.name,
-      price: product.price,
-      originalPrice: product.originalPrice,
-      image: product.image,
-    });
-    setIsAddingToCart(false);
-  };
-
   return (
     <div className={`group relative`}>
       <div className="relative bg-gray-100 rounded-2xl overflow-hidden aspect-[1.2]">
-        <Link href={`/products/${product._id}`}>
+        <Link href={`/products/${product.slug}`}>
           <Image
             src={product.image || "/placeholder.svg"}
             alt={product.name}
@@ -101,7 +83,7 @@ export function ProductCard({ product }: ProductCardProps) {
       </div>
 
       <div className="mt-4 space-y-2">
-        <Link href={`/products/${product._id}`}>
+        <Link href={`/products/${product.slug}`}>
           <h3 className="font-bold text-lg hover:text-gray-600 transition-colors">
             {product.name}
           </h3>
@@ -134,21 +116,16 @@ export function ProductCard({ product }: ProductCardProps) {
             </span>
           )}
         </div>
-
-        <Button
-          onClick={handleAddToCart}
-          className="w-full mt-3 rounded-md group-hover:opacity-100 transition-opacity"
-          disabled={isAddingToCart}
-        >
-          {isAddingToCart ? (
-            <>
-              <LoadingSpinner size="sm" className="mr-2" />
-              Adding...
-            </>
-          ) : (
-            "Add to Cart"
-          )}
-        </Button>
+        {(product.btnText || "Shop Now") && (
+          <Button
+            asChild
+            className="w-full mt-3 rounded-md group-hover:opacity-100 transition-opacity"
+          >
+            <Link href={`/products/${product.slug}`}>
+              {product.btnText || "Shop Now"}
+            </Link>
+          </Button>
+        )}
       </div>
     </div>
   );

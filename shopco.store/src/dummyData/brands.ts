@@ -1,16 +1,16 @@
 export interface Brand {
-  id: string
-  name: string
-  logo: string
-  description: string
-  category: string
-  featured: boolean
-  premium: boolean
-  founded: string
-  country: string
-  priceRange: "Budget" | "Mid-Range" | "Premium" | "Luxury"
-  specialties: string[]
-  productCount: number
+  id: string;
+  name: string;
+  logo: string;
+  description: string;
+  category: string[];
+  featured: boolean;
+  premium: boolean;
+  founded: string;
+  country: string;
+  priceRange: "Budget" | "Mid-Range" | "Premium" | "Luxury";
+  specialties: string[];
+  productCount: number;
 }
 
 export const brands: Brand[] = [
@@ -18,8 +18,9 @@ export const brands: Brand[] = [
     id: "versace",
     name: "Versace",
     logo: "/placeholder.svg?height=80&width=120",
-    description: "Italian luxury fashion company known for glamorous designs and bold prints.",
-    category: "Luxury",
+    description:
+      "Italian luxury fashion company known for glamorous designs and bold prints.",
+    category: ["Luxury"],
     featured: true,
     premium: true,
     founded: "1978",
@@ -32,8 +33,9 @@ export const brands: Brand[] = [
     id: "zara",
     name: "Zara",
     logo: "/placeholder.svg?height=80&width=120",
-    description: "Spanish fast fashion retailer known for trendy, affordable clothing.",
-    category: "Fast Fashion",
+    description:
+      "Spanish fast fashion retailer known for trendy, affordable clothing.",
+    category: ["Fast Fashion"],
     featured: true,
     premium: false,
     founded: "1975",
@@ -46,8 +48,9 @@ export const brands: Brand[] = [
     id: "gucci",
     name: "Gucci",
     logo: "/placeholder.svg?height=80&width=120",
-    description: "Italian luxury brand known for leather goods, fashion, and accessories.",
-    category: "Luxury",
+    description:
+      "Italian luxury brand known for leather goods, fashion, and accessories.",
+    category: ["Luxury"],
     featured: true,
     premium: true,
     founded: "1921",
@@ -60,13 +63,14 @@ export const brands: Brand[] = [
     id: "prada",
     name: "Prada",
     logo: "/placeholder.svg?height=80&width=120",
-    description: "Italian luxury fashion house specializing in leather handbags and accessories.",
-    category: "Luxury",
+    description:
+      "Italian luxury fashion house specializing in leather handbags and accessories.",
+    category: ["Luxury"],
     featured: true,
     premium: true,
     founded: "1913",
     country: "Italy",
-    priceRange: "Luxury",
+    priceRange: "Budget",
     specialties: ["Handbags", "Shoes", "Ready-to-Wear"],
     productCount: 142,
   },
@@ -74,8 +78,9 @@ export const brands: Brand[] = [
     id: "calvin-klein",
     name: "Calvin Klein",
     logo: "/placeholder.svg?height=80&width=120",
-    description: "American fashion brand known for minimalist designs and underwear.",
-    category: "Contemporary",
+    description:
+      "American fashion brand known for minimalist designs and underwear.",
+    category: ["Contemporary"],
     featured: true,
     premium: false,
     founded: "1968",
@@ -88,8 +93,9 @@ export const brands: Brand[] = [
     id: "nike",
     name: "Nike",
     logo: "/placeholder.svg?height=80&width=120",
-    description: "American multinational corporation known for athletic footwear and apparel.",
-    category: "Sportswear",
+    description:
+      "American multinational corporation known for athletic footwear and apparel.",
+    category: ["Sportswear"],
     featured: false,
     premium: false,
     founded: "1964",
@@ -102,8 +108,9 @@ export const brands: Brand[] = [
     id: "adidas",
     name: "Adidas",
     logo: "/placeholder.svg?height=80&width=120",
-    description: "German multinational corporation known for athletic shoes and clothing.",
-    category: "Sportswear",
+    description:
+      "German multinational corporation known for athletic shoes and clothing.",
+    category: ["Sportswear"],
     featured: false,
     premium: false,
     founded: "1949",
@@ -116,8 +123,9 @@ export const brands: Brand[] = [
     id: "hm",
     name: "H&M",
     logo: "/placeholder.svg?height=80&width=120",
-    description: "Swedish multinational clothing-retail company known for fast-fashion.",
-    category: "Fast Fashion",
+    description:
+      "Swedish multinational clothing-retail company known for fast-fashion.",
+    category: ["Fast Fashion"],
     featured: false,
     premium: false,
     founded: "1947",
@@ -130,8 +138,9 @@ export const brands: Brand[] = [
     id: "uniqlo",
     name: "Uniqlo",
     logo: "/placeholder.svg?height=80&width=120",
-    description: "Japanese casual wear designer and retailer known for quality basics.",
-    category: "Casual",
+    description:
+      "Japanese casual wear designer and retailer known for quality basics.",
+    category: ["Casual"],
     featured: false,
     premium: false,
     founded: "1949",
@@ -144,8 +153,9 @@ export const brands: Brand[] = [
     id: "tommy-hilfiger",
     name: "Tommy Hilfiger",
     logo: "/placeholder.svg?height=80&width=120",
-    description: "American premium clothing brand known for classic American style.",
-    category: "Contemporary",
+    description:
+      "American premium clothing brand known for classic American style.",
+    category: ["Contemporary"],
     featured: false,
     premium: false,
     founded: "1985",
@@ -158,8 +168,9 @@ export const brands: Brand[] = [
     id: "ralph-lauren",
     name: "Ralph Lauren",
     logo: "/placeholder.svg?height=80&width=120",
-    description: "American fashion company known for luxury lifestyle products.",
-    category: "Luxury",
+    description:
+      "American fashion company known for luxury lifestyle products.",
+    category: ["Luxury"],
     featured: false,
     premium: true,
     founded: "1967",
@@ -172,8 +183,9 @@ export const brands: Brand[] = [
     id: "levis",
     name: "Levi's",
     logo: "/placeholder.svg?height=80&width=120",
-    description: "American clothing company known for denim jeans and casual wear.",
-    category: "Denim",
+    description:
+      "American clothing company known for denim jeans and casual wear.",
+    category: ["Denim"],
     featured: false,
     premium: false,
     founded: "1853",
@@ -182,24 +194,24 @@ export const brands: Brand[] = [
     specialties: ["Denim", "Jeans", "Casual Wear"],
     productCount: 145,
   },
-]
+];
 
 export function getBrandById(id: string): Brand | undefined {
-  return brands.find((brand) => brand.id === id)
+  return brands.find((brand) => brand.id === id);
 }
 
 export function getFeaturedBrands(): Brand[] {
-  return brands.filter((brand) => brand.featured)
+  return brands.filter((brand) => brand.featured);
 }
 
 export function getPremiumBrands(): Brand[] {
-  return brands.filter((brand) => brand.premium)
+  return brands.filter((brand) => brand.premium);
 }
 
 export function getBrandsByCategory(category: string): Brand[] {
-  return brands.filter((brand) => brand.category === category)
+  return brands.filter((brand) => brand.category.includes(category));
 }
 
 export function getBrandCategories(): string[] {
-  return Array.from(new Set(brands.map((brand) => brand.category)))
+  return Array.from(new Set(brands.flatMap((brand) => brand.category)));
 }

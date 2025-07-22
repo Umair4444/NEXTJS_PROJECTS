@@ -1,23 +1,23 @@
-"use client"
+"use client";
 
-import { create } from "zustand"
-import { persist } from "zustand/middleware"
+import { create } from "zustand";
+import { persist } from "zustand/middleware";
 
 export interface WishlistItem {
-  id: string
-  name: string
-  price: number
-  originalPrice?: number
-  image: string
-  rating: number
+  _id: string;
+  name: string;
+  price: number;
+  originalPrice?: number;
+  image: string;
+  rating: number;
 }
 
 interface WishlistStore {
-  items: WishlistItem[]
-  addItem: (item: WishlistItem) => void
-  removeItem: (id: string) => void
-  isInWishlist: (id: string) => boolean
-  clearWishlist: () => void
+  items: WishlistItem[];
+  addItem: (item: WishlistItem) => void;
+  removeItem: (id: string) => void;
+  isInWishlist: (id: string) => boolean;
+  clearWishlist: () => void;
 }
 
 export const useWishlist = create<WishlistStore>()(
@@ -26,22 +26,22 @@ export const useWishlist = create<WishlistStore>()(
       items: [],
       addItem: (item) =>
         set((state) => {
-          const exists = state.items.find((i) => i.id === item.id)
-          if (exists) return state
-          return { items: [...state.items, item] }
+          const exists = state.items.find((i) => i._id === item._id);
+          if (exists) return state;
+          return { items: [...state.items, item] };
         }),
       removeItem: (id) =>
         set((state) => ({
-          items: state.items.filter((item) => item.id !== id),
+          items: state.items.filter((item) => item._id !== id),
         })),
       isInWishlist: (id) => {
-        const { items } = get()
-        return items.some((item) => item.id === id)
+        const { items } = get();
+        return items.some((item) => item._id === id);
       },
       clearWishlist: () => set({ items: [] }),
     }),
     {
       name: "wishlist-storage",
-    },
-  ),
-)
+    }
+  )
+);

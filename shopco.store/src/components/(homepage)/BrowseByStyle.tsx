@@ -1,5 +1,5 @@
 import Image from "next/image";
-import model from "@/images/model.png";
+import model from "@/dummyData/model.png";
 
 const BrowseByStyle = () => {
   return (

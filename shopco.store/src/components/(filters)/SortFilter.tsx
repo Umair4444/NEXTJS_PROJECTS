@@ -14,7 +14,6 @@ interface SortByProps {
 }
 
 const SortFilter: React.FC<SortByProps> = ({ sortBy, setSortBy }) => {
-
   return (
     <>
       <Select value={sortBy} onValueChange={setSortBy}>

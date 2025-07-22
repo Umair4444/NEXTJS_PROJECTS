@@ -3,7 +3,6 @@
 import { useState, useMemo, useEffect } from "react";
 import { Filter, SlidersHorizontal } from "lucide-react";
 import { Button } from "@/components/ui/button";
-
 import {
   Sheet,
   SheetContent,
@@ -13,25 +12,24 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 
-import { ProductCard } from "@/components/(products)/product-card";
-import SearchFilter from "@/components/(filters)/Search";
+import { ProductCard } from "@/components/(cards)/ProductCard";
+import SearchFilter from "@/components/(filters)/SearchFilter";
 import FilterContent from "@/components/(filters)/ContentFilter";
 import SortFilter from "@/components/(filters)/SortFilter";
 import { useSanityStore } from "@/hooks/useSanityStore";
+// import { products } from "@/dummyData/products";
 
 export default function ProductsPage() {
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [priceRange, setPriceRange] = useState([0, 500]);
   const [sortBy, setSortBy] = useState("name");
   const [searchQuery, setSearchQuery] = useState("");
-  const { brands, products, fetchAll, isLoading } = useSanityStore();
-
+  // for fetching data from sanity store
+  const { products, fetchAll } = useSanityStore();
   useEffect(() => {
     fetchAll(); // Fetch all data on mount
   }, []);
 
-  // const categories = Array.from(new Set(products.map((p) => p.typeCategories)));
-  // Extract unique categories
   const categories = useMemo(() => {
     const all = products.flatMap(
       (p) => p.typeCategories?.map((c) => c.title) || []
@@ -145,6 +143,7 @@ export default function ProductsPage() {
           {/* Search */}
           <div className="mb-8">
             <SearchFilter
+              placeholder={"Search products..."}
               searchQuery={searchQuery}
               setSearchQuery={setSearchQuery}
             />
