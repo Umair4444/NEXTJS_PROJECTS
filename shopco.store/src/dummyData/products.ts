@@ -47,8 +47,8 @@ export interface Product {
   name: string;
   slug: string;
   price: number;
-  originalPrice?: number;
-  discount?: number;
+  originalPrice: number;
+  discount: number;
   btnText: string;
   description: string;
   productDescription: string;
@@ -192,6 +192,8 @@ export const products: Product[] = [
     slug: "checkered-shirt",
     price: 180,
     btnText: "Order Now",
+    originalPrice: 99,
+    discount: 20,
     description: "Classic checkered design with button-up collar.",
     productDescription: "Made from soft brushed cotton for comfort.",
     isNew: false,
@@ -257,6 +259,8 @@ export const products: Product[] = [
     productDescription: "100% cotton, soft-touch and durable print.",
     isNew: false,
     isOnSale: false,
+    originalPrice: 130,
+    discount: 66,
     rating: 4.0,
     image: "/images/product6.png",
     images: ["/images/product6.png"],
@@ -271,6 +275,8 @@ export const products: Product[] = [
     name: "Loose Fit Bermuda Shorts",
     slug: "loose-fit-bermuda",
     price: 80,
+    originalPrice: 55,
+    discount: 10,
     btnText: "Buy Shorts",
     description: "Relaxed fit shorts with breathable fabric.",
     productDescription: "Best for summer and casual looks.",
@@ -290,6 +296,8 @@ export const products: Product[] = [
     name: "Faded Skinny Jeans",
     slug: "faded-skinny-jeans",
     price: 210,
+    originalPrice: 200,
+    discount: 30,
     btnText: "Order Now",
     description: "Slightly faded skinny jeans with cool washed look.",
     productDescription: "Excellent choice for fashion-forward casual wear.",
@@ -330,6 +338,8 @@ export const products: Product[] = [
     name: "High Waist Denim Shorts",
     slug: "high-waist-denim-shorts",
     price: 165,
+    originalPrice: 100,
+    discount: 10,
     btnText: "Add to Cart",
     description: "High-waisted shorts for a flattering silhouette.",
     productDescription: "Perfect match for crop tops and casual tees.",
@@ -346,8 +356,15 @@ export const products: Product[] = [
   },
 ];
 
-export function getProductById(id: string): Product | undefined {
-  return products.find((product) => product._id === id);
+// export const getProductById = (id: string) =>
+//   products && products.find((product) => product.slug === id);
+
+export function getProductById(id: string): Product {
+  const product = products.find((product) => product.slug === id);
+  if (!product) {
+    throw new Error("Product not found");
+  }
+  return product;
 }
 
 export function getProductsByGenderCategory(slug: string): Product[] {

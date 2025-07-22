@@ -1,8 +1,9 @@
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
-import { Product } from "@/dummyData/products";
+// import { Product } from "@/dummyData/products";
 import { cn } from "@/lib/utils";
+import { Product } from "@/hooks/sanityTypes";
 
 interface ProductImageProps {
   product: Product;
@@ -16,7 +17,11 @@ const ProductImages = ({ product }: ProductImageProps) => {
       <div className="space-y-4">
         <div className="aspect-square bg-gray-100 rounded-2xl overflow-hidden">
           <Image
-            src={product.images[selectedImage] || product.image}
+            src={
+              product.images[selectedImage] ||
+              product.image ||
+              "/placeholder.svg"
+            }
             alt={product.name}
             width={600}
             height={600}

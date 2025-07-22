@@ -1,7 +1,7 @@
 import React from "react";
 import { Star } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Product } from "@/dummyData/products";
+import { Product } from "@/hooks/sanityTypes";
 
 interface ProductImageProps {
   product: Product;

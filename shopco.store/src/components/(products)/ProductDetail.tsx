@@ -1,6 +1,5 @@
 "use client";
 
-import { Product } from "@/dummyData/products";
 import React, { useState } from "react";
 import { Heart, Star, Minus, Plus, ShoppingCart } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -9,6 +8,7 @@ import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
 import { useWishlist } from "@/hooks/use-wishlist";
 import { useCart } from "@/hooks/use-cart";
+import { Product } from "@/hooks/sanityTypes";
 
 interface ProductDetailProps {
   product: Product;

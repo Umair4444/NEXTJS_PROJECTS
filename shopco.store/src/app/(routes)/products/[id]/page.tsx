@@ -12,11 +12,8 @@ interface ProductPageProps {
 }
 
 export default function ProductPage({ params }: ProductPageProps) {
-  // FOR FETCHING DATA FROM DUMMYDATA FILR WORKS OFFLINE
-  // const product = getProductById(params.id);
-  // if (!product) {
-  //   notFound();
-  // }
+  // // FOR FETCHING DATA FROM DUMMYDATA FILR WORKS OFFLINE
+  // const productfind = getProductById(params.id);
 
   const { products, fetchAll } = useSanityStore();
   useEffect(() => {
@@ -24,7 +21,6 @@ export default function ProductPage({ params }: ProductPageProps) {
   }, []);
 
   const productfind = products.find((product) => product.slug == params.id);
-  console.log(">>>>", products);
 
   if (!productfind) {
     notFound();

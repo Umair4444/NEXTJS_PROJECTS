@@ -2,13 +2,13 @@ import React from "react";
 import ProductDetailsTab from "../(products)/ProductDetailsTab";
 import ProductImages from "../(products)/ProductImages";
 import ProductDetail from "../(products)/ProductDetail";
-import { Product } from "@/dummyData/products";
+import { Product } from "@/hooks/sanityTypes";
 
-interface ProductImageProps {
+interface ProductProps {
   product: Product;
 }
 
-const ProductDetailCard = ({ product }: ProductImageProps) => {
+const ProductDetailCard = ({ product }: ProductProps) => {
   return (
     <>
       <div className="max-w-7xl mx-auto px-4 py-8">
