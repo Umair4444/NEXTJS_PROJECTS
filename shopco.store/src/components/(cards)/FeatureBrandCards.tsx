@@ -92,7 +92,7 @@ const FeatureBrands: React.FC = () => {
                 </div>
 
                 <Button asChild className="w-full rounded-full mt-auto">
-                  <Link href={`/brands/${brand._id}`}>Shop {brand.name}</Link>
+                  <Link href={`/brands/${brand.slug}`}>Shop {brand.name}</Link>
                 </Button>
               </CardContent>
             </Card>

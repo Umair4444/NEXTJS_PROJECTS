@@ -6,15 +6,26 @@ import Link from "next/link";
 import { MapPin, Calendar, Package, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-
 import { Card, CardContent } from "@/components/ui/card";
-import { getBrandById } from "@/dummyData/brands";
-import { brands } from "@/dummyData/brands";
+import { useSanityStore } from "@/hooks/useSanityStore";
+import { useEffect } from "react";
+import getPriceRangeColor from "@/components/(products)/PriceRange";
+// import { brands } from "@/dummyData/brands";
 
 export default function BrandPage() {
   const params = useParams();
-  const brandparams = getBrandById(params.id as string);
-  const brand = brands.find((brand) => brand._id == brandparams?._id);
+  // for dummy data 
+  // const brandparams = getBrandById(params.id as string);
+  // const brand = brands.find((brand) => brand._id == brandparams?._id);
+
+  const { brands, fetchAll } = useSanityStore();
+  useEffect(() => {
+    fetchAll(); // Fetch all data on mount
+  }, []);
+
+  if (!brands.length) return null;
+
+  const brand = brands.find((brand) => brand.slug == params.id);
 
   if (!brand) {
     notFound();
@@ -45,13 +56,13 @@ export default function BrandPage() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Brand Logo and Info */}
             <div className="text-center lg:text-left">
-              <div className="w-48 h-32 bg-gray-100 rounded-2xl flex items-center justify-center mx-auto lg:mx-0 mb-8">
+              <div className="w-fit h-fit bg-gray-100 rounded-2xl flex items-center justify-center mx-auto lg:mx-0 mb-8">
                 <Image
-                  src={brand.logo || "/placeholder.svg"}
+                  src={brand.image || "/placeholder.svg"}
                   alt={`${brand.name} logo`}
-                  width={180}
-                  height={120}
-                  className="object-contain"
+                  width={300}
+                  height={300}
+                  className="object-fill aspect-square w-fit"
                 />
               </div>
 
@@ -79,9 +90,9 @@ export default function BrandPage() {
                 </div>
               </div>
 
-              {/* <Badge className={`${getPriceRangeColor(brand.priceRange)} mb-6`}>
+              <Badge className={`${getPriceRangeColor(brand.priceRange)} mb-6`}>
                 {brand.priceRange}
-              </Badge> */}
+              </Badge>
 
               <p className="text-lg text-gray-600 leading-relaxed mb-8">
                 {brand.description}
@@ -102,7 +113,7 @@ export default function BrandPage() {
             </div>
 
             {/* Brand Stats */}
-            <div className="grid grid-cols-2 gap-6">
+            <div className="grid grid-cols-2 gap-6 self-start ">
               <Card className="text-center p-6 border-none shadow-lg">
                 <CardContent className="p-0">
                   <div className="text-3xl font-bold text-blue-600 mb-2">
@@ -186,20 +197,25 @@ export default function BrandPage() {
           </h2>
           <div className="grid grid-cols-3 md:grid-cols-6 gap-4">
             {brands
-              .filter((brand) => brand._id !== brand._id)
+              .filter((brand) => brand.slug !== params.id)
               .slice(0, 6)
               .map((brand) => (
                 <Link
                   key={brand._id}
-                  href={`/brands/${brand._id}`}
+                  href={`/brands/${brand.slug}`}
                   className="group bg-white rounded-xl p-6 text-center hover:shadow-lg transition-all duration-300 border border-gray-100"
                 >
                   {/* BRAND LOGO */}
-                  <div className="w-16 h-12 bg-gray-100 rounded-lg flex items-center justify-center mx-auto mb-4 px-10 group-hover:bg-gray-200 transition-colors">
-                    <span className="text-sm font-bold text-gray-600">
-                      {brand.name.toUpperCase()}
-                    </span>
+                  <div className="w-36 h-24 bg-gray-100 rounded-lg flex items-center justify-center mx-auto mb-4 group-hover:bg-gray-200 transition-colors overflow-hidden">
+                    <Image
+                      src={brand.logo || "/placeholder.svg"}
+                      alt={brand.name}
+                      width={64}
+                      height={48}
+                      className="object-contain w-fit h-fit"
+                    />
                   </div>
+
                   {/* BRAND NAME */}
                   <h3 className="font-semibold capitalize">
                     {brand.name.replace("-", " ")}

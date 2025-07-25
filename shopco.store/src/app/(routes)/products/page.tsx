@@ -37,6 +37,9 @@ export default function ProductsPage() {
   }, []);
 
   const categories = useMemo(() => {
+    // for safety
+    if (!products || products.length === 0) return [];
+
     const all = products.flatMap(
       (p) => p.typeCategories?.map((c) => c.title) || []
     );

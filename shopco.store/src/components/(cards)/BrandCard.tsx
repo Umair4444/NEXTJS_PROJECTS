@@ -60,7 +60,7 @@ export function BrandCard({ brand, variant = "default" }: BrandCardProps) {
           size="sm"
           className=" absolute bottom-0 right-2 left-2 rounded-full mb-1"
         >
-          <Link href={`/brands/${brand._id}`}>Shop Now</Link>
+          <Link href={`/brands/${brand.slug}`}>Shop Now</Link>
         </Button>
       </CardContent>
     </Card>
