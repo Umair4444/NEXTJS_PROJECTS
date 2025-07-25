@@ -23,24 +23,24 @@ export default function HomePage() {
       </section>
 
       {/* New Arrivals */}
-      <section className="py-16">
+      <section className="py-12">
         <NewArrival />
       </section>
 
       <hr className="max-w-7xl mx-auto border-gray-200" />
 
       {/* Top Selling */}
-      <section className="py-16">
+      <section className="py-12">
         <TopSelling />
       </section>
 
       {/* Browse by Style */}
-      <section className="py-16">
+      <section className="py-6">
         <BrowseByStyle />
       </section>
 
       {/* Customer Reviews */}
-      <section className="py-16">
+      <section className="pt-12">
         <CustomerReviews />
       </section>
     </div>
