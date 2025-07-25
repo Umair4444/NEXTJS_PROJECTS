@@ -1,52 +1,116 @@
-// schemas/brand.ts
 import { defineType, defineField } from "sanity";
 
 export default defineType({
   name: "brand",
   title: "Brand",
   type: "document",
+  initialValue: {
+    isFeatured: false,
+    isPremium: false,
+    btnText: "Visit Shop",
+  },
   fields: [
     defineField({
-      name: "slug",
-      type: "slug",
-      title: "Slug",
-      options: { source: "name", maxLength: 96 },
+      name: "name",
+      title: "Name",
+      type: "string",
+      validation: (Rule) => Rule.required(),
     }),
-    defineField({ name: "name", type: "string", title: "Brand Name" }),
+    defineField({
+      name: "slug",
+      title: "Slug",
+      type: "slug",
+      options: {
+        source: "name",
+        maxLength: 96,
+      },
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: "description",
+      title: "Description",
+      type: "text",
+    }),
+    defineField({
+      name: "btnText",
+      title: "Button Text",
+      type: "string",
+      initialValue: "Visit Shop",
+    }),
     defineField({
       name: "image",
+      title: "Main Image",
       type: "image",
-      title: "Brand Image",
-      options: { hotspot: true },
+      options: {
+        hotspot: true,
+      },
     }),
-    defineField({ name: "btnText", type: "string", title: "Button Text" }),
-    defineField({ name: "description", type: "text", title: "Description" }),
     defineField({
-      name: "isPremium",
+      name: "logo",
+      title: "Brand Logo",
+      type: "image",
+      options: {
+        hotspot: true,
+      },
+    }),
+    defineField({
+      name: "brandCategory",
+      title: "Brand Categories",
+      type: "array",
+      of: [
+        {
+          type: "reference",
+          to: [{ type: "brandCategory" }],
+        },
+      ],
+    }),
+    defineField({
+      name: "isFeatured",
+      title: "Is Featured?",
       type: "boolean",
-      title: "Is Premium?",
       initialValue: false,
     }),
-
     defineField({
-      name: "targetCustomer",
-      title: "Target Customers",
-      type: "array",
-      of: [{ type: "reference", to: [{ type: "targetCustomer" }] }],
+      name: "isPremium",
+      title: "Is Premium?",
+      type: "boolean",
+      initialValue: false,
     }),
-
     defineField({
-      name: "category",
-      title: "Categories",
-      type: "array",
-      of: [{ type: "reference", to: [{ type: "brandCategory" }] }],
+      name: "founded",
+      title: "Founded Year",
+      type: "string",
     }),
-
     defineField({
-      name: "products",
-      title: "Associated Products",
+      name: "country",
+      title: "Country",
+      type: "string",
+    }),
+    defineField({
+      name: "priceRange",
+      title: "Price Range",
+      type: "string",
+      options: {
+        list: ["Budget", "Mid-Range", "Premium", "Luxury"],
+        layout: "radio",
+      },
+    }),
+    defineField({
+      name: "specialties",
+      title: "Specialties",
       type: "array",
-      of: [{ type: "reference", to: [{ type: "product" }] }],
+      of: [{ type: "string" }],
+    }),
+    defineField({
+      name: "productCount",
+      title: "Product Count",
+      type: "number",
+    }),
+    defineField({
+      name: "product",
+      type: "reference",
+      title: "Product",
+      to: [{ type: "product" }],
     }),
   ],
 });

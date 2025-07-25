@@ -26,11 +26,17 @@ export interface Brand {
   name: string;
   slug: string;
   description: string;
-  isPremium: boolean;
   btnText: string;
   image: string;
-  targetCustomer: Category[];
-  category: Category[];
+  brandCategory: Category[];
+  logo: string;
+  isFeatured: boolean;
+  isPremium: boolean;
+  founded: string;
+  country: string;
+  priceRange: "Budget" | "Mid-Range" | "Premium" | "Luxury";
+  specialties: string[];
+  productCount: number;
 }
 
 export interface Product {

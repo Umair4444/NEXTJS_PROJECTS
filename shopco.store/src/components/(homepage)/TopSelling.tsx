@@ -1,10 +1,22 @@
+"use client";
 import { getTopSelling } from "@/dummyData/products";
 import Link from "next/link";
 import { ProductCard } from "../(cards)/ProductCard";
 import { Button } from "../ui/button";
+import { useSanityStore } from "@/hooks/useSanityStore";
+import { useEffect } from "react";
 
 const TopSelling = () => {
-  const topSelling = getTopSelling();
+  // for dummy data
+  // const topSelling = getTopSelling();
+
+  // for data from sanity
+  const { products, fetchAll } = useSanityStore();
+  useEffect(() => {
+    fetchAll(); // Fetch all data on mount
+  }, []);
+
+  const topSelling = products.filter((product) => product.isOnSale);
 
   return (
     <>

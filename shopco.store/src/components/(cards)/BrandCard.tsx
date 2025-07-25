@@ -5,8 +5,9 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
-import type { Brand } from "@/dummyData/brands";
+// import type { Brand } from "@/dummyData/brands";
 import getPriceRangeColor from "../(products)/PriceRange";
+import { Brand } from "@/hooks/sanityTypes";
 
 interface BrandCardProps {
   brand: Brand;
@@ -27,7 +28,7 @@ export function BrandCard({ brand, variant = "default" }: BrandCardProps) {
           height={60}
           className="object-contain transition-transform duration-300 group-hover:scale-105"
         />
-        {brand.premium && (
+        {brand.isPremium && (
           <Badge className="absolute top-2 right-2 bg-yellow-500 text-white text-xs text-nowrap">
             Premium
           </Badge>
@@ -59,7 +60,7 @@ export function BrandCard({ brand, variant = "default" }: BrandCardProps) {
           size="sm"
           className=" absolute bottom-0 right-2 left-2 rounded-full mb-1"
         >
-          <Link href={`/brands/${brand.id}`}>Shop Now</Link>
+          <Link href={`/brands/${brand._id}`}>Shop Now</Link>
         </Button>
       </CardContent>
     </Card>

@@ -6,8 +6,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Button } from "../ui/button";
-import { Trash2Icon } from "lucide-react";
 
 interface BrandSortFilterProps {
   sortBy: string;

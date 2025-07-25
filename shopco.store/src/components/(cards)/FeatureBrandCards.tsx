@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { getFeaturedBrands } from "@/dummyData/brands";
 import Image from "next/image";
 import Link from "next/link";
@@ -9,9 +9,18 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import getPriceRangeColor from "../(products)/PriceRange";
+import { useSanityStore } from "@/hooks/useSanityStore";
 
 const FeatureBrands: React.FC = () => {
-  const featuredBrands = getFeaturedBrands();
+  // from dummy data
+  // const featuredBrands = getFeaturedBrands();
+
+  // from sanity
+  const { brands, fetchAll } = useSanityStore();
+  useEffect(() => {
+    fetchAll(); // Fetch all data on mount
+  }, []);
+  const featuredBrands = brands.filter((brand) => brand.isFeatured);
 
   return (
     <div className="max-w-7xl mx-auto px-4">
@@ -23,11 +32,11 @@ const FeatureBrands: React.FC = () => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {featuredBrands.map((brand) => {
+        {featuredBrands.slice(0, 4).map((brand) => {
           const priceRangeColor = getPriceRangeColor(brand.priceRange);
           return (
             <Card
-              key={brand.id}
+              key={brand._id}
               className="group hover:shadow-xl transition-all duration-300 border-none shadow-lg overflow-hidden h-fit flex flex-col"
             >
               <div className="relative bg-white p-8 flex items-center justify-center h-32 flex-shrink-0">
@@ -38,7 +47,7 @@ const FeatureBrands: React.FC = () => {
                   height={80}
                   className="object-contain group-hover:scale-105 transition-transform duration-300"
                 />
-                {brand.premium && (
+                {brand.isPremium && (
                   <Badge className="absolute top-4 right-4 bg-yellow-500 hover:bg-yellow-600">
                     Premium
                   </Badge>
@@ -71,7 +80,7 @@ const FeatureBrands: React.FC = () => {
                 </div>
 
                 <div className="flex flex-wrap gap-1 mb-4">
-                  {brand.specialties?.slice(0, 2).map((specialty) => (
+                  {brand.specialties?.slice(0, 3).map((specialty) => (
                     <Badge
                       key={specialty}
                       variant="secondary"
@@ -83,7 +92,7 @@ const FeatureBrands: React.FC = () => {
                 </div>
 
                 <Button asChild className="w-full rounded-full mt-auto">
-                  <Link href={`/brands/${brand.id}`}>Shop {brand.name}</Link>
+                  <Link href={`/brands/${brand._id}`}>Shop {brand.name}</Link>
                 </Button>
               </CardContent>
             </Card>

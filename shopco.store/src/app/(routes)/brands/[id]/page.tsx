@@ -1,6 +1,5 @@
 "use client";
 
-import { useState, useMemo } from "react";
 import { useParams, notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
@@ -9,14 +8,13 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 
 import { Card, CardContent } from "@/components/ui/card";
-import { ProductCard } from "@/components/(cards)/ProductCard";
 import { getBrandById } from "@/dummyData/brands";
 import { brands } from "@/dummyData/brands";
 
 export default function BrandPage() {
   const params = useParams();
   const brandparams = getBrandById(params.id as string);
-  const brand = brands.find((brand) => brand.id == brandparams?.id);
+  const brand = brands.find((brand) => brand._id == brandparams?._id);
 
   if (!brand) {
     notFound();
@@ -59,7 +57,7 @@ export default function BrandPage() {
 
               <div className="flex items-center justify-center lg:justify-start gap-4 mb-4">
                 <h1 className="text-4xl md:text-5xl font-bold">{brand.name}</h1>
-                {brand.premium && (
+                {brand.isPremium && (
                   <Badge className="bg-yellow-500 hover:bg-yellow-600 text-white">
                     Premium
                   </Badge>
@@ -159,10 +157,15 @@ export default function BrandPage() {
           <h2 className="text-3xl font-bold text-center mb-12">Brand Story</h2>
           <div className="prose prose-lg max-w-none text-gray-600">
             <p className="text-center leading-relaxed">
-              {brand.name} has been a pioneer in the {brand.category} industry
-              since {brand.founded}. Founded in {brand.country}, the brand has
-              consistently delivered exceptional quality and innovative designs
-              that have captured the hearts of fashion enthusiasts worldwide.
+              {brand.name} has been a pioneer in the{" "}
+              {brand.brandCategory
+                .map((cat) => cat.title)
+                .join(", ")
+                .toLowerCase()}{" "}
+              industry since {brand.founded}. Founded in {brand.country}, the
+              brand has consistently delivered exceptional quality and
+              innovative designs that have captured the hearts of fashion
+              enthusiasts worldwide.
             </p>
             <p className="text-center leading-relaxed mt-6">
               With a focus on {brand.specialties.join(", ").toLowerCase()},{" "}
@@ -183,12 +186,12 @@ export default function BrandPage() {
           </h2>
           <div className="grid grid-cols-3 md:grid-cols-6 gap-4">
             {brands
-              .filter((brand) => brand.id !== brand.id)
+              .filter((brand) => brand._id !== brand._id)
               .slice(0, 6)
               .map((brand) => (
                 <Link
-                  key={brand.id}
-                  href={`/brands/${brand.id}`}
+                  key={brand._id}
+                  href={`/brands/${brand._id}`}
                   className="group bg-white rounded-xl p-6 text-center hover:shadow-lg transition-all duration-300 border border-gray-100"
                 >
                   {/* BRAND LOGO */}
@@ -223,7 +226,7 @@ export default function BrandPage() {
               size="lg"
               className="bg-white text-black hover:bg-gray-100 rounded-full px-8"
             >
-              <Link href={`/products?brand=${brand.id}`}>
+              <Link href={`/products?brand=${brand._id}`}>
                 Shop All {brand.name}
               </Link>
             </Button>

@@ -1,11 +1,20 @@
+export interface Category {
+  _id: string;
+  title: string;
+  slug: string;
+}
+
 export interface Brand {
-  id: string;
+  _id: string;
   name: string;
-  logo: string;
+  slug: string;
   description: string;
-  category: string[];
-  featured: boolean;
-  premium: boolean;
+  btnText: string;
+  image: string;
+  brandCategory: Category[];
+  logo: string;
+  IsFeatured: boolean;
+  isPremium: boolean;
   founded: string;
   country: string;
   priceRange: "Budget" | "Mid-Range" | "Premium" | "Luxury";
@@ -15,14 +24,17 @@ export interface Brand {
 
 export const brands: Brand[] = [
   {
-    id: "versace",
+    _id: "versace",
     name: "Versace",
-    logo: "/placeholder.svg?height=80&width=120",
+    slug: "versace",
     description:
       "Italian luxury fashion company known for glamorous designs and bold prints.",
-    category: ["Luxury"],
-    featured: true,
-    premium: true,
+    btnText: "Shop Now",
+    image: "/placeholder.svg",
+    logo: "/placeholder.svg?height=80&width=120",
+    brandCategory: [{ _id: "luxury", title: "Luxury", slug: "luxury" }],
+    IsFeatured: true,
+    isPremium: true,
     founded: "1978",
     country: "Italy",
     priceRange: "Luxury",
@@ -30,188 +42,189 @@ export const brands: Brand[] = [
     productCount: 156,
   },
   {
-    id: "zara",
+    _id: "zara",
     name: "Zara",
-    logo: "/placeholder.svg?height=80&width=120",
+    slug: "zara",
     description:
-      "Spanish fast fashion retailer known for trendy, affordable clothing.",
-    category: ["Fast Fashion"],
-    featured: true,
-    premium: false,
-    founded: "1975",
+      "Spanish apparel retailer known for fast fashion and trendy styles.",
+    btnText: "Explore Now",
+    image: "/placeholder.svg",
+    logo: "/placeholder.svg?height=80&width=120",
+    brandCategory: [{ _id: "trendy", title: "Trendy", slug: "trendy" }],
+    IsFeatured: true,
+    isPremium: false,
+    founded: "1974",
     country: "Spain",
     priceRange: "Mid-Range",
-    specialties: ["Trendy Fashion", "Workwear", "Casual Wear"],
-    productCount: 324,
+    specialties: ["Casual Wear", "Fast Fashion", "Accessories"],
+    productCount: 200,
   },
   {
-    id: "gucci",
-    name: "Gucci",
+    _id: "nike",
+    name: "Nike",
+    slug: "nike",
+    description: "Global leader in athletic footwear, apparel, and equipment.",
+    btnText: "Shop Now",
+    image: "/placeholder.svg",
     logo: "/placeholder.svg?height=80&width=120",
+    brandCategory: [
+      { _id: "sportswear", title: "Sportswear", slug: "sportswear" },
+    ],
+    IsFeatured: true,
+    isPremium: false,
+    founded: "1964",
+    country: "United States",
+    priceRange: "Mid-Range",
+    specialties: ["Athletic Wear", "Shoes", "Gear"],
+    productCount: 320,
+  },
+  {
+    _id: "gucci",
+    name: "Gucci",
+    slug: "gucci",
     description:
-      "Italian luxury brand known for leather goods, fashion, and accessories.",
-    category: ["Luxury"],
-    featured: true,
-    premium: true,
+      "Luxury fashion brand from Italy known for bold, high-end designs.",
+    btnText: "Discover Now",
+    image: "/placeholder.svg",
+    logo: "/placeholder.svg?height=80&width=120",
+    brandCategory: [{ _id: "luxury", title: "Luxury", slug: "luxury" }],
+    IsFeatured: true,
+    isPremium: true,
     founded: "1921",
     country: "Italy",
     priceRange: "Luxury",
-    specialties: ["Leather Goods", "Handbags", "Shoes"],
-    productCount: 198,
+    specialties: ["Fashion", "Leather Goods", "Fragrances"],
+    productCount: 185,
   },
   {
-    id: "prada",
-    name: "Prada",
+    _id: "uniqlo",
+    name: "Uniqlo",
+    slug: "uniqlo",
+    description: "Japanese casual wear designer, manufacturer and retailer.",
+    btnText: "Browse Now",
+    image: "/placeholder.svg",
     logo: "/placeholder.svg?height=80&width=120",
-    description:
-      "Italian luxury fashion house specializing in leather handbags and accessories.",
-    category: ["Luxury"],
-    featured: true,
-    premium: true,
-    founded: "1913",
-    country: "Italy",
+    brandCategory: [{ _id: "casual", title: "Casual", slug: "casual" }],
+    IsFeatured: false,
+    isPremium: false,
+    founded: "1949",
+    country: "Japan",
     priceRange: "Budget",
-    specialties: ["Handbags", "Shoes", "Ready-to-Wear"],
-    productCount: 142,
+    specialties: ["Casual Wear", "Basics", "Functional Fashion"],
+    productCount: 210,
   },
   {
-    id: "calvin-klein",
-    name: "Calvin Klein",
+    _id: "balenciaga",
+    name: "Balenciaga",
+    slug: "balenciaga",
+    description: "Luxury fashion house known for edgy and innovative designs.",
+    btnText: "View Collection",
+    image: "/placeholder.svg",
     logo: "/placeholder.svg?height=80&width=120",
-    description:
-      "American fashion brand known for minimalist designs and underwear.",
-    category: ["Contemporary"],
-    featured: true,
-    premium: false,
-    founded: "1968",
-    country: "USA",
-    priceRange: "Mid-Range",
-    specialties: ["Underwear", "Jeans", "Fragrances"],
-    productCount: 267,
+    brandCategory: [{ _id: "luxury", title: "Luxury", slug: "luxury" }],
+    IsFeatured: false,
+    isPremium: true,
+    founded: "1919",
+    country: "Spain",
+    priceRange: "Luxury",
+    specialties: ["Fashion", "Sneakers", "Streetwear"],
+    productCount: 132,
   },
   {
-    id: "nike",
-    name: "Nike",
-    logo: "/placeholder.svg?height=80&width=120",
-    description:
-      "American multinational corporation known for athletic footwear and apparel.",
-    category: ["Sportswear"],
-    featured: false,
-    premium: false,
-    founded: "1964",
-    country: "USA",
-    priceRange: "Mid-Range",
-    specialties: ["Athletic Wear", "Sneakers", "Sports Equipment"],
-    productCount: 189,
-  },
-  {
-    id: "adidas",
+    _id: "adidas",
     name: "Adidas",
+    slug: "adidas",
+    description: "German multinational known for sportswear and athletic gear.",
+    btnText: "Find Your Fit",
+    image: "/placeholder.svg",
     logo: "/placeholder.svg?height=80&width=120",
-    description:
-      "German multinational corporation known for athletic shoes and clothing.",
-    category: ["Sportswear"],
-    featured: false,
-    premium: false,
+    brandCategory: [
+      { _id: "sportswear", title: "Sportswear", slug: "sportswear" },
+    ],
+    IsFeatured: true,
+    isPremium: false,
     founded: "1949",
     country: "Germany",
     priceRange: "Mid-Range",
-    specialties: ["Athletic Wear", "Sneakers", "Sports Accessories"],
-    productCount: 156,
+    specialties: ["Footwear", "Tracksuits", "Performance Wear"],
+    productCount: 278,
   },
   {
-    id: "hm",
+    _id: "hm",
     name: "H&M",
-    logo: "/placeholder.svg?height=80&width=120",
+    slug: "h-and-m",
     description:
-      "Swedish multinational clothing-retail company known for fast-fashion.",
-    category: ["Fast Fashion"],
-    featured: false,
-    premium: false,
+      "Swedish fast-fashion clothing company offering modern basics.",
+    btnText: "Get Started",
+    image: "/placeholder.svg",
+    logo: "/placeholder.svg?height=80&width=120",
+    brandCategory: [{ _id: "trendy", title: "Trendy", slug: "trendy" }],
+    IsFeatured: false,
+    isPremium: false,
     founded: "1947",
     country: "Sweden",
     priceRange: "Budget",
-    specialties: ["Trendy Fashion", "Basics", "Kids Clothing"],
-    productCount: 298,
+    specialties: ["Basics", "Trendy Fashion", "Collaborations"],
+    productCount: 350,
   },
   {
-    id: "uniqlo",
-    name: "Uniqlo",
-    logo: "/placeholder.svg?height=80&width=120",
+    _id: "prada",
+    name: "Prada",
+    slug: "prada",
     description:
-      "Japanese casual wear designer and retailer known for quality basics.",
-    category: ["Casual"],
-    featured: false,
-    premium: false,
-    founded: "1949",
-    country: "Japan",
-    priceRange: "Mid-Range",
-    specialties: ["Basics", "Outerwear", "Innovative Fabrics"],
-    productCount: 134,
-  },
-  {
-    id: "tommy-hilfiger",
-    name: "Tommy Hilfiger",
+      "Italian luxury fashion house known for sophisticated designs.",
+    btnText: "Experience Luxury",
+    image: "/placeholder.svg",
     logo: "/placeholder.svg?height=80&width=120",
-    description:
-      "American premium clothing brand known for classic American style.",
-    category: ["Contemporary"],
-    featured: false,
-    premium: false,
-    founded: "1985",
-    country: "USA",
-    priceRange: "Mid-Range",
-    specialties: ["Preppy Style", "Denim", "Polo Shirts"],
-    productCount: 176,
-  },
-  {
-    id: "ralph-lauren",
-    name: "Ralph Lauren",
-    logo: "/placeholder.svg?height=80&width=120",
-    description:
-      "American fashion company known for luxury lifestyle products.",
-    category: ["Luxury"],
-    featured: false,
-    premium: true,
-    founded: "1967",
-    country: "USA",
-    priceRange: "Premium",
-    specialties: ["Polo Shirts", "Luxury Lifestyle", "Home Goods"],
-    productCount: 203,
-  },
-  {
-    id: "levis",
-    name: "Levi's",
-    logo: "/placeholder.svg?height=80&width=120",
-    description:
-      "American clothing company known for denim jeans and casual wear.",
-    category: ["Denim"],
-    featured: false,
-    premium: false,
-    founded: "1853",
-    country: "USA",
-    priceRange: "Mid-Range",
-    specialties: ["Denim", "Jeans", "Casual Wear"],
+    brandCategory: [{ _id: "luxury", title: "Luxury", slug: "luxury" }],
+    IsFeatured: true,
+    isPremium: true,
+    founded: "1913",
+    country: "Italy",
+    priceRange: "Luxury",
+    specialties: ["Bags", "Runway Fashion", "Eyewear"],
     productCount: 145,
+  },
+  {
+    _id: "gap",
+    name: "GAP",
+    slug: "gap",
+    description: "American clothing and accessories retailer known for basics.",
+    btnText: "Shop the Look",
+    image: "/placeholder.svg",
+    logo: "/placeholder.svg?height=80&width=120",
+    brandCategory: [{ _id: "casual", title: "Casual", slug: "casual" }],
+    IsFeatured: false,
+    isPremium: false,
+    founded: "1969",
+    country: "United States",
+    priceRange: "Budget",
+    specialties: ["Denim", "T-Shirts", "Hoodies"],
+    productCount: 220,
   },
 ];
 
 export function getBrandById(id: string): Brand | undefined {
-  return brands.find((brand) => brand.id === id);
+  return brands.find((brand) => brand._id === id);
 }
 
 export function getFeaturedBrands(): Brand[] {
-  return brands.filter((brand) => brand.featured);
+  return brands.filter((brand) => brand.IsFeatured);
 }
 
 export function getPremiumBrands(): Brand[] {
-  return brands.filter((brand) => brand.premium);
+  return brands.filter((brand) => brand.isPremium);
 }
 
-export function getBrandsByCategory(category: string): Brand[] {
-  return brands.filter((brand) => brand.category.includes(category));
+export function getBrandsByCategory(categorySlug: string): Brand[] {
+  return brands.filter((brand) =>
+    brand.brandCategory.some((cat) => cat.slug === categorySlug)
+  );
 }
 
 export function getBrandCategories(): string[] {
-  return Array.from(new Set(brands.flatMap((brand) => brand.category)));
+  const categories = brands.flatMap((brand) =>
+    brand.brandCategory.map((c) => c.title)
+  );
+  return Array.from(new Set(categories));
 }

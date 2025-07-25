@@ -23,7 +23,7 @@ const FilterBrandCategories: React.FC<BrandFilterContentProps> = ({
             </p>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-            {categories.map((category) => (
+            {categories.slice(0, 6).map((category) => (
               <Button
                 key={category}
                 variant="outline"

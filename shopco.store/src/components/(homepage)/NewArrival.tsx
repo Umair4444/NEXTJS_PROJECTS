@@ -1,12 +1,22 @@
-import React from "react";
+"use client";
+import React, { useEffect } from "react";
 import { ProductCard } from "../(cards)/ProductCard";
 import { Button } from "../ui/button";
 import Link from "next/link";
 import { getNewArrivals, products } from "@/dummyData/products";
+import { useSanityStore } from "@/hooks/useSanityStore";
 
 const NewArrival = () => {
-  const newArrivals = getNewArrivals();
-  console.log("////", newArrivals);
+  // for dummy data
+  // const newArrivals = getNewArrivals();
+
+  // for data from sanity
+  const { products, fetchAll } = useSanityStore();
+  useEffect(() => {
+    fetchAll(); // Fetch all data on mount
+  }, []);
+
+  const newArrivals = products.filter((product) => product.isNew);
 
   return (
     <>
@@ -15,7 +25,7 @@ const NewArrival = () => {
           NEW ARRIVALS
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {newArrivals.map((product) => (
+          {newArrivals.slice(0, 4).map((product) => (
             <ProductCard key={product._id} product={product} />
           ))}
         </div>

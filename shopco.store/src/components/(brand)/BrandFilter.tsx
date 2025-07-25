@@ -1,6 +1,8 @@
-import React from "react";
+"use client";
+import React, { useEffect } from "react";
 import { Label } from "../ui/label";
 import { Checkbox } from "../ui/checkbox";
+import { useSanityStore } from "@/hooks/useSanityStore";
 
 interface BrandFilterContentProps {
   categories: string[];
@@ -21,7 +23,20 @@ const BrandFilter: React.FC<BrandFilterContentProps> = ({
   showPremiumOnly,
   setShowPremiumOnly,
 }) => {
-  const priceRanges = ["Budget", "Mid-Range", "Premium", "Luxury"];
+  // for dummy data
+  // const priceRanges = ["Budget", "Mid-Range", "Premium", "Luxury"];
+
+  // from sanity
+  const { brands, fetchAll } = useSanityStore();
+  useEffect(() => {
+    fetchAll(); // Fetch all data on mount
+  }, []);
+  
+  const priceRanges = Array.from(
+    new Set(
+      brands.map((brand) => brand.priceRange).filter(Boolean) // removes null/undefined/empty
+    )
+  );
 
   const handleCategoryChange = (category: string, checked: boolean) => {
     if (checked) {

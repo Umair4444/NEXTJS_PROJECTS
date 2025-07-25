@@ -26,15 +26,12 @@ export interface Brand {
   name: string;
   slug: string;
   description: string;
-  isPremium: boolean;
   btnText: string;
   image: string;
-  targetCustomer: Category[];
   category: Category[];
-
   logo: string;
-  featured: boolean;
-  premium: boolean;
+  IsFeatured: boolean;
+  isPremium: boolean;
   founded: string;
   country: string;
   priceRange: "Budget" | "Mid-Range" | "Premium" | "Luxury";
@@ -98,48 +95,6 @@ const faqs: FAQ[] = [
     _id: "faq2",
     question: "Does it shrink after wash?",
     answer: "No noticeable shrinkage if washed in cold water.",
-  },
-];
-
-const brands: Brand[] = [
-  {
-    _id: "brand1",
-    name: "UrbanWear",
-    slug: "urbanwear",
-    logo: "/placeholder.svg?height=80&width=120",
-    description: "Trendy fashion for everyday wear.",
-    isPremium: false,
-    btnText: "Shop Now",
-    image: "/images/brand1.png",
-    targetCustomer: [categories[5]], // Men
-    category: [categories[0], categories[1]], // T-Shirts, Jeans
-    featured: true,
-    premium: true,
-    founded: "1978",
-    country: "Italy",
-    priceRange: "Luxury",
-    specialties: ["Evening Wear", "Accessories", "Fragrances"],
-    productCount: 156,
-  },
-  {
-    _id: "brand2",
-    name: "EliteStyle",
-    slug: "elitestyle",
-    logo: "/placeholder.svg?height=80&width=120",
-
-    description: "Premium clothing with elegant designs.",
-    isPremium: true,
-    btnText: "Explore",
-    image: "/images/brand2.png",
-    targetCustomer: [categories[4]], // Women
-    category: [categories[2], categories[3]], // Shirts, Shorts
-    featured: true,
-    premium: true,
-    founded: "1978",
-    country: "Italy",
-    priceRange: "Luxury",
-    specialties: ["Evening Wear", "Accessories", "Fragrances"],
-    productCount: 156,
   },
 ];
 

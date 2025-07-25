@@ -1,46 +1,61 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { Filter } from "lucide-react";
 import { Button } from "@/components/ui/button";
-
 import { Card, CardContent } from "@/components/ui/card";
-// import BrandCard from "@/components/(products)/brand-card";
 import { BrandCard } from "@/components/(cards)/BrandCard";
-import { brands, getBrandCategories } from "@/dummyData/brands";
 import CallToAction from "@/components/(brand)/CTA";
 import FilterBrandCategories from "@/components/(brand)/FilterBrandCategories";
 import SearchFilter from "@/components/(filters)/SearchFilter";
-import FeatureBrands from "@/components/(cards)/FeatureBrandCardss";
+import FeatureBrands from "@/components/(cards)/FeatureBrandCards";
 import Stats from "@/components/(brand)/Stats";
 import BrandFilter from "@/components/(brand)/BrandFilter";
 import MobileFilter from "@/components/(brand)/MobileFilter";
 import BrandSortFilter from "@/components/(brand)/BrandSortFilter";
+import { useSanityStore } from "@/hooks/useSanityStore";
+// import { brands, getBrandCategories } from "@/dummyData/brands";
 
 export default function BrandsPage() {
-  const categories = getBrandCategories();
+  // const categories = getBrandCategories();
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [selectedPriceRanges, setSelectedPriceRanges] = useState<string[]>([]);
   const [sortBy, setSortBy] = useState("name");
   const [showPremiumOnly, setShowPremiumOnly] = useState(false);
 
+  const { brands, fetchAll } = useSanityStore();
+  useEffect(() => {
+    fetchAll(); // Fetch all data on mount
+  }, []);
+
+  const categories = brands.flatMap((brand) =>
+    brand.brandCategory.map((c) => c.title)
+  );
+
   const filteredBrands = useMemo(() => {
+    if (!brands || brands.length === 0) return [];
+
     const filtered = brands.filter((brand) => {
+      const name = brand.name?.toLowerCase() || "";
+      const description = brand.description?.toLowerCase() || "";
+      const search = searchQuery.toLowerCase();
+
       const matchesSearch =
-        brand.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        brand.description.toLowerCase().includes(searchQuery.toLowerCase());
+        name.includes(search) || description.includes(search);
 
       const matchesCategory =
         selectedCategories.length === 0 ||
-        (brand.category &&
-          brand.category.some((c) => selectedCategories.includes(c)));
+        (brand.brandCategory &&
+          brand.brandCategory.some((c) =>
+            selectedCategories.includes(c?.title ?? "")
+          ));
 
-      const matchesPremium = !showPremiumOnly || brand.premium;
+      const matchesPremium = !showPremiumOnly || brand.isPremium === true;
 
       const matchesPriceRange =
         selectedPriceRanges.length === 0 ||
-        selectedPriceRanges.includes(brand.priceRange);
+        selectedPriceRanges.includes(brand.priceRange ?? "");
 
       return (
         matchesSearch && matchesCategory && matchesPriceRange && matchesPremium
@@ -51,18 +66,19 @@ export default function BrandsPage() {
     filtered.sort((a, b) => {
       switch (sortBy) {
         case "products":
-          return b.productCount - a.productCount;
+          return (b.productCount || 0) - (a.productCount || 0);
         case "founded":
-          return Number.parseInt(a.founded) - Number.parseInt(b.founded);
+          return parseInt(a.founded || "0") - parseInt(b.founded || "0");
         case "country":
-          return a.country.localeCompare(b.country);
+          return (a.country || "").localeCompare(b.country || "");
         default:
-          return a.name.localeCompare(b.name);
+          return (a.name || "").localeCompare(b.name || "");
       }
     });
 
     return filtered;
   }, [
+    brands,
     searchQuery,
     selectedCategories,
     selectedPriceRanges,
@@ -96,7 +112,6 @@ export default function BrandsPage() {
       <section className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex flex-col lg:flex-row gap-8">
-            
             {/* Desktop Filters */}
             <div className="hidden lg:block w-64 shrink-0">
               <Card className="border-none shadow-lg sticky top-4">
@@ -144,7 +159,6 @@ export default function BrandsPage() {
                   />
                   {/* Filter and Sort by  */}
                   <BrandSortFilter sortBy={sortBy} setSortBy={setSortBy} />
-                  
                 </div>
               </div>
 
@@ -160,7 +174,7 @@ export default function BrandsPage() {
               {/* Brands Grid */}
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 ">
                 {filteredBrands.map((brand) => (
-                  <BrandCard key={brand.id} brand={brand} />
+                  <BrandCard key={brand._id} brand={brand} />
                 ))}
               </div>
 

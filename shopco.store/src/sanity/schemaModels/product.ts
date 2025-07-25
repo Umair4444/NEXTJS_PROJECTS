@@ -87,6 +87,7 @@ export default defineType({
       title: "Type Categories",
       type: "array",
       of: [{ type: "reference", to: [{ type: "typeCategory" }] }],
+      initialValue: [],
     }),
 
     defineField({

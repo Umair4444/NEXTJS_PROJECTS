@@ -19,11 +19,16 @@ export const useSanityStore = create<SanityState>((set) => ({
     try {
       const [brands, products] = await Promise.all([
         client.fetch(`*[_type == "brand"]{
-          _id, name, slug, description, isPremium, btnText,
+          _id,name,description,btnText,
+          "slug": slug.current,
           "image": image.asset->url,
-          targetCustomer[]->{_id, title, slug},
-          category[]->{_id, title, slug},
-          }`),
+          "logo": logo.asset->url,
+          brandCategory[]->{
+            _id,
+            title,
+            slug },
+          isFeatured,isPremium,founded,country,
+          priceRange,specialties,productCount}`),
 
         client.fetch(`*[_type == "product"]{
             _id,name,price,originalPrice,discount,btnText,

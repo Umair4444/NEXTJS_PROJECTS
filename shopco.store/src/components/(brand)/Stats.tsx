@@ -1,9 +1,22 @@
-import { brands, getBrandCategories, getFeaturedBrands } from "@/dummyData/brands";
-import React from "react";
+"use client";
+// import { brands, getBrandCategories, getFeaturedBrands } from "@/dummyData/brands";
+import { useSanityStore } from "@/hooks/useSanityStore";
+import React, { useEffect } from "react";
 
 const Stats = () => {
-  const featuredBrands = getFeaturedBrands();
-  const categories = getBrandCategories();
+  // const featuredBrands = getFeaturedBrands();
+  // const categories = getBrandCategories();
+
+  const { brands, fetchAll } = useSanityStore();
+  useEffect(() => {
+    fetchAll(); // Fetch all data on mount
+  }, []);
+
+  const categories = brands.flatMap((brand) =>
+    brand.brandCategory.map((cat) => cat.title)
+  );
+
+  const featuredBrands = brands.filter((brand) => brand.isFeatured);
 
   return (
     <>

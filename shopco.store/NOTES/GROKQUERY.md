@@ -1,27 +1,23 @@
 ## Brand
 brand->{
-        _id,
-        name,
-        slug,
-        description,
-        isPremium,
+       _id,
+       name,
+       description,
+       btnText,
+       "slug": slug.current,
+       "image": image.asset->url,
+       "logo": logo.asset->url,
         brandCategory[]->{
-        _id,
-        title,
-        slug
-        },
-        targetCustomer[]->{
-        _id,
-        title,
-        slug
-        },
-        category[]->{
-        _id,
-        title,
-        slug
-        },
-        btnText,
-        "image": image.asset->url
+         _id,
+          title,
+          slug },
+        isFeatured,
+        isPremium,
+        founded,
+        country,
+        priceRange,
+        specialties,
+        productCount
         },
 
 ## // Example GROQ query for fetching products
