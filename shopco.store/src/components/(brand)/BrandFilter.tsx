@@ -31,7 +31,7 @@ const BrandFilter: React.FC<BrandFilterContentProps> = ({
   useEffect(() => {
     fetchAll(); // Fetch all data on mount
   }, []);
-  
+
   const priceRanges = Array.from(
     new Set(
       brands.map((brand) => brand.priceRange).filter(Boolean) // removes null/undefined/empty

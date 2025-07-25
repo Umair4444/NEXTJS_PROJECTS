@@ -29,8 +29,10 @@ export default function BrandsPage() {
     fetchAll(); // Fetch all data on mount
   }, []);
 
-  const categories = brands.flatMap((brand) =>
-    brand.brandCategory.map((c) => c.title)
+  const categories = Array.from(
+    new Set(
+      brands.flatMap((brand) => brand.brandCategory?.map((c) => c.title) || [])
+    )
   );
 
   const filteredBrands = useMemo(() => {
