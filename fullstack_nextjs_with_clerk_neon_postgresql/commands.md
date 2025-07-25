@@ -5,7 +5,7 @@ npm install prisma --save-dev
 npx prisma init --datasource-provider postgresql
 npx prisma format
 
-npx prisma migrate dev --name init "create table and its colums from schema"
+npx prisma migrate dev --name init "create table and its columns from schema"
 npx prisma db push
 
 npm install prisma @prisma/client
