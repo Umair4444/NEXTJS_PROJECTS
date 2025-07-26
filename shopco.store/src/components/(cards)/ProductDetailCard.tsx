@@ -14,14 +14,14 @@ const ProductDetailCard = ({ product }: ProductProps) => {
       <div className="max-w-7xl mx-auto px-4 py-8">
         <div className="grid md:grid-cols-2 gap-12">
           {/* Product Images */}
-          <ProductImages product={product} />
+          <ProductImages key={product.slug} product={product} />
 
           {/* Product Details */}
-          <ProductDetail product={product} />
+          <ProductDetail key={product.slug} product={product} />
         </div>
 
         {/* Product Details Tabs */}
-        <ProductDetailsTab product={product} />
+        <ProductDetailsTab key={product.slug} product={product} />
       </div>
     </>
   );

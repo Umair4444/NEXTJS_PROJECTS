@@ -1,5 +1,4 @@
 "use client";
-import { notFound } from "next/navigation";
 import { getProductById } from "@/dummyData/products";
 import { useSanityStore } from "@/hooks/useSanityStore";
 import { useEffect } from "react";
@@ -21,9 +20,7 @@ export default function ProductPage({ params }: ProductPageProps) {
   }, []);
   const productfind = products.find((product) => product.slug == params.id);
 
-  if (!productfind) {
-    notFound();
-  }
+  if (!productfind) return [];
 
-  return <ProductDetailCard product={productfind} />;
+  return <ProductDetailCard key={productfind._id} product={productfind} />;
 }
