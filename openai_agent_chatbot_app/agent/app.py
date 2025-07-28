@@ -76,6 +76,6 @@ def get_saved_messages():
     return {"messages": saved_messages}
 
 
-# Only for local development
-if __name__ == "__main__":
-    uvicorn.run("app:app", host="127.0.0.1", port=8000, reload=True)
+# # Only for local development
+# if __name__ == "__main__":
+#     uvicorn.run("app:app", host="127.0.0.1", port=8000, reload=True)
