@@ -6,7 +6,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Anonyomous Feedback app",
-  description: "It gives true feedback",
+  description: "It gives you true feedback",
 };
 
 export default function RootLayout({
