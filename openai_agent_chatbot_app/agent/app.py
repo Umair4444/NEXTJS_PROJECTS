@@ -12,7 +12,8 @@ app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
     # allow_origins=["http://localhost:3000"],  # Change if your frontend runs elsewhere
-    allow_origins=["https://chatbotagent-sooty.vercel.app"],  # running on vercel
+    # allow_origins=["https://chatbotagent-sooty.vercel.app"],  # running on vercel
+    allow_origins=["https://chatbotagent-sooty.vercel.app","http://localhost:3000"],  # running on vercel and localhost
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -78,6 +79,6 @@ def get_saved_messages():
     return {"messages": saved_messages if saved_messages else []}
 
 
-# # Only for local development
-# if __name__ == "__main__":
-#     uvicorn.run("app:app", host="127.0.0.1", port=8000, reload=True)
+# Only for local development
+if __name__ == "__main__":
+    uvicorn.run("app:app", host="127.0.0.1", port=8000, reload=True)

@@ -11,5 +11,6 @@
       "src": "/api/(.*)",
       "dest": "app.py"
     }
-  ]
+  ],
+  "ignoreCommand": "git diff --quiet HEAD^ HEAD ./"
 }

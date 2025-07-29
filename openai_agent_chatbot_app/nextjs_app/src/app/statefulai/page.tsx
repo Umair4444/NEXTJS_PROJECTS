@@ -10,8 +10,8 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
 
   const fetchMessages = async () => {
-    // const res = await fetch("http://127.0.0.1:8001/api/messages");
-    const res = await fetch("https://agentapi-three.vercel.app/api/messages");
+    const res = await fetch("http://127.0.0.1:8001/api/messages");
+    // const res = await fetch("https://agentapi-three.vercel.app/api/messages");
     const data = await res.json();
     setMessages(data.messages);
   };
@@ -20,8 +20,8 @@ export default function Home() {
     if (!input.trim()) return;
     setLoading(true);
 
-    // const res = await fetch("http://127.0.0.1:8001/api/chat", {
-    const res = await fetch("https://agentapi-three.vercel.app/api/chat", {
+    const res = await fetch("http://127.0.0.1:8001/api/chat", {
+    // const res = await fetch("https://agentapi-three.vercel.app/api/chat", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ input }),
