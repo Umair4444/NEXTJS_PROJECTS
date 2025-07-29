@@ -76,7 +76,7 @@ async def chat(request: Request):
 
 @app.get("/api/messages")
 def get_saved_messages():
-    return {"messages": saved_messages}
+    return {"messages": saved_messages if saved_messages else []}
 
 
 # # Only for local development
