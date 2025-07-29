@@ -4,6 +4,8 @@ from dotenv import load_dotenv
 import os
 import uvicorn
 from fastapi.middleware.cors import CORSMiddleware
+from mangum import Mangum
+
 
 load_dotenv()
 
@@ -11,7 +13,8 @@ app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
     # allow_origins=["http://localhost:3000"],  # Change if your frontend runs elsewhere
-    allow_origins=["https://chatbotagent-sooty.vercel.app/"],  # running on vercel
+    allow_origins=["http://localhost:3000",
+                   "https://chatbotagent-sooty.vercel.app"],  # running on vercel
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -80,3 +83,4 @@ def get_saved_messages():
 # # Only for local development
 # if __name__ == "__main__":
 #     uvicorn.run("app:app", host="127.0.0.1", port=8000, reload=True)
+handler = Mangum(app)
