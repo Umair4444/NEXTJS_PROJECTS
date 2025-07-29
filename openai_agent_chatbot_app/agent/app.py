@@ -13,8 +13,7 @@ app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
     # allow_origins=["http://localhost:3000"],  # Change if your frontend runs elsewhere
-    allow_origins=["http://localhost:3000",
-                   "https://chatbotagent-sooty.vercel.app"],  # running on vercel
+    allow_origins=["https://chatbotagent-sooty.vercel.app"],  # running on vercel
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
