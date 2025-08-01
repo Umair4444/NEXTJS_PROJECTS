@@ -1,0 +1,167 @@
+/* Import Google Fonts for Natural Wedding Theme */
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /**
+   * Natural Wedding Design System
+   * Earthy, botanical, and romantic color palette
+   */
+  :root {
+    --background: 32 20% 97%;
+    --foreground: 25 15% 20%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 25 15% 20%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 25 15% 20%;
+
+    --primary: 25 30% 35%;
+    --primary-foreground: 32 20% 97%;
+
+    --secondary: 32 25% 93%;
+    --secondary-foreground: 25 15% 20%;
+
+    --muted: 32 15% 90%;
+    --muted-foreground: 25 10% 50%;
+
+    --accent: 140 25% 85%;
+    --accent-foreground: 25 15% 20%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 32 15% 85%;
+    --input: 32 15% 92%;
+    --ring: 25 30% 35%;
+
+    --radius: 0.75rem;
+
+    /* Natural Wedding Colors */
+    --sage-green: 140 25% 65%;
+    --sage-green-light: 140 25% 85%;
+    --sage-green-dark: 140 30% 45%;
+    --dusty-rose: 350 25% 80%;
+    --dusty-rose-light: 350 25% 90%;
+    --cream: 32 20% 95%;
+    --warm-beige: 32 25% 88%;
+    --terracotta: 15 45% 70%;
+    --forest-green: 140 40% 35%;
+    --champagne: 45 30% 90%;
+  }
+
+  .dark {
+    --background: 25 15% 8%;
+    --foreground: 32 20% 95%;
+
+    --card: 25 15% 10%;
+    --card-foreground: 32 20% 95%;
+
+    --popover: 25 15% 10%;
+    --popover-foreground: 32 20% 95%;
+
+    --primary: 140 25% 65%;
+    --primary-foreground: 25 15% 8%;
+
+    --secondary: 25 15% 15%;
+    --secondary-foreground: 32 20% 95%;
+
+    --muted: 25 15% 18%;
+    --muted-foreground: 32 10% 60%;
+
+    --accent: 140 25% 25%;
+    --accent-foreground: 32 20% 95%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 25 15% 20%;
+    --input: 25 15% 18%;
+    --ring: 140 25% 65%;
+
+    /* Natural Wedding Colors - Dark Mode */
+    --sage-green: 140 25% 55%;
+    --sage-green-light: 140 25% 35%;
+    --sage-green-dark: 140 30% 25%;
+    --dusty-rose: 350 25% 60%;
+    --dusty-rose-light: 350 25% 30%;
+    --cream: 32 20% 15%;
+    --warm-beige: 32 25% 20%;
+    --terracotta: 15 45% 50%;
+    --forest-green: 140 40% 25%;
+    --champagne: 45 30% 25%;
+  }
+
+  /* Global Reset */
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+      sans-serif;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Wedding Typography */
+  .font-playfair {
+    font-family: "Playfair Display", serif;
+  }
+
+  .font-cormorant {
+    font-family: "Cormorant Garamond", serif;
+  }
+
+  .font-inter {
+    font-family: "Inter", sans-serif;
+  }
+
+  /* Wedding-specific utilities */
+  .text-sage {
+    color: hsl(var(--sage-green));
+  }
+
+  .text-sage-dark {
+    color: hsl(var(--sage-green-dark));
+  }
+
+  .text-dusty-rose {
+    color: hsl(var(--dusty-rose));
+  }
+
+  .bg-sage {
+    background-color: hsl(var(--sage-green));
+  }
+
+  .bg-sage-light {
+    background-color: hsl(var(--sage-green-light));
+  }
+
+  .bg-dusty-rose {
+    background-color: hsl(var(--dusty-rose));
+  }
+
+  .bg-cream {
+    background-color: hsl(var(--cream));
+  }
+
+  .bg-warm-beige {
+    background-color: hsl(var(--warm-beige));
+  }
+
+  .bg-terracotta {
+    background-color: hsl(var(--terracotta));
+  }
+
+  .bg-champagne {
+    background-color: hsl(var(--champagne));
+  }
+}
