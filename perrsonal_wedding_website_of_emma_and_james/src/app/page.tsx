@@ -7,7 +7,6 @@ import WeddingStory from "@/components/WeddingStory";
 export default function Home() {
   return (
     <div className="bg-background">
-      {/* Wedding Page Components */}
       <WeddingHero />
       <WeddingStory />
       <WeddingGallery />
