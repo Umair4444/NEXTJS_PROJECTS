@@ -38,8 +38,8 @@ export default function Footer() {
             Emma & James
           </h3>
           <p className="font-cormorant text-lg italic mb-8">
-            "Love is the bridge between two hearts, and we can't wait to cross
-            it together with all of you by our side."
+            &quos;Love is the bridge between two hearts, and we can&apos;t wait
+            to cross it together with all of you by our side.&quos;
           </p>
 
           {/* Wedding date & countdown */}

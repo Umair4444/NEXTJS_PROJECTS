@@ -52,9 +52,9 @@ export default function WeddingStory() {
             Our Love Story
           </h2>
           <p className="font-cormorant text-xl md:text-2xl text-muted-foreground italic max-w-3xl mx-auto">
-            Every love story is beautiful, but ours is our favorite. Here's how
-            two hearts found their way to each other through nature's gentle
-            guidance.
+            Every love story is beautiful, but ours is our favorite. Here&apos;s
+            how two hearts found their way to each other through nature&apos;s
+            gentle guidance.
           </p>
         </div>
 
@@ -114,8 +114,8 @@ export default function WeddingStory() {
         <div className="mt-20 text-center">
           <div className="bg-sage-light/30 rounded-3xl p-12 max-w-4xl mx-auto">
             <blockquote className="font-cormorant text-2xl md:text-3xl italic text-primary mb-6">
-              "In all the world, there is no heart for me like yours. In all the
-              world, there is no love for you like mine."
+              &quos;In all the world, there is no heart for me like yours. In
+              all the world, there is no love for you like mine.&quos;
             </blockquote>
             <cite className="text-muted-foreground">— Maya Angelou</cite>
           </div>

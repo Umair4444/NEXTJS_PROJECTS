@@ -60,7 +60,7 @@ export default function RSVPPage() {
                 </h4>
                 <p className="text-muted-foreground">
                   Plus-ones are welcome if specifically mentioned on your
-                  invitation. If you're unsure, please reach out to us directly.
+                  invitation. If you&apos;re unsure, please reach out to us directly.
                 </p>
               </div>
 
@@ -87,10 +87,10 @@ export default function RSVPPage() {
 
               <div className="bg-white rounded-2xl p-6">
                 <h4 className="font-playfair text-lg font-semibold text-primary mb-2">
-                  What if I can't make it?
+                  What if I can&apos;t make it?
                 </h4>
                 <p className="text-muted-foreground">
-                  We'll miss you, but we understand! We hope to celebrate with
+                  We&apos;ll miss you, but we understand! We hope to celebrate with
                   you in another way soon. Please still RSVP so we know.
                 </p>
               </div>
@@ -107,7 +107,7 @@ export default function RSVPPage() {
               Still Have Questions?
             </h3>
             <p className="text-muted-foreground mb-8">
-              Don't hesitate to reach out! We're here to help make sure you have
+              Don&apos;t hesitate to reach out! We&apos;re here to help make sure you have
               everything you need for our special day.
             </p>
             <div className="bg-sage-light/10 rounded-2xl p-6">

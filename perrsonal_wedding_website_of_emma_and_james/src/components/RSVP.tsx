@@ -75,7 +75,7 @@ export default function RSVP() {
             RSVP
           </h2>
           <p className="font-cormorant text-xl md:text-2xl text-muted-foreground italic max-w-3xl mx-auto">
-            We can't wait to celebrate with you! Please let us know if you'll be
+            We can&apos;t wait to celebrate with you! Please let us know if you&apos;ll be
             joining us for our special day.
           </p>
         </div>
@@ -91,7 +91,7 @@ export default function RSVP() {
                 Please Respond by May 1st, 2024
               </h3>
               <p className="text-muted-foreground">
-                We're excited to celebrate with you!
+                We&apos;re excited to celebrate with you!
               </p>
             </div>
 

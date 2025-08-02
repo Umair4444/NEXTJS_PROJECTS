@@ -88,7 +88,7 @@ export default function WeddingGallery() {
           </h2>
           <p className="font-cormorant text-xl md:text-2xl text-muted-foreground italic max-w-3xl mx-auto">
             A glimpse into our journey together, from our engagement session to
-            the beautiful venue where we'll say "I do."
+            the beautiful venue where we&apos;ll say &quos;I do.&quos;
           </p>
         </div>
 

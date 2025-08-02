@@ -101,7 +101,8 @@ export default function WeddingHero() {
           </h1>
 
           <p className="font-cormorant text-xl md:text-2xl text-muted-foreground italic mb-8 max-w-2xl mx-auto">
-            "Two hearts, one soul, forever intertwined in nature's embrace"
+            &quos;Two hearts, one soul, forever intertwined in nature&apos;s
+            embrace&quos;
           </p>
 
           {/* Wedding details */}

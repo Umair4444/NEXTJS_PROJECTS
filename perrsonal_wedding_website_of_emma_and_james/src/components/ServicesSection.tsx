@@ -130,7 +130,7 @@ export default function ServicesSection() {
                 </h3>
                 <p className="text-lg text-brand-gray-600 dark:text-gray-300">
                   Join thousands of satisfied customers who have experienced our
-                  exceptional car rental service. We're committed to making your
+                  exceptional car rental service. We&apos;re committed to making your
                   journey comfortable and memorable.
                 </p>
               </div>

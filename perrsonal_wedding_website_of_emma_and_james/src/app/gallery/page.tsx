@@ -25,7 +25,7 @@ export default function GalleryPage() {
 
             <p className="font-cormorant text-xl md:text-2xl text-muted-foreground italic mb-8">
               A visual journey through our engagement, adventures, and the
-              beautiful venue where we'll say "I do."
+              beautiful venue where we&apos;ll say &quos;I do.&quos;
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -55,7 +55,7 @@ export default function GalleryPage() {
               More Photos Coming Soon!
             </h3>
             <p className="text-muted-foreground mb-8">
-              After our wedding day, we'll be adding all the beautiful moments
+              After our wedding day, we&apos;ll be adding all the beautiful moments
               captured by our photographer and shared by our friends and family.
             </p>
             <div className="bg-white rounded-3xl p-8 shadow-lg">
