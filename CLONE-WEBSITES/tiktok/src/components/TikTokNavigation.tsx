@@ -1,16 +1,16 @@
-"use client"
+"use client";
 import { Home, Search, Plus, MessageCircle, User } from "lucide-react";
 import { useState } from "react";
 
 export default function TikTokNavigation() {
-  const [activeTab, setActiveTab] = useState('home');
+  const [activeTab, setActiveTab] = useState("home");
 
   const navItems = [
-    { id: 'home', icon: Home, label: 'Home' },
-    { id: 'discover', icon: Search, label: 'Discover' },
-    { id: 'create', icon: Plus, label: 'Create', isSpecial: true },
-    { id: 'inbox', icon: MessageCircle, label: 'Inbox' },
-    { id: 'profile', icon: User, label: 'Profile' },
+    { id: "home", icon: Home, label: "Home" },
+    { id: "discover", icon: Search, label: "Discover" },
+    { id: "create", icon: Plus, label: "Create", isSpecial: true },
+    { id: "inbox", icon: MessageCircle, label: "Inbox" },
+    { id: "profile", icon: User, label: "Profile" },
   ];
 
   return (
@@ -34,21 +34,21 @@ export default function TikTokNavigation() {
               </button>
             );
           }
-          
+
           return (
             <button
               key={item.id}
               onClick={() => setActiveTab(item.id)}
               className="flex flex-col items-center justify-center flex-1 py-2"
             >
-              <Icon 
+              <Icon
                 className={`w-6 h-6 ${
-                  isActive ? 'text-white' : 'text-gray-500'
-                }`} 
+                  isActive ? "text-white" : "text-gray-500"
+                }`}
               />
-              <span 
+              <span
                 className={`text-xs mt-1 ${
-                  isActive ? 'text-white' : 'text-gray-500'
+                  isActive ? "text-white" : "text-gray-500"
                 }`}
               >
                 {item.label}

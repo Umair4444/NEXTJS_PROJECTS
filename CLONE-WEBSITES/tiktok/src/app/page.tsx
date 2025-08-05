@@ -181,7 +181,7 @@ export default function TikTokHome() {
       <TikTokNavigation />
 
       {/* Video Navigation Indicators */}
-      <div className="fixed right-4 top-1/2 transform -translate-y-1/2 z-30 space-y-2">
+      <div className="hidden md:block fixed right-1/2 bottom-16 space-x-2 transform -translate-y-1/2 z-30 space-y-2">
         {videos.map((_, index) => (
           <button
             key={index}
