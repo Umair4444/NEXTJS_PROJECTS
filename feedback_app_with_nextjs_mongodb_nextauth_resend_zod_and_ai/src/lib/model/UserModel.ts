@@ -1,6 +1,7 @@
 import mongoose, { Schema, Document } from "mongoose";
 
 export interface Message extends Document {
+  _id: string;
   content: string;
   createdAt: Date;
 }
@@ -37,7 +38,7 @@ const UserSchema: Schema<User> = new mongoose.Schema({
   },
   password: {
     type: String,
-    required: [true, "Email is required"],
+    required: [true, "Password is required"],
   },
   email: {
     type: String,
