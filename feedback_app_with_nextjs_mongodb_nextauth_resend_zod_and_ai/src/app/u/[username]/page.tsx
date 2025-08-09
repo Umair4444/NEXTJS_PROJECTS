@@ -8,7 +8,6 @@ import { Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { CardHeader, CardContent, Card } from "@/components/ui/card";
-// import { useCompletion } from 'ai/react';
 import {
   Form,
   FormControl,
@@ -37,16 +36,10 @@ const initialMessageString =
 export default function SendMessage() {
   const params = useParams<{ username: string }>();
   const username = params.username;
-
-  // const {
-  //   complete,
-  //   completion,
-  //   isLoading: isSuggestLoading,
-  //   error,
-  // } = useCompletion({
-  //   api: '/api/suggest-messages',
-  //   initialCompletion: initialMessageString,
-  // });
+  const [isLoading, setIsLoading] = useState(false);
+  const [isSuggestLoading, setIsSuggestLoading] = useState(false);
+  const [messages, setMessages] = useState(initialMessageString);
+  const [error, setError] = useState("");
 
   const form = useForm<z.infer<typeof messageSchema>>({
     resolver: zodResolver(messageSchema),
@@ -57,8 +50,6 @@ export default function SendMessage() {
   const handleMessageClick = (message: string) => {
     form.setValue("content", message);
   };
-
-  const [isLoading, setIsLoading] = useState(false);
 
   const onSubmit = async (data: z.infer<typeof messageSchema>) => {
     setIsLoading(true);
@@ -87,11 +78,32 @@ export default function SendMessage() {
   };
 
   const fetchSuggestedMessages = async () => {
+    setIsSuggestLoading(true);
     try {
-      // complete('');
-    } catch (error) {
-      console.error("Error fetching messages:", error);
-      // Handle error appropriately
+      const res = await fetch("/api/suggest-messages", { method: "POST" });
+      console.log("response", res);
+      const reader = res.body?.getReader();
+      console.log("reader", reader);
+      const decoder = new TextDecoder();
+      console.log("decoder", decoder);
+
+      let text = "";
+      while (true) {
+        const { done, value } = await reader!.read();
+        console.log("done", done);
+        console.log("value", value);
+        if (done) break;
+        text += decoder.decode(value);
+        setMessages(text); // update as chunks arrive
+      }
+
+      // const data = await res.json();
+      // setMessages(data.response);
+    } catch (err) {
+      setError(error);
+      console.error("Failed to fetch:", err);
+    } finally {
+      setIsSuggestLoading(false);
     }
   };
 
@@ -136,24 +148,24 @@ export default function SendMessage() {
 
       <div className="space-y-4 my-8">
         <div className="space-y-2">
-          {/* <Button
+          <Button
             onClick={fetchSuggestedMessages}
             className="my-4"
             disabled={isSuggestLoading}
           >
-            Suggest Messages
-          </Button> */}
+            {isSuggestLoading ? "Suggesting..." : " Suggest Messages"}
+          </Button>
           <p>Click on any message below to select it.</p>
         </div>
         <Card>
           <CardHeader>
             <h3 className="text-xl font-semibold">Messages</h3>
           </CardHeader>
-          {/* <CardContent className="flex flex-col space-y-4">
+          <CardContent className="flex flex-col space-y-4">
             {error ? (
-              <p className="text-red-500">{error.message}</p>
+              <p className="text-red-500">{error}</p>
             ) : (
-              parseStringMessages(completion).map((message, index) => (
+              parseStringMessages(messages).map((message, index) => (
                 <Button
                   key={index}
                   variant="outline"
@@ -164,7 +176,7 @@ export default function SendMessage() {
                 </Button>
               ))
             )}
-          </CardContent> */}
+          </CardContent>
         </Card>
       </div>
       <Separator className="my-6" />
