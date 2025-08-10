@@ -8,8 +8,9 @@ import Navbar from "@/components/Navbar";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Anonyomous Feedback app",
-  description: "It gives you true feedback",
+  title: "Anonyomous Feedback Network",
+  description:
+    "It gives you true feedback from all over the world and also keeps your identidy secret",
 };
 
 export default function RootLayout({
@@ -20,7 +21,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <AuthProvider>
-        <body className={inter.className}>
+        <body
+          className={`${inter.className} bg-gradient-to-r from-purple-500 to-pink-500 `}
+        >
           <Navbar />
           {children}
           <Toaster />

@@ -11,30 +11,35 @@ function Navbar() {
   const user: User = session?.user as User;
 
   return (
-    <nav className="p-4 md:p-6 shadow-md bg-gray-900 text-white">
-      <div className="container mx-auto flex flex-col md:flex-row justify-between items-center">
-        <Link href="#" className="text-xl font-bold mb-4 md:mb-0">
+    <nav className="p-4 md:p-6 shadow-md bg-gradient-to-r from-white via-gray-50 to-gray-100">
+      <div className="container mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+        {/* Brand Logo / Title */}
+        <Link
+          href="/"
+          className="text-2xl font-bold bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent hover:opacity-80 transition"
+        >
           True Feedback
         </Link>
+
+        {/* Right Side - Auth Buttons */}
         {session ? (
-          <>
-            <span className="mr-4">
-              Welcome, {user?.username || user?.email}
+          <div className="flex flex-col md:flex-row items-center gap-3">
+            <span className="text-sm sm:text-base text-gray-700">
+              Welcome,{" "}
+              <span className="font-medium text-gray-900">
+                {user?.username || user?.email}
+              </span>
             </span>
             <Button
               onClick={() => signOut()}
-              className="w-full md:w-auto bg-slate-100 text-black"
-              variant="outline"
+              className="bg-gradient-to-r from-purple-500 to-pink-500 text-white hover:opacity-90 transition w-full md:w-auto"
             >
               Logout
             </Button>
-          </>
+          </div>
         ) : (
-          <Link href="/sign-in">
-            <Button
-              className="w-full md:w-auto bg-slate-100 text-black"
-              variant={"outline"}
-            >
+          <Link href="/sign-in" className="w-full md:w-auto">
+            <Button className="bg-gradient-to-r from-purple-500 to-pink-500 text-white hover:opacity-90 transition w-full md:w-auto">
               Login
             </Button>
           </Link>

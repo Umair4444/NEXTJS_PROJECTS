@@ -1,11 +1,10 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import axios, { AxiosError } from "axios";
 import dayjs from "dayjs";
-import { X } from "lucide-react";
+import { Trash2 } from "lucide-react";
 import { Message } from "@/lib/model/UserModel";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -34,9 +33,7 @@ export function MessageCard({ message, onMessageDelete }: MessageCardProps) {
       const response = await axios.delete<ApiResponse>(
         `/api/delete-message/${message._id}`
       );
-      toast({
-        title: response.data.message,
-      });
+      toast({ title: response.data.message });
       onMessageDelete(message._id);
     } catch (error) {
       const axiosError = error as AxiosError<ApiResponse>;
@@ -50,38 +47,46 @@ export function MessageCard({ message, onMessageDelete }: MessageCardProps) {
   };
 
   return (
-    <Card className="card-bordered">
-      <CardHeader>
-        <div className="flex justify-between items-center">
-          <CardTitle>{message.content}</CardTitle>
+    <div className="w-full">
+      <div className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg shadow-lg p-4 flex flex-col justify-between h-32 min-h-[8rem] max-h-[8rem] transition-transform duration-200 hover:scale-[1.02]">
+        {/* Top Row */}
+        <div className="flex justify-between items-start gap-4">
+          <p className="text-white text-base font-medium leading-relaxed break-words flex-1">
+            {message.content}
+          </p>
+
           <AlertDialog>
             <AlertDialogTrigger asChild>
-              <Button variant="destructive">
-                <X className="w-5 h-5" />
+              <Button
+                size="icon"
+                className="p-2 rounded-full bg-red-600 hover:bg-red-700 text-white"
+              >
+                <Trash2 className="w-5 h-5" />
               </Button>
             </AlertDialogTrigger>
-            <AlertDialogContent>
+            <AlertDialogContent className="max-w-sm">
               <AlertDialogHeader>
-                <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                <AlertDialogTitle>Delete this message?</AlertDialogTitle>
                 <AlertDialogDescription>
-                  This action cannot be undone. This will permanently delete
-                  this message.
+                  This action cannot be undone. This will permanently delete the
+                  message.
                 </AlertDialogDescription>
               </AlertDialogHeader>
               <AlertDialogFooter>
                 <AlertDialogCancel>Cancel</AlertDialogCancel>
                 <AlertDialogAction onClick={handleDeleteConfirm}>
-                  Continue
+                  Delete
                 </AlertDialogAction>
               </AlertDialogFooter>
             </AlertDialogContent>
           </AlertDialog>
         </div>
-        <div className="text-sm">
-          {dayjs(message.createdAt).format("MMM D, YYYY h:mm A")}
-        </div>
-      </CardHeader>
-      <CardContent></CardContent>
-    </Card>
+
+        {/* Timestamp */}
+        <span className="text-xs text-white/80">
+          {dayjs(message.createdAt).format("MMM D, YYYY • h:mm A")}
+        </span>
+      </div>
+    </div>
   );
 }

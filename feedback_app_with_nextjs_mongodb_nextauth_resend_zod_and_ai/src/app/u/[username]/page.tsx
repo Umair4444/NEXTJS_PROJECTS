@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import axios, { AxiosError } from "axios";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { Loader2 } from "lucide-react";
+import { Loader2, Loader } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { CardHeader, CardContent, Card } from "@/components/ui/card";
@@ -25,17 +25,14 @@ import { useParams } from "next/navigation";
 import { messageSchema } from "@/lib/Schemas/messageSchema";
 
 const specialChar = "||";
-
-const parseStringMessages = (messageString: string): string[] => {
-  return messageString.split(specialChar);
-};
+const parseStringMessages = (messageString: string) =>
+  messageString.split(specialChar);
 
 const initialMessageString =
   "What's your favorite movie?||Do you have any pets?||What's your dream job?";
 
 export default function SendMessage() {
-  const params = useParams<{ username: string }>();
-  const username = params.username;
+  const { username } = useParams<{ username: string }>();
   const [isLoading, setIsLoading] = useState(false);
   const [isSuggestLoading, setIsSuggestLoading] = useState(false);
   const [messages, setMessages] = useState(initialMessageString);
@@ -58,18 +55,14 @@ export default function SendMessage() {
         ...data,
         username,
       });
-
-      toast({
-        title: response.data.message,
-        variant: "default",
-      });
+      toast({ title: response.data.message });
       form.reset({ ...form.getValues(), content: "" });
     } catch (error) {
       const axiosError = error as AxiosError<ApiResponse>;
       toast({
         title: "Error",
         description:
-          axiosError.response?.data.message ?? "Failed to sent message",
+          axiosError.response?.data.message ?? "Failed to send message",
         variant: "destructive",
       });
     } finally {
@@ -81,37 +74,30 @@ export default function SendMessage() {
     setIsSuggestLoading(true);
     try {
       const res = await fetch("/api/suggest-messages", { method: "POST" });
-      console.log("response", res);
       const reader = res.body?.getReader();
-      console.log("reader", reader);
       const decoder = new TextDecoder();
-      console.log("decoder", decoder);
-
       let text = "";
       while (true) {
         const { done, value } = await reader!.read();
-        console.log("done", done);
-        console.log("value", value);
         if (done) break;
         text += decoder.decode(value);
-        setMessages(text); // update as chunks arrive
+        setMessages(text); // streaming effect
       }
-
-      // const data = await res.json();
-      // setMessages(data.response);
     } catch (err) {
-      setError(error);
-      console.error("Failed to fetch:", err);
+      setError("Failed to load suggestions");
+      console.error(err);
     } finally {
       setIsSuggestLoading(false);
     }
   };
 
   return (
-    <div className="container mx-auto my-8 p-6 bg-white rounded max-w-4xl">
-      <h1 className="text-4xl font-bold mb-6 text-center">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 mt-2 bg-gradient-to-br from-white to-gray-50 rounded-2xl shadow-lg border border-gray-100">
+      <h1 className="text-3xl sm:text-4xl font-bold mb-6 text-center bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
         Public Profile Link
       </h1>
+
+      {/* Form */}
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
           <FormField
@@ -119,11 +105,14 @@ export default function SendMessage() {
             name="content"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Send Anonymous Message to @{username}</FormLabel>
+                <FormLabel className="text-gray-600 font-medium">
+                  Send Anonymous Message to @{username}
+                </FormLabel>
                 <FormControl>
                   <Textarea
-                    placeholder="Write your anonymous message here"
-                    className="resize-none"
+                    placeholder="Write your anonymous message here..."
+                    className="resize-none rounded-xl border-gray-300 focus:ring-2 focus:ring-purple-400 transition-all shadow-sm"
+                    rows={4}
                     {...field}
                   />
                 </FormControl>
@@ -131,37 +120,46 @@ export default function SendMessage() {
               </FormItem>
             )}
           />
+
           <div className="flex justify-center">
-            {isLoading ? (
-              <Button disabled>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                Please wait
-              </Button>
-            ) : (
-              <Button type="submit" disabled={isLoading || !messageContent}>
-                Send It
-              </Button>
-            )}
+            <Button
+              type="submit"
+              disabled={isLoading || !messageContent}
+              className="px-6 py-2 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 text-white hover:shadow-lg hover:scale-105 transition-transform"
+            >
+              {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+              {isLoading ? "Sending..." : "Send It"}
+            </Button>
           </div>
         </form>
       </Form>
 
+      {/* Suggestions */}
       <div className="space-y-4 my-8">
         <div className="space-y-2">
           <Button
             onClick={fetchSuggestedMessages}
-            className="my-4"
+            className="my-4 rounded-full bg-gradient-to-r from-indigo-500 to-purple-500 text-white hover:scale-105 transition-transform"
             disabled={isSuggestLoading}
           >
-            {isSuggestLoading ? "Suggesting..." : " Suggest Messages"}
+            {isSuggestLoading ? (
+              <span className="flex items-center gap-2">
+                <Loader className="h-4 w-4 animate-spin" /> Suggesting...
+              </span>
+            ) : (
+              " Suggest Messages"
+            )}
           </Button>
-          <p>Click on any message below to select it.</p>
+          <p className="text-gray-500 text-sm">
+            Click on any message below to select it.
+          </p>
         </div>
-        <Card>
+
+        <Card className="bg-white/70 backdrop-blur-md shadow-md border-none">
           <CardHeader>
-            <h3 className="text-xl font-semibold">Messages</h3>
+            <h3 className="text-lg sm:text-xl font-semibold">Messages</h3>
           </CardHeader>
-          <CardContent className="flex flex-col space-y-4">
+          <CardContent className="grid grid-cols-1 gap-3">
             {error ? (
               <p className="text-red-500">{error}</p>
             ) : (
@@ -169,7 +167,7 @@ export default function SendMessage() {
                 <Button
                   key={index}
                   variant="outline"
-                  className="mb-2"
+                  className="rounded-full text-wrap  px-4 py-6 hover:bg-purple-50 transition-colors"
                   onClick={() => handleMessageClick(message)}
                 >
                   {message}
@@ -179,11 +177,16 @@ export default function SendMessage() {
           </CardContent>
         </Card>
       </div>
+
       <Separator className="my-6" />
+
+      {/* Call to Action */}
       <div className="text-center">
-        <div className="mb-4">Get Your Message Board</div>
+        <div className="mb-4 text-gray-500">Get Your Message Board</div>
         <Link href={"/sign-up"}>
-          <Button>Create Your Account</Button>
+          <Button className="rounded-full bg-gradient-to-r from-green-400 to-blue-500 text-white hover:scale-105 transition-transform">
+            Create Your Account
+          </Button>
         </Link>
       </div>
     </div>

@@ -9,12 +9,13 @@ import { Message } from "@/lib/model/UserModel";
 import { ApiResponse } from "@/lib/types/ApiResponse";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios, { AxiosError } from "axios";
-import { Loader2, RefreshCcw } from "lucide-react";
+import { Loader2, RefreshCcw, Link } from "lucide-react";
 import { User } from "next-auth";
 import { useSession } from "next-auth/react";
 import React, { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { acceptingMessageSchema } from "@/lib/Schemas/acceptingMeassageSchema";
+import { DashboardSkeleton } from "@/components/DashboardSkeleton";
 
 const DashboardPage = () => {
   const [messages, setMessages] = useState<Message[]>([]);
@@ -61,17 +62,13 @@ const DashboardPage = () => {
       setIsSwitchLoading(false);
       try {
         const response = await axios.get<ApiResponse>("/api/get-messages");
-        console.log("Fetched messages:", response.data.messages);
-
         setMessages(response.data.messages || []);
-        console.log("messages",messages)
         if (refresh) {
           toast({
             title: "Refreshed Messages",
             description: "Showing latest messages",
           });
         }
-        console.log(response);
       } catch (error) {
         const axiosError = error as AxiosError<ApiResponse>;
         toast({
@@ -88,26 +85,19 @@ const DashboardPage = () => {
     [setIsLoading, setMessages, toast]
   );
 
-  // Fetch initial state from the server
   useEffect(() => {
     if (!session || !session.user) return;
-
     fetchMessages();
-
     fetchAcceptMessages();
   }, [session, setValue, toast, fetchAcceptMessages, fetchMessages]);
 
-  // Handle switch change
   const handleSwitchChange = async () => {
     try {
       const response = await axios.post<ApiResponse>("/api/accept-messages", {
         acceptMessages: !acceptMessages,
       });
       setValue("acceptingMessage", !acceptMessages);
-      toast({
-        title: response.data.message,
-        variant: "default",
-      });
+      toast({ title: response.data.message });
     } catch (error) {
       const axiosError = error as AxiosError<ApiResponse>;
       toast({
@@ -121,11 +111,14 @@ const DashboardPage = () => {
   };
 
   if (!session || !session.user) {
-    return <div>Please Login</div>;
+    return (
+      <div className="text-center py-10">
+        <DashboardSkeleton />
+      </div>
+    );
   }
 
   const { username } = session.user as User;
-
   const baseUrl = `${window.location.protocol}//${window.location.host}`;
   const profileUrl = `${baseUrl}/u/${username}`;
 
@@ -138,52 +131,65 @@ const DashboardPage = () => {
   };
 
   return (
-    <div className="my-8 mx-4 md:mx-8 lg:mx-auto p-6 bg-white rounded w-full max-w-6xl">
-      <h1 className="text-4xl font-bold mb-4">User Dashboard</h1>
+    <div className="my-8 px-4 md:px-8 lg:px-12 max-w-7xl mx-auto">
+      {/* HEADER */}
+      <h1 className="text-4xl font-bold mb-8 text-gray-800">User Dashboard</h1>
 
-      <div className="mb-4">
-        <h2 className="text-lg font-semibold mb-2">Copy Your Unique Link</h2>{" "}
-        <div className="flex items-center">
+      {/* PROFILE LINK CARD */}
+      <div className="bg-white rounded-xl shadow-md p-5 mb-6 border border-gray-100">
+        <h2 className="text-lg font-semibold mb-3 flex items-center gap-2">
+          <Link className="w-5 h-5 text-indigo-500" /> Your Unique Link
+        </h2>
+        <div className="flex flex-col sm:flex-row gap-3">
           <input
             type="text"
             value={profileUrl}
             disabled
-            className="input input-bordered w-full p-2 mr-2"
+            className="w-full rounded-md border border-gray-300 p-2 bg-gray-50 text-gray-700"
           />
-          <Button onClick={copyToClipboard}>Copy</Button>
+          <Button onClick={copyToClipboard} className="shrink-0">
+            Copy
+          </Button>
         </div>
       </div>
 
-      <div className="mb-4">
+      {/* SWITCH */}
+      <div className="bg-white w-fit rounded-xl shadow-md p-5 mb-6 border border-gray-100 flex gap-4 items-center justify-between">
+        <span className="font-medium text-gray-700">
+          Accept Messages: {acceptMessages ? "On" : "Off"}
+        </span>
         <Switch
           {...register("acceptingMessage")}
           checked={acceptMessages}
           onCheckedChange={handleSwitchChange}
           disabled={isSwitchLoading}
         />
-        <span className="ml-2">
-          Accept Messages: {acceptMessages ? "On" : "Off"}
-        </span>
       </div>
-      <Separator />
 
-      <Button
-        className="mt-4"
-        variant="outline"
-        onClick={(e) => {
-          e.preventDefault();
-          fetchMessages(true);
-        }}
-      >
-        {isLoading ? (
-          <Loader2 className="h-4 w-4 animate-spin" />
-        ) : (
-          <RefreshCcw className="h-4 w-4" />
-        )}
-      </Button>
-      <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-6">
+      <Separator className="mb-6" />
+
+      {/* REFRESH BUTTON */}
+      <div className="flex justify-end mb-4">
+        <Button
+          size="icon"
+          variant="outline"
+          onClick={(e) => {
+            e.preventDefault();
+            fetchMessages(true);
+          }}
+        >
+          {isLoading ? (
+            <Loader2 className="h-4 w-4 animate-spin" />
+          ) : (
+            <RefreshCcw className="h-4 w-4" />
+          )}
+        </Button>
+      </div>
+
+      {/* MESSAGES GRID */}
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
         {messages.length > 0 ? (
-          messages.map((message, index) => (
+          messages.map((message) => (
             <MessageCard
               key={message._id}
               message={message}
@@ -191,7 +197,9 @@ const DashboardPage = () => {
             />
           ))
         ) : (
-          <p>No messages to display.</p>
+          <p className="text-gray-500 col-span-full text-center">
+            No messages to display.
+          </p>
         )}
       </div>
     </div>
