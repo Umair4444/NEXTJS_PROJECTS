@@ -16,7 +16,7 @@
 // }
 
 import { google } from "@ai-sdk/google";
-import { streamText,StreamTextResult } from "ai";
+import { streamText, StreamTextResult } from "ai";
 import { NextRequest } from "next/server";
 
 export const runtime = "edge";
@@ -28,7 +28,6 @@ export async function POST(req: NextRequest) {
     model: google("gemini-2.5-flash"),
     prompt: message,
   });
-
 
   return new Response(
     new ReadableStream({
