@@ -52,7 +52,7 @@ export function EducationForm({ data, onChange }: EducationFormProps) {
           <CardContent className="flex flex-col items-center justify-center py-8">
             <GraduationCap className="h-12 w-12 text-muted-foreground mb-4" />
             <p className="text-muted-foreground text-center">
-              No education added yet. Click "Add Education" to get started.
+              No education added yet. Click &quot;Add Education&quot; to get started.
             </p>
           </CardContent>
         </Card>

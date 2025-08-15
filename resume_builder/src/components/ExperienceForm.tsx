@@ -53,7 +53,7 @@ export function ExperienceForm({ data, onChange }: ExperienceFormProps) {
           <CardContent className="flex flex-col items-center justify-center py-8">
             <Briefcase className="h-12 w-12 text-muted-foreground mb-4 animate-float" />
             <p className="text-muted-foreground text-center animate-fade-in">
-              No work experience added yet. Click "Add Experience" to get started.
+              No work experience added yet. Click &quot;Add Experience&quot; to get started.
             </p>
           </CardContent>
         </Card>
