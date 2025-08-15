@@ -80,6 +80,20 @@ export default function ResumeBuilder() {
   const [exportLoading, setExportLoading] = useState<string | null>(null);
   const { toast } = useToast();
 
+  const handleExportViaWindowPrint = () => {
+    if (!resumeData.personalInfo.fullName) {
+      toast({
+        title: "Missing Information",
+        description: "Please fill in at least your name before printing.",
+        variant: "destructive",
+        className: "bg-orange-500 text-white",
+      });
+      return;
+    }
+
+    window.print(); // CSS handles showing only resume-preview
+  };
+
   const updateResumeData = (section: keyof ResumeData, data: any) => {
     setResumeData((prev) => ({
       ...prev,
@@ -87,7 +101,7 @@ export default function ResumeBuilder() {
     }));
   };
 
-  const handleExport = async (type: "pdf" | "jpg" | "word") => {
+  const handleExportviahtml2canva = async (type: "pdf" | "jpg" | "word") => {
     if (!resumeData.personalInfo.fullName) {
       toast({
         title: "Missing Information",
@@ -263,9 +277,12 @@ export default function ResumeBuilder() {
                           : "bg-transparent hover-glow"
                       }`}
                       onClick={() =>
-                        handleExport(type as "pdf" | "jpg" | "word")
+                        handleExportviahtml2canva(
+                          type as "pdf" | "jpg" | "word"
+                        )
                       }
-                      disabled={exportLoading !== null}
+                      // disabled={exportLoading !== null}
+                      disabled={!showPreview || exportLoading !== null}
                     >
                       {exportLoading === type ? (
                         <div className="flex items-center">
@@ -275,11 +292,25 @@ export default function ResumeBuilder() {
                       ) : (
                         <>
                           <Download className="h-4 w-4 mr-2" />
-                          Download {type.toUpperCase()}
+                          Download via HTML2Canva {type.toUpperCase()}
                         </>
                       )}
                     </Button>
                   ))}
+
+                  <Button
+                    variant={showPreview ? "default" : "outline"}
+                    className={`w-full button-enhanced ${
+                      showPreview
+                        ? "bg-black text-white hover:bg-black/80"
+                        : "bg-black text-white hover-glow"
+                    }`}
+                    onClick={handleExportViaWindowPrint}
+                    disabled={!showPreview}
+                  >
+                    <Download className="h-4 w-4 mr-2" />
+                    Download via Window Print PDF
+                  </Button>
                 </div>
 
                 <p className="text-sm text-muted-foreground text-center animate-fade-in">

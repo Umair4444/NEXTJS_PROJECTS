@@ -92,40 +92,67 @@
 
 /* ---------- Custom Animations ---------- */
 @keyframes fade-in {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 .animate-fade-in {
   animation: fade-in 0.5s ease-in-out;
 }
 
 @keyframes slide-in-left {
-  from { opacity: 0; transform: translateX(-20px); }
-  to { opacity: 1; transform: translateX(0); }
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 .animate-slide-in-left {
   animation: slide-in-left 0.6s ease-out;
 }
 
 @keyframes slide-in-right {
-  from { opacity: 0; transform: translateX(20px); }
-  to { opacity: 1; transform: translateX(0); }
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 .animate-slide-in-right {
   animation: slide-in-right 0.6s ease-out;
 }
 
 @keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-6px); }
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
 }
 .animate-float {
   animation: float 3s ease-in-out infinite;
 }
 
 @keyframes gradient-move {
-  0% { background-position: 0% 50%; }
-  100% { background-position: 100% 50%; }
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
 }
 .animate-gradient {
   background-size: 200% auto;
@@ -151,7 +178,7 @@
 }
 .hover-lift:hover {
   transform: translateY(-5px);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
 }
 
 .hover-scale {
@@ -163,14 +190,18 @@
 
 /* ---------- Spinner ---------- */
 .spinner-enhanced {
-  border: 2px solid rgba(255,255,255,0.2);
+  border: 2px solid rgba(255, 255, 255, 0.2);
   border-top: 2px solid white;
   border-radius: 50%;
   animation: spin 0.6s linear infinite;
 }
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 /* ---------- Tab Content Transition ---------- */
@@ -180,9 +211,33 @@
 
 /* ---------- Pulse Glow ---------- */
 @keyframes pulse-glow {
-  0%, 100% { filter: drop-shadow(0 0 4px rgba(99,102,241,0.8)); }
-  50% { filter: drop-shadow(0 0 8px rgba(139,92,246,0.9)); }
+  0%,
+  100% {
+    filter: drop-shadow(0 0 4px rgba(99, 102, 241, 0.8));
+  }
+  50% {
+    filter: drop-shadow(0 0 8px rgba(139, 92, 246, 0.9));
+  }
 }
 .animate-pulse-glow {
   animation: pulse-glow 2s infinite;
+}
+
+/* ------- For Printing ----------- */
+
+/* Only show the resume-preview when printing */
+@media print {
+  body * {
+    visibility: hidden; /* Hide everything */
+  }
+  #resume-preview,
+  #resume-preview * {
+    visibility: visible; /* Only show resume preview */
+  }
+  #resume-preview {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
 }
