@@ -93,6 +93,7 @@ export default function ResumeBuilder() {
         title: "Missing Information",
         description: "Please fill in at least your name before exporting.",
         variant: "destructive",
+        className: "bg-orange-500 text-white",
       });
       return;
     }
@@ -107,32 +108,27 @@ export default function ResumeBuilder() {
       switch (type) {
         case "pdf":
           await exportToPDF("resume-preview", `${filename}.pdf`);
-          toast({
-            title: "Success",
-            description: "Resume exported as PDF successfully!",
-          });
           break;
         case "jpg":
           await exportToJPG("resume-preview", `${filename}.jpg`);
-          toast({
-            title: "Success",
-            description: "Resume exported as JPG successfully!",
-          });
           break;
         case "word":
           await exportToWord(resumeData, `${filename}.docx`);
-          toast({
-            title: "Success",
-            description: "Resume exported as Word document successfully!",
-          });
           break;
       }
+
+      toast({
+        title: "Success",
+        description: `Resume exported as ${type.toUpperCase()} successfully!`,
+        className: "bg-green-500 text-white",
+      });
     } catch (error) {
       console.error("Export error:", error);
       toast({
         title: "Export Failed",
         description: `Failed to export resume as ${type.toUpperCase()}. Please try again.`,
         variant: "destructive",
+        className: "bg-red-500 text-white",
       });
     } finally {
       setExportLoading(null);
@@ -140,17 +136,24 @@ export default function ResumeBuilder() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800">
+    <div
+      className="min-h-screen bg-cover bg-center bg-no-repeat"
+      style={{
+        backgroundImage:
+          "url('https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=1600&auto=format&fit=crop&q=80')",
+      }}
+    >
       <div className="container mx-auto px-4 py-8">
+        {/* Header */}
         <div className="text-center mb-8 animate-fade-in">
           <div className="inline-flex items-center gap-2 mb-4 animate-float">
-            <Sparkles className="h-8 w-8 text-blue-600 animate-pulse-glow" />
-            <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-white animate-gradient">
+            <Sparkles className="h-8 w-8 text-blue-500 animate-pulse-glow" />
+            <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent animate-gradient">
               Professional Resume Builder
             </h1>
-            <Sparkles className="h-8 w-8 text-purple-600 animate-pulse-glow" />
+            <Sparkles className="h-8 w-8 text-purple-500 animate-pulse-glow" />
           </div>
-          <p className="text-lg text-gray-600 dark:text-gray-300 animate-slide-up">
+          <p className="text-lg text-gray-700 dark:text-gray-300">
             Create ATS-friendly resumes with professional designs
           </p>
         </div>
@@ -158,7 +161,7 @@ export default function ResumeBuilder() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Form Section */}
           <div className="lg:col-span-2">
-            <Card className="animate-slide-in-left hover-lift">
+            <Card className="animate-slide-in-left hover-lift bg-white/80 dark:bg-black/60 backdrop-blur-lg">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <FileText className="h-5 w-5" />
@@ -233,7 +236,7 @@ export default function ResumeBuilder() {
 
           {/* Preview Section */}
           <div className="lg:col-span-1">
-            <Card className="sticky top-8 animate-slide-in-right hover-lift">
+            <Card className="sticky top-8 animate-slide-in-right hover-lift backdrop-blur-lg bg-white/70 dark:bg-black/60 border border-white/20">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Eye className="h-5 w-5" />
@@ -250,59 +253,33 @@ export default function ResumeBuilder() {
                 </Button>
 
                 <div className="space-y-2">
-                  <Button
-                    className="w-full button-enhanced bg-black text-white hover:bg-black/80"
-                    onClick={() => handleExport("pdf")}
-                    disabled={exportLoading !== null}
-                  >
-                    {exportLoading === "pdf" ? (
-                      <div className="flex items-center">
-                        <div className="spinner-enhanced w-4 h-4 mr-2"></div>
-                        Generating PDF...
-                      </div>
-                    ) : (
-                      <>
-                        <Download className="h-4 w-4 mr-2" />
-                        Download PDF
-                      </>
-                    )}
-                  </Button>
-                  <Button
-                    variant="outline"
-                    className="w-full bg-transparent button-enhanced hover-glow"
-                    onClick={() => handleExport("jpg")}
-                    disabled={exportLoading !== null}
-                  >
-                    {exportLoading === "jpg" ? (
-                      <div className="flex items-center">
-                        <div className="spinner-enhanced w-4 h-4 mr-2"></div>
-                        Generating JPG...
-                      </div>
-                    ) : (
-                      <>
-                        <Download className="h-4 w-4 mr-2" />
-                        Download JPG
-                      </>
-                    )}
-                  </Button>
-                  <Button
-                    variant="outline"
-                    className="w-full bg-transparent button-enhanced hover-glow"
-                    onClick={() => handleExport("word")}
-                    disabled={exportLoading !== null}
-                  >
-                    {exportLoading === "word" ? (
-                      <div className="flex items-center">
-                        <div className="spinner-enhanced w-4 h-4 mr-2"></div>
-                        Generating Word...
-                      </div>
-                    ) : (
-                      <>
-                        <Download className="h-4 w-4 mr-2" />
-                        Download Word
-                      </>
-                    )}
-                  </Button>
+                  {["pdf", "jpg", "word"].map((type) => (
+                    <Button
+                      key={type}
+                      variant={type === "pdf" ? "default" : "outline"}
+                      className={`w-full button-enhanced ${
+                        type === "pdf"
+                          ? "bg-black text-white hover:bg-black/80"
+                          : "bg-transparent hover-glow"
+                      }`}
+                      onClick={() =>
+                        handleExport(type as "pdf" | "jpg" | "word")
+                      }
+                      disabled={exportLoading !== null}
+                    >
+                      {exportLoading === type ? (
+                        <div className="flex items-center">
+                          <div className="spinner-enhanced w-4 h-4 mr-2"></div>
+                          Generating {type.toUpperCase()}...
+                        </div>
+                      ) : (
+                        <>
+                          <Download className="h-4 w-4 mr-2" />
+                          Download {type.toUpperCase()}
+                        </>
+                      )}
+                    </Button>
+                  ))}
                 </div>
 
                 <p className="text-sm text-muted-foreground text-center animate-fade-in">
@@ -316,7 +293,7 @@ export default function ResumeBuilder() {
 
         {/* Preview Modal/Section */}
         {showPreview && (
-          <div className="mt-8 preview-enter-active">
+          <div className="mt-8 animate-fade-in">
             <div id="resume-preview">
               <ResumePreview data={resumeData} />
             </div>

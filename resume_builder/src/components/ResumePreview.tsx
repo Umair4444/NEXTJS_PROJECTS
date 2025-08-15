@@ -98,7 +98,7 @@ export function ResumePreview({ data }: ResumePreviewProps) {
                 </div>
               </div>
               {exp.description && (
-                <div className="text-gray-700 text-sm leading-relaxed whitespace-pre-line ml-4 border-l-2 border-blue-200 pl-3">
+                <div className="max-w-xl md:max-w-2xl lg:max-w-3xl text-gray-700 text-sm leading-relaxed whitespace-pre-line break-words ml-4 border-l-2 border-blue-200 pl-3">
                   {exp.description}
                 </div>
               )}
@@ -489,7 +489,8 @@ export function ResumePreview({ data }: ResumePreviewProps) {
   };
 
   return (
-    <Card className="max-w-4xl mx-auto">
+    // <Card className="max-w-4xl mx-auto">
+    <Card className="max-w-4xl mx-auto bg-white/80 dark:bg-black/60 backdrop-blur-lg">
       <CardContent className="p-6">
         <div className="mb-6">
           <h3 className="text-lg font-semibold mb-4">Choose Template</h3>
