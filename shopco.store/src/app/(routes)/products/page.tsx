@@ -172,6 +172,9 @@ export default function ProductsPage() {
               placeholder={"Search products..."}
               searchQuery={searchQuery}
               setSearchQuery={setSearchQuery}
+              products={filteredProducts}
+              variant="desktop"
+              showDropdown={false}
             />
           </div>
 

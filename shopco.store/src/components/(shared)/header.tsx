@@ -10,7 +10,6 @@ import {
   ChevronDown,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import {
   DropdownMenu,
@@ -18,14 +17,31 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { useCart } from "@/hooks/use-cart";
 import { useWishlist } from "@/hooks/use-wishlist";
 import { usePathname } from "next/navigation";
+import SearchFilter from "../(filters)/SearchFilter";
+import { useEffect, useMemo, useState } from "react";
+import { useSanityStore } from "@/hooks/useSanityStore";
 
 export function Header() {
   const { items: cartItems } = useCart();
   const { items: wishlistItems } = useWishlist();
   const pathname = usePathname();
+  const [searchQuery, setSearchQuery] = useState("");
+
+  // for fetching data from sanity store
+  const { products, fetchAll } = useSanityStore();
+  useEffect(() => {
+    fetchAll(); // Fetch all data on mount
+  }, []);
+
+  const filteredProducts = useMemo(() => {
+    return products.filter((product) =>
+      product.name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+  }, [products, searchQuery]);
 
   return (
     <>
@@ -54,8 +70,8 @@ export function Header() {
                     SHOP.CO
                   </Link>
 
-                  {/* Navigation */}
-                  <nav className="hidden md:flex items-center gap-6">
+                  {/* Navigation (Desktop) */}
+                  <nav className="hidden lg:flex items-center gap-6">
                     <DropdownMenu>
                       <DropdownMenuTrigger className="flex items-center gap-1 hover:text-gray-600">
                         Shop <ChevronDown className="w-4 h-4" />
@@ -92,12 +108,15 @@ export function Header() {
                     </Link>
                   </nav>
 
-                  {/* Search Bar */}
-                  <div className="flex-1 max-w-md relative">
-                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-                    <Input
-                      placeholder="Search for products..."
-                      className="pl-10 bg-gray-100 border-none rounded-full"
+                  {/* Search Bar (Desktop) */}
+                  <div className="flex-1 max-w-md relative hidden md:block">
+                    <SearchFilter
+                      placeholder="Search products..."
+                      searchQuery={searchQuery}
+                      setSearchQuery={setSearchQuery}
+                      products={filteredProducts}
+                      variant="desktop"
+                      showDropdown={true}
                     />
                   </div>
 
@@ -122,9 +141,35 @@ export function Header() {
                     <Link href="/user">
                       <User className="w-6 h-6" />
                     </Link>
-                    <Button variant="ghost" size="sm" className="md:hidden">
-                      <Menu className="w-6 h-6" />
-                    </Button>
+
+                    {/* Mobile Menu */}
+                    <Sheet>
+                      <SheetTrigger asChild>
+                        <Button variant="ghost" size="sm" className="lg:hidden">
+                          <Menu className="w-6 h-6" />
+                        </Button>
+                      </SheetTrigger>
+                      <SheetContent side="left" className="w-72">
+                        <nav className="flex flex-col gap-4 mt-8">
+                          <Link href="/products">All Products</Link>
+                          <Link href="/products?isonsale=true">On Sale</Link>
+                          <Link href="/products?isnew=true">New Arrivals</Link>
+                          <Link href="/brands">Brands</Link>
+
+                          {/* Mobile Search */}
+                          <div className="mt-4">
+                            <SearchFilter
+                              placeholder="Search products..."
+                              searchQuery={searchQuery}
+                              setSearchQuery={setSearchQuery}
+                              products={filteredProducts}
+                              variant="mobile"
+                              showDropdown={true}
+                            />
+                          </div>
+                        </nav>
+                      </SheetContent>
+                    </Sheet>
                   </div>
                 </div>
               </div>
