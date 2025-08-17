@@ -170,6 +170,9 @@ export default function BrandsPage() {
                   searchQuery={searchQuery}
                   setSearchQuery={setSearchQuery}
                   placeholder={"Search Brands..."}
+                  products={filteredBrands}
+                  variant="desktop"
+                  showDropdown={false}
                 />
               </div>
 
