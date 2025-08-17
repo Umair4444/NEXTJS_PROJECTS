@@ -5,10 +5,12 @@ import Link from "next/link";
 import { useSession, signOut } from "next-auth/react";
 import { Button } from "./ui/button";
 import { User } from "next-auth";
+import { usePathname } from "next/navigation";
 
 function Navbar() {
   const { data: session } = useSession();
   const user: User = session?.user as User;
+  const pathname = usePathname();
 
   return (
     <nav className="p-4 md:p-6 shadow-md bg-gradient-to-r from-white via-gray-50 to-gray-100">
@@ -38,11 +40,13 @@ function Navbar() {
             </Button>
           </div>
         ) : (
-          <Link href="/sign-in" className="w-full md:w-auto">
-            <Button className="bg-gradient-to-r from-purple-500 to-pink-500 text-white hover:opacity-90 transition w-full md:w-auto">
-              Login
-            </Button>
-          </Link>
+          pathname !== "/sign-in" && (
+            <Link href="/sign-in" className="w-full md:w-auto">
+              <Button className="bg-gradient-to-r from-purple-500 to-pink-500 text-white hover:opacity-90 transition w-full md:w-auto">
+                Login
+              </Button>
+            </Link>
+          )
         )}
       </div>
     </nav>
