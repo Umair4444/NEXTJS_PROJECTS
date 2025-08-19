@@ -1,12 +1,18 @@
-"use client"
+"use client";
 import { useState } from "react";
 import Link from "next/link";
-import Header from "@/components/Header";
+import Header from "@/components/(Shared)/Header";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Separator } from "@/components/ui/separator";
@@ -20,15 +26,17 @@ const orderItems = [
     name: "Syltherine",
     price: 2500000,
     quantity: 2,
-    image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=80&h=80&fit=crop"
+    image:
+      "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=80&h=80&fit=crop",
   },
   {
     id: "3",
     name: "Lolito",
     price: 7000000,
     quantity: 1,
-    image: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=80&h=80&fit=crop"
-  }
+    image:
+      "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=80&h=80&fit=crop",
+  },
 ];
 
 export default function Checkout() {
@@ -41,7 +49,7 @@ export default function Checkout() {
     city: "",
     province: "",
     postalCode: "",
-    country: "Indonesia"
+    country: "Indonesia",
   });
   const [paymentMethod, setPaymentMethod] = useState("credit-card");
   const [shippingMethod, setShippingMethod] = useState("standard");
@@ -50,7 +58,7 @@ export default function Checkout() {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
@@ -58,8 +66,16 @@ export default function Checkout() {
     return `Rp ${price.toLocaleString()}`;
   };
 
-  const subtotal = orderItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-  const shippingCost = shippingMethod === "express" ? 50000 : shippingMethod === "same-day" ? 100000 : 0;
+  const subtotal = orderItems.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0
+  );
+  const shippingCost =
+    shippingMethod === "express"
+      ? 50000
+      : shippingMethod === "same-day"
+      ? 100000
+      : 0;
   const tax = subtotal * 0.1;
   const total = subtotal + shippingCost + tax;
 
@@ -69,26 +85,35 @@ export default function Checkout() {
       alert("Please accept the terms and conditions");
       return;
     }
-    alert("Order placed successfully! You will receive a confirmation email shortly.");
+    alert(
+      "Order placed successfully! You will receive a confirmation email shortly."
+    );
   };
 
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      
+
       {/* Hero Section */}
-      <section className="relative h-64 bg-cover bg-center bg-no-repeat"
-               style={{
-                 backgroundImage: "url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1920&h=400&fit=crop')"
-               }}>
+      <section
+        className="relative h-64 bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage:
+            "url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1920&h=400&fit=crop')",
+        }}
+      >
         <div className="absolute inset-0 bg-black/40" />
         <div className="relative container mx-auto px-6 h-full flex items-center justify-center">
           <div className="text-center text-white">
             <h1 className="text-4xl font-bold mb-4">Checkout</h1>
             <nav className="text-sm">
-              <Link href="/" className="hover:underline">Home</Link>
+              <Link href="/" className="hover:underline">
+                Home
+              </Link>
               <span className="mx-2">›</span>
-              <Link href="/cart" className="hover:underline">Cart</Link>
+              <Link href="/cart" className="hover:underline">
+                Cart
+              </Link>
               <span className="mx-2">›</span>
               <span>Checkout</span>
             </nav>
@@ -192,9 +217,13 @@ export default function Checkout() {
                           <SelectValue placeholder="Select Province" />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="dki-jakarta">DKI Jakarta</SelectItem>
+                          <SelectItem value="dki-jakarta">
+                            DKI Jakarta
+                          </SelectItem>
                           <SelectItem value="west-java">West Java</SelectItem>
-                          <SelectItem value="central-java">Central Java</SelectItem>
+                          <SelectItem value="central-java">
+                            Central Java
+                          </SelectItem>
                           <SelectItem value="east-java">East Java</SelectItem>
                           <SelectItem value="bali">Bali</SelectItem>
                         </SelectContent>
@@ -224,13 +253,20 @@ export default function Checkout() {
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <RadioGroup value={shippingMethod} onValueChange={setShippingMethod}>
+                  <RadioGroup
+                    value={shippingMethod}
+                    onValueChange={setShippingMethod}
+                  >
                     <div className="flex items-center space-x-2 p-4 border border-border rounded-lg">
                       <RadioGroupItem value="standard" id="standard" />
                       <div className="flex-1 flex justify-between items-center">
                         <div>
-                          <Label htmlFor="standard" className="font-medium">Standard Delivery</Label>
-                          <p className="text-sm text-muted-foreground">5-7 business days</p>
+                          <Label htmlFor="standard" className="font-medium">
+                            Standard Delivery
+                          </Label>
+                          <p className="text-sm text-muted-foreground">
+                            5-7 business days
+                          </p>
                         </div>
                         <Badge className="bg-green-500">FREE</Badge>
                       </div>
@@ -239,8 +275,12 @@ export default function Checkout() {
                       <RadioGroupItem value="express" id="express" />
                       <div className="flex-1 flex justify-between items-center">
                         <div>
-                          <Label htmlFor="express" className="font-medium">Express Delivery</Label>
-                          <p className="text-sm text-muted-foreground">2-3 business days</p>
+                          <Label htmlFor="express" className="font-medium">
+                            Express Delivery
+                          </Label>
+                          <p className="text-sm text-muted-foreground">
+                            2-3 business days
+                          </p>
                         </div>
                         <span className="font-medium">Rp 50,000</span>
                       </div>
@@ -249,8 +289,12 @@ export default function Checkout() {
                       <RadioGroupItem value="same-day" id="same-day" />
                       <div className="flex-1 flex justify-between items-center">
                         <div>
-                          <Label htmlFor="same-day" className="font-medium">Same Day Delivery</Label>
-                          <p className="text-sm text-muted-foreground">Within 24 hours</p>
+                          <Label htmlFor="same-day" className="font-medium">
+                            Same Day Delivery
+                          </Label>
+                          <p className="text-sm text-muted-foreground">
+                            Within 24 hours
+                          </p>
                         </div>
                         <span className="font-medium">Rp 100,000</span>
                       </div>
@@ -268,22 +312,54 @@ export default function Checkout() {
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <RadioGroup value={paymentMethod} onValueChange={setPaymentMethod}>
+                  <RadioGroup
+                    value={paymentMethod}
+                    onValueChange={setPaymentMethod}
+                  >
                     <div className="flex items-center space-x-2 p-4 border border-border rounded-lg">
                       <RadioGroupItem value="credit-card" id="credit-card" />
-                      <Label htmlFor="credit-card" className="flex-1 font-medium">Credit Card</Label>
+                      <Label
+                        htmlFor="credit-card"
+                        className="flex-1 font-medium"
+                      >
+                        Credit Card
+                      </Label>
                       <div className="flex gap-2">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Visa.svg" alt="Visa" className="h-6" />
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard" className="h-6" />
+                        <img
+                          src="https://upload.wikimedia.org/wikipedia/commons/0/04/Visa.svg"
+                          alt="Visa"
+                          className="h-6"
+                        />
+                        <img
+                          src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg"
+                          alt="Mastercard"
+                          className="h-6"
+                        />
                       </div>
                     </div>
                     <div className="flex items-center space-x-2 p-4 border border-border rounded-lg">
-                      <RadioGroupItem value="bank-transfer" id="bank-transfer" />
-                      <Label htmlFor="bank-transfer" className="flex-1 font-medium">Bank Transfer</Label>
+                      <RadioGroupItem
+                        value="bank-transfer"
+                        id="bank-transfer"
+                      />
+                      <Label
+                        htmlFor="bank-transfer"
+                        className="flex-1 font-medium"
+                      >
+                        Bank Transfer
+                      </Label>
                     </div>
                     <div className="flex items-center space-x-2 p-4 border border-border rounded-lg">
-                      <RadioGroupItem value="cash-on-delivery" id="cash-on-delivery" />
-                      <Label htmlFor="cash-on-delivery" className="flex-1 font-medium">Cash on Delivery</Label>
+                      <RadioGroupItem
+                        value="cash-on-delivery"
+                        id="cash-on-delivery"
+                      />
+                      <Label
+                        htmlFor="cash-on-delivery"
+                        className="flex-1 font-medium"
+                      >
+                        Cash on Delivery
+                      </Label>
                     </div>
                   </RadioGroup>
 
@@ -308,11 +384,7 @@ export default function Checkout() {
                         </div>
                         <div>
                           <Label htmlFor="cvv">CVV</Label>
-                          <Input
-                            id="cvv"
-                            placeholder="123"
-                            className="mt-2"
-                          />
+                          <Input id="cvv" placeholder="123" className="mt-2" />
                         </div>
                       </div>
                     </div>
@@ -338,10 +410,16 @@ export default function Checkout() {
                           className="w-16 h-16 object-cover rounded"
                         />
                         <div className="flex-1">
-                          <h4 className="font-medium text-foreground">{item.name}</h4>
-                          <div className="text-sm text-muted-foreground">Qty: {item.quantity}</div>
+                          <h4 className="font-medium text-foreground">
+                            {item.name}
+                          </h4>
+                          <div className="text-sm text-muted-foreground">
+                            Qty: {item.quantity}
+                          </div>
                         </div>
-                        <span className="font-medium">{formatPrice(item.price * item.quantity)}</span>
+                        <span className="font-medium">
+                          {formatPrice(item.price * item.quantity)}
+                        </span>
                       </div>
                     ))}
                   </div>
@@ -356,7 +434,11 @@ export default function Checkout() {
                     </div>
                     <div className="flex justify-between">
                       <span className="text-muted-foreground">Shipping</span>
-                      <span>{shippingCost === 0 ? 'Free' : formatPrice(shippingCost)}</span>
+                      <span>
+                        {shippingCost === 0
+                          ? "Free"
+                          : formatPrice(shippingCost)}
+                      </span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-muted-foreground">Tax</span>
@@ -378,23 +460,31 @@ export default function Checkout() {
                     <Checkbox
                       id="terms"
                       checked={acceptTerms}
-                      onCheckedChange={(checked) => setAcceptTerms(checked as boolean)}
+                      onCheckedChange={(checked) =>
+                        setAcceptTerms(checked as boolean)
+                      }
                     />
                     <Label htmlFor="terms" className="text-sm leading-relaxed">
                       I agree to the{" "}
-                      <Link href="/terms" className="text-primary hover:underline">
+                      <Link
+                        href="/terms"
+                        className="text-primary hover:underline"
+                      >
                         Terms & Conditions
                       </Link>{" "}
                       and{" "}
-                      <Link href="/privacy" className="text-primary hover:underline">
+                      <Link
+                        href="/privacy"
+                        className="text-primary hover:underline"
+                      >
                         Privacy Policy
                       </Link>
                     </Label>
                   </div>
 
-                  <Button 
-                    type="submit" 
-                    className="w-full" 
+                  <Button
+                    type="submit"
+                    className="w-full"
                     size="lg"
                     disabled={!acceptTerms}
                   >
@@ -409,7 +499,9 @@ export default function Checkout() {
                   <div className="flex items-center gap-3 text-center">
                     <Shield className="h-8 w-8 text-green-500" />
                     <div>
-                      <h4 className="font-medium text-foreground">Secure Checkout</h4>
+                      <h4 className="font-medium text-foreground">
+                        Secure Checkout
+                      </h4>
                       <p className="text-sm text-muted-foreground">
                         Your payment information is encrypted and secure
                       </p>
@@ -432,27 +524,35 @@ export default function Checkout() {
               </div>
               <div>
                 <h3 className="font-semibold text-foreground">Free Delivery</h3>
-                <p className="text-sm text-muted-foreground">For all orders over Rp 2,000,000</p>
+                <p className="text-sm text-muted-foreground">
+                  For all orders over Rp 2,000,000
+                </p>
               </div>
             </div>
-            
+
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center">
                 <Shield className="w-6 h-6 text-primary-foreground" />
               </div>
               <div>
-                <h3 className="font-semibold text-foreground">Secure Payment</h3>
-                <p className="text-sm text-muted-foreground">100% secure payment</p>
+                <h3 className="font-semibold text-foreground">
+                  Secure Payment
+                </h3>
+                <p className="text-sm text-muted-foreground">
+                  100% secure payment
+                </p>
               </div>
             </div>
-            
+
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center">
                 <CreditCard className="w-6 h-6 text-primary-foreground" />
               </div>
               <div>
                 <h3 className="font-semibold text-foreground">Easy Returns</h3>
-                <p className="text-sm text-muted-foreground">90 day return policy</p>
+                <p className="text-sm text-muted-foreground">
+                  90 day return policy
+                </p>
               </div>
             </div>
           </div>

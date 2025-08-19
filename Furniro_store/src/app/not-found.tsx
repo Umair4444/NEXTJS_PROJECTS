@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import Header from "@/components/Header";
+import Header from "@/components/(Shared)/Header";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Home, Search, ArrowLeft, ShoppingBag } from "lucide-react";

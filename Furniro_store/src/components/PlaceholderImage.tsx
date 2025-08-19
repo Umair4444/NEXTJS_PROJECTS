@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import Header from "@/components/(Shared)/Header";
+import Footer from "@/components/(Shared)/Footer";
 import { ArrowLeft, Construction } from "lucide-react";
 
 interface PlaceholderPageProps {
@@ -10,11 +10,14 @@ interface PlaceholderPageProps {
   description: string;
 }
 
-export default function PlaceholderImage({ title, description }: PlaceholderPageProps) {
+export default function PlaceholderImage({
+  title,
+  description,
+}: PlaceholderPageProps) {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      
+
       <main className="container mx-auto px-4 py-16">
         <div className="max-w-2xl mx-auto">
           <Card className="text-center">
@@ -31,7 +34,8 @@ export default function PlaceholderImage({ title, description }: PlaceholderPage
                 {description}
               </p>
               <p className="text-sm text-muted-foreground">
-                This page is currently under development. Please check back soon or continue exploring our other sections.
+                This page is currently under development. Please check back soon
+                or continue exploring our other sections.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button asChild>

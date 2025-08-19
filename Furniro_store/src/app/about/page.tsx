@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Header from "@/components/Header";
+import Header from "@/components/(Shared)/Header";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -22,8 +22,8 @@ const teamMembers = [
     name: "Sarah Johnson",
     role: "Founder & CEO",
     image:
-"https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8ZmVtYWxlfGVufDB8fDB8fHww",
-  description:
+      "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8ZmVtYWxlfGVufDB8fDB8fHww",
+    description:
       "With over 15 years in furniture design, Sarah founded Furniro to bring quality craftsmanship to modern homes.",
     quote: "Every piece of furniture should tell a story and create memories.",
   },
