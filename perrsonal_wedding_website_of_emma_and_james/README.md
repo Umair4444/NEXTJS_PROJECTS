@@ -1,36 +1,110 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Emma & James’s Wedding Website
+
+A beautiful, responsive wedding website built with **Next.js**, designed to share event details and capture RSVPs for Emma and James’s big day.
+
+---
+
+## Table of Contents
+
+1. [About](#about)
+2. [Features](#features)
+3. [Preview](#preview) _(optional)_
+4. [Getting Started](#getting-started)
+5. [Project Structure](#project-structure)
+6. [Available Scripts](#available-scripts)
+7. [Deployment](#deployment)
+8. [Contributing](#contributing) _(optional)_
+9. [License](#license)
+
+---
+
+## About
+
+This site showcases all the wedding details for Emma and James—venue, schedule, photos, RSVP form, and more—powered by Next.js for a modern, fast, and user-friendly guest experience.
+
+---
+
+## Features
+
+- **Responsive Design**: Optimized for viewing across devices (mobile, tablet, and desktop).
+- **Event Details**: Date, venue, accommodation, dress code, etc.
+- **RSVP System**: Custom form to capture guest responses (with optional backend integration).
+- **Photo Gallery**: Showcase engagement or wedding-related photos (static or dynamic).
+- **Countdown Timer** _(if included)_.
+- **Contact/Registry Links**.
+
+---
+
+## Preview
+
+live demo 👉 https://personal-weddings-portfolio.vercel.app/
+
 
 ## Getting Started
 
-First, run the development server:
+To run the project locally:
 
-```bash
+# Clone repository
+git clone https://github.com/Umair4444/NEXTJS_PROJECTS.git
+cd NEXTJS_PROJECTS/perrsonal_wedding_website_of_emma_and_james
+
+# Install dependencies
+npm install
+# or
+yarn install
+
+# Run development server
 npm run dev
 # or
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+# Visit the site at:
+http://localhost:3000
+
+## Project Structure
+
+perrsonal_wedding_website_of_emma_and_james/
+├── pages/
+│   ├── index.tsx          # Home / landing page
+│   ├── rsvp.tsx           # RSVP form page
+│   └── gallery.tsx        # Photos gallery (if applicable)
+├── components/
+│   ├── Header.tsx
+│   ├── Footer.tsx
+│   ├── RSVPForm.tsx
+│   ├── Countdown.tsx
+│   └── PhotoGrid.tsx
+├── public/
+│   ├── images/            # Static assets (photos, icons)
+│   └── favicon.ico
+├── styles/
+│   ├── globals.css
+│   └── components/
+│       └── ...
+├── package.json
+├── next.config.js
+├── tsconfig.json *(if using TypeScript)*
+└── README.md *(this file)*
+(Adjust to match your actual project layout.)
+
+## Available Scripts
+Command	Description
+npm run dev	Start development server
+npm run build	Build production version
+npm start	Serve built app (after build)
+npm run lint	Run linting (if applicable)
+npm run format	Format code with Prettier (if setup)
+
+## Deployment
+You can deploy your Next.js wedding site to:
+
+Vercel (recommended): Connect your GitHub repo, configure, and deploy in one click.
+
+Netlify, AWS Amplify, or any platform supporting Next.js.
+
+## Contributing
+This is a personal wedding project, so contributions aren’t required—but feel free to fork or suggest improvements! All styles, features, and content reflect Emma & James’s unique celebration.
+
+## License
+(If you’d like to open-source it or add a license like MIT, include details here.)
 ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
