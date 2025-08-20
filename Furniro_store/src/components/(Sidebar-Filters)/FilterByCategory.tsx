@@ -2,7 +2,17 @@ import { categories, products } from "@/lib/mockData";
 import React from "react";
 import { Card } from "../ui/card";
 
-const FilterByCategory = () => {
+interface FilterProps {
+  categories: string[];
+  selectedCategory: string;
+  setSelectedCategory: (category: string) => void;
+}
+
+const FilterByCategory: React.FC<FilterProps> = ({
+  categories,
+  selectedCategory,
+  setSelectedCategory,
+}) => {
   return (
     <>
       <Card className="p-6">

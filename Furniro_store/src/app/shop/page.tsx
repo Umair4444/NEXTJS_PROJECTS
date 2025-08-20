@@ -1,8 +1,6 @@
 "use client";
 import { useState } from "react";
-import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import {
   Select,
   SelectContent,
@@ -10,18 +8,22 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Slider } from "@/components/ui/slider";
-
-import { Input } from "@/components/ui/input";
-import { Filter, Grid, List, Search, X } from "lucide-react";
 
 import { categories, products } from "@/lib/mockData";
 import CustomerSupport from "@/components/CustomerSupport";
 import Pagination from "@/components/(Shared)/Pagination";
 import ProductGridCard from "@/components/(Product)/ProductGridCard";
-import FilterByRating from "@/components/(Product)/FilterByRating";
-import FilterBySale from "@/components/(Product)/FilterBySale";
-import FilterByPrice from "@/components/(Product)/FilterByPrice";
+import FilterByRating from "@/components/(Sidebar-Filters)/FilterByRating";
+import FilterBySale from "@/components/(Sidebar-Filters)/FilterBySale";
+import FilterByPrice from "@/components/(Sidebar-Filters)/FilterByPrice";
+import FilterByCategory from "@/components/(Sidebar-Filters)/FilterByCategory";
+import ViewMode from "@/components/(Topbar-Filters)/ViewModeFilter";
+import SortBy from "@/components/(Topbar-Filters)/SortByFilter";
+import ClearFilter from "@/components/(Topbar-Filters)/ClearFilter";
+import QuickCategory from "@/components/(Topbar-Filters)/QuickCategoryFilter";
+import SearchFilter from "@/components/(Topbar-Filters)/SearchFilter";
+import FloatingWindow from "@/components/FloatingWindow";
+import { Search } from "lucide-react";
 
 export default function Shop() {
   const [selectedCategory, setSelectedCategory] = useState("All");
@@ -103,28 +105,14 @@ export default function Shop() {
         {/* Floating Elements */}
         <div className="absolute top-10 left-20 w-16 h-16 bg-white/10 rounded-full blur-lg animate-pulse"></div>
         <div className="absolute bottom-20 right-32 w-24 h-24 bg-primary/20 rounded-full blur-md animate-pulse delay-1000"></div>
-
-        <div className="relative container mx-auto px-6 h-full flex items-center justify-center">
-          <div className="text-center text-white">
-            <h1 className="text-5xl lg:text-6xl font-bold mb-6 bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
-              Shop
-            </h1>
-            <p className="text-xl mb-6 max-w-2xl mx-auto text-white/90">
-              Discover our complete collection of premium furniture and home
-              accessories
-            </p>
-            <nav className="text-sm">
-              <Link
-                href="/"
-                className="hover:underline text-white/80 hover:text-white transition-colors"
-              >
-                Home
-              </Link>
-              <span className="mx-2 text-white/60">›</span>
-              <span className="text-white">Shop</span>
-            </nav>
-          </div>
-        </div>
+        {/* Floating Window Component */}
+        <FloatingWindow
+          current={"Shop"}
+          previous={"Home"}
+          description={
+            " Discover our complete collection of premium furniture and home accessories"
+          }
+        />
       </section>
 
       {/* Search & Quick Filters */}
@@ -132,43 +120,17 @@ export default function Shop() {
         <div className="container mx-auto px-6 py-6">
           <div className="flex flex-col lg:flex-row gap-6 items-center">
             {/* Search */}
-            <div className="relative flex-1 max-w-md">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
-              <Input
-                type="search"
-                placeholder="Search products..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-10 bg-background border-border shadow-sm"
-              />
-              {searchQuery && (
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => setSearchQuery("")}
-                  className="absolute right-2 top-1/2 transform -translate-y-1/2 h-6 w-6 p-0"
-                >
-                  <X className="h-3 w-3" />
-                </Button>
-              )}
-            </div>
+            <SearchFilter
+              searchQuery={searchQuery}
+              setSearchQuery={setSearchQuery}
+            />
 
             {/* Quick Category Filters */}
-            <div className="flex flex-wrap gap-2">
-              {categories.slice(0, 5).map((category) => (
-                <Button
-                  key={category}
-                  variant={
-                    selectedCategory === category ? "default" : "outline"
-                  }
-                  size="sm"
-                  onClick={() => setSelectedCategory(category)}
-                  className="rounded-full"
-                >
-                  {category}
-                </Button>
-              ))}
-            </div>
+            <QuickCategory
+              categories={categories}
+              selectedCategory={selectedCategory}
+              setSelectedCategory={setSelectedCategory}
+            />
           </div>
         </div>
       </section>
@@ -177,33 +139,17 @@ export default function Shop() {
       <section className="border-b border-border bg-card/50">
         <div className="container mx-auto px-6 py-4">
           <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4">
-            <div className="flex items-center gap-4">
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => setShowFilters(!showFilters)}
-                className="lg:hidden"
-              >
-                <Filter className="h-4 w-4 mr-2" />
-                Filters
-              </Button>
-              <span className="text-foreground font-medium">
-                {filteredProducts.length} of {products.length} products
-              </span>
-              {(selectedCategory !== "All" ||
-                searchQuery ||
-                filters.onSale ||
-                filters.newArrivals) && (
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={clearFilters}
-                  className="text-primary"
-                >
-                  Clear filters
-                </Button>
-              )}
-            </div>
+            {/* Clear Filter */}
+            <ClearFilter
+              showFilters={showFilters}
+              setShowFilters={setShowFilters}
+              products={products}
+              filteredProducts={filteredProducts}
+              selectedCategory={selectedCategory}
+              searchQuery={searchQuery}
+              filters={filters}
+              clearFilters={clearFilters}
+            />
 
             <div className="flex items-center gap-4">
               <div className="flex items-center gap-2">
@@ -219,46 +165,10 @@ export default function Shop() {
                   </SelectContent>
                 </Select>
               </div>
-
-              <div className="flex items-center gap-2">
-                <span className="text-sm text-muted-foreground">Sort by:</span>
-                <Select value={sortBy} onValueChange={setSortBy}>
-                  <SelectTrigger className="w-40">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="default">Default</SelectItem>
-                    <SelectItem value="price-low">
-                      Price: Low to High
-                    </SelectItem>
-                    <SelectItem value="price-high">
-                      Price: High to Low
-                    </SelectItem>
-                    <SelectItem value="name">Name A-Z</SelectItem>
-                    <SelectItem value="rating">Highest Rated</SelectItem>
-                    <SelectItem value="newest">Newest First</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-
-              <div className="flex items-center border border-border rounded-lg bg-background">
-                <Button
-                  variant={viewMode === "grid" ? "default" : "ghost"}
-                  size="sm"
-                  onClick={() => setViewMode("grid")}
-                  className="rounded-r-none"
-                >
-                  <Grid className="h-4 w-4" />
-                </Button>
-                <Button
-                  variant={viewMode === "list" ? "default" : "ghost"}
-                  size="sm"
-                  onClick={() => setViewMode("list")}
-                  className="rounded-l-none"
-                >
-                  <List className="h-4 w-4" />
-                </Button>
-              </div>
+              {/* Filter by sorting */}
+              <SortBy sortBy={sortBy} setSortBy={setSortBy} />
+              {/* Change Product ViewMode */}
+              <ViewMode viewMode={viewMode} setViewMode={setViewMode} />
             </div>
           </div>
         </div>
@@ -272,33 +182,12 @@ export default function Shop() {
               showFilters ? "block" : "hidden"
             } lg:block w-full lg:w-80 space-y-6`}
           >
-            <Card className="p-6">
-              <h3 className="font-bold text-foreground mb-4 text-lg">
-                Categories
-              </h3>
-              <div className="space-y-2">
-                {categories.map((category) => {
-                  const count =
-                    category === "All"
-                      ? products.length
-                      : products.filter((p) => p.category === category).length;
-                  return (
-                    <button
-                      key={category}
-                      onClick={() => setSelectedCategory(category)}
-                      className={`flex justify-between items-center w-full text-left px-4 py-3 rounded-lg transition-all duration-200 ${
-                        selectedCategory === category
-                          ? "bg-primary text-primary-foreground shadow-md"
-                          : "text-muted-foreground hover:text-foreground hover:bg-muted"
-                      }`}
-                    >
-                      <span className="font-medium">{category}</span>
-                      <span className="text-sm">({count})</span>
-                    </button>
-                  );
-                })}
-              </div>
-            </Card>
+            {/* Filter By Category */}
+            <FilterByCategory
+              categories={categories}
+              selectedCategory={selectedCategory}
+              setSelectedCategory={setSelectedCategory}
+            />
 
             {/* Filter By Price Range */}
             <FilterByPrice
@@ -327,6 +216,7 @@ export default function Shop() {
                 >
                   {filteredProducts.map((product) => (
                     <ProductGridCard
+                      key={product.id}
                       product={product}
                       viewMode={viewMode}
                       formatPrice={formatPrice}
