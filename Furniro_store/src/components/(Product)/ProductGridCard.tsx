@@ -94,7 +94,7 @@ const ProductGridCard: React.FC<CardProps> = ({
           </div>
 
           <Link href={`/shop/${product.id}`}>
-            <h3 className="font-bold text-foreground hover:text-primary transition-colors text-lg">
+            <h3 className="font-bold text-foreground hover:text-primary transition-colors text-lg hover:text-red-500">
               {product.name}
             </h3>
           </Link>

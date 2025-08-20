@@ -2,7 +2,7 @@ import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 import { Button } from "../ui/button";
-import { featuredProducts } from "@/lib/mockData";
+import { featuredProducts } from "@/lib/mockDataProduct";
 
 const FeatureProducts = () => {
   return (

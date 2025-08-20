@@ -9,7 +9,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-import { categories, products } from "@/lib/mockData";
+import { categories, products } from "@/lib/mockDataProduct";
 import CustomerSupport from "@/components/CustomerSupport";
 import Pagination from "@/components/(Shared)/Pagination";
 import ProductGridCard from "@/components/(Product)/ProductGridCard";

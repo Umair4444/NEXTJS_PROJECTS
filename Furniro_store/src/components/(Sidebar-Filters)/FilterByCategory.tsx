@@ -1,4 +1,4 @@
-import { categories, products } from "@/lib/mockData";
+import { categories, products } from "@/lib/mockDataProduct";
 import React from "react";
 import { Card } from "../ui/card";
 
