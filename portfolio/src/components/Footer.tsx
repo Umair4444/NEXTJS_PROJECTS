@@ -14,7 +14,7 @@ const Footer = () => {
           alt="grid"
           width={50}
           height={50}
-          className="w-full h-full opacity-50 "
+          className="w-full h-full opacity-50"
         />
       </div>
 

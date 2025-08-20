@@ -246,11 +246,16 @@ export const socialMedia = [
   },
   {
     id: 2,
+    img: "/upwork.svg",
+    link: "https://www.upwork.com/freelancers/~012e2fcb5070245999?mp_source=share",
+  },
+  {
+    id: 3,
     img: "/fiverr.svg",
     link: "https://www.fiverr.com/users/umairkhan44s",
   },
   {
-    id: 3,
+    id: 4,
     img: "/link.svg",
     link: "https://www.linkedin.com/in/umair-khan44",
   },
