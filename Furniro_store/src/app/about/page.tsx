@@ -53,7 +53,7 @@ export default function About() {
               </h1>
 
               <p className="text-xl text-white/90 leading-relaxed max-w-2xl">
-                From a small workshop to a trusted brand, we've been
+                From a small workshop to a trusted brand, we&apos;ve been
                 transforming houses into homes with furniture that combines
                 timeless design, exceptional quality, and sustainable practices.
               </p>
@@ -302,7 +302,7 @@ export default function About() {
                     <div className="relative">
                       <Quote className="h-6 w-6 text-primary/30 absolute -top-2 -left-2" />
                       <p className="italic text-foreground text-center font-medium pl-4">
-                        "{member.quote}"
+                        &quot;{member.quote}&quot;
                       </p>
                     </div>
                   </div>
@@ -397,7 +397,7 @@ export default function About() {
                   <Quote className="h-8 w-8 text-primary/30" />
 
                   <p className="text-muted-foreground leading-relaxed italic text-lg">
-                    "{testimonial.content}"
+                    &quot;{testimonial.content}&quot;
                   </p>
 
                   <div className="flex items-center gap-4 pt-4 border-t border-border">

@@ -42,7 +42,7 @@ const ContactForm = ({}) => {
             Contact Information
           </Badge>
           <h2 className="text-4xl lg:text-5xl font-bold text-foreground mb-6">
-            We'd Love to Hear from You
+            We&apos;d Love to Hear from You
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             Have questions about our products, need design advice, or want to

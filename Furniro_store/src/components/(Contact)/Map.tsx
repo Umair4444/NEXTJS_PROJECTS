@@ -34,8 +34,8 @@ const Map = () => {
                   Interactive Map Coming Soon
                 </h3>
                 <p className="text-muted-foreground mb-4 max-w-md">
-                  We're working on integrating an interactive map to help you
-                  find us easily
+                  We&apos;re working on integrating an interactive map to help
+                  you find us easily
                 </p>
                 <div className="space-y-2 text-sm text-muted-foreground">
                   <p>400 University Drive Suite 200</p>

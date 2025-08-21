@@ -108,8 +108,8 @@ export default function Cart() {
               Your Cart is Empty
             </h2>
             <p className="text-muted-foreground mb-8 max-w-md mx-auto">
-              Looks like you haven't added any items to your cart yet. Start
-              shopping to fill it up!
+              Looks like you haven&apos;t added any items to your cart yet.
+              Start shopping to fill it up!
             </p>
             <Button asChild size="lg">
               <Link href="/shop">
@@ -283,7 +283,7 @@ export default function Cart() {
                     </Button>
                   </div>
                   <p className="text-xs text-muted-foreground">
-                    Try "SAVE10" for 10% off
+                    Try &quot;SAVE10&quot; for 10% off
                   </p>
                 </CardContent>
               </Card>

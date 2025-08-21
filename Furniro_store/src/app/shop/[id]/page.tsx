@@ -31,7 +31,7 @@ export default function ProductDetail() {
                   Product Not Found
                 </h1>
                 <p className="text-muted-foreground">
-                  Sorry, the product you're looking for does not exist or is no
+                  Sorry, the product you&apos;re looking for does not exist or is no
                   longer available.
                 </p>
                 <Button asChild className="mt-6">

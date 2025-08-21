@@ -16,8 +16,8 @@ const CTA = () => {
           Ready to Get Started?
         </h2>
         <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
-          Whether you're looking for a single piece or furnishing your entire
-          home, we're here to help you every step of the way.
+          Whether you&apos;re looking for a single piece or furnishing your entire
+          home, we&apos;re here to help you every step of the way.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Button

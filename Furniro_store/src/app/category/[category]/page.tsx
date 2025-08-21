@@ -276,7 +276,7 @@ export default function Category() {
               Category Not Found
             </h1>
             <p className="text-muted-foreground mb-8">
-              The category you're looking for doesn't exist. Explore our other
+              The category you&apos;re looking for doesn&apos;t exist. Explore our other
               collections.
             </p>
             <div className="flex gap-4 justify-center">
@@ -885,7 +885,7 @@ export default function Category() {
                   No Products Found
                 </h3>
                 <p className="text-muted-foreground mb-8 max-w-md mx-auto">
-                  We couldn't find any products matching your current filters.
+                  We couldn&apos;t find any products matching your current filters.
                   Try adjusting your search criteria.
                 </p>
                 <Button onClick={clearFilters} className="shadow-lg">

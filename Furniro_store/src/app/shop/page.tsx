@@ -234,7 +234,7 @@ export default function Shop() {
                   No Products Found
                 </h3>
                 <p className="text-muted-foreground mb-8 max-w-md mx-auto">
-                  We couldn't find any products matching your current filters.
+                  We couldn&apos;t find any products matching your current filters.
                   Try adjusting your search criteria.
                 </p>
                 <Button onClick={clearFilters} className="shadow-lg">
