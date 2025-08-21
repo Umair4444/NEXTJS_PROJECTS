@@ -41,7 +41,7 @@ const FAQ = () => {
 
         <div className="text-center mt-12">
           <p className="text-muted-foreground mb-6">
-            Can't find what you're looking for?
+            Can&apos;t find what you&apos;re looking for?
           </p>
           <Button variant="outline" size="lg" className="shadow-lg">
             Contact Support
