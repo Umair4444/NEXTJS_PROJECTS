@@ -1,13 +1,24 @@
+"use client";
+
 import { ParallaxScroll } from "@/components/ui/Parallax-Scroll";
+import { Button } from "@/components/ui/button"; // assuming you use shadcn/ui
+import { useRouter } from "next/navigation";
 
 export default function ParallaxScrollDemo() {
+  const router = useRouter();
+
   return (
-    <>
-      <div className="text-center font-bold text-3xl pt-10">
-        <h1>NextJs Utility Apps</h1>
+    <div>
+      <div className="flex items-center justify-between px-6 pt-6">
+        <Button variant="secondary" onClick={() => router.back()}>
+          ← Back
+        </Button>
+        <h1 className="text-center font-bold text-3xl flex-1">
+          NextJs Utility Apps
+        </h1>
       </div>
       <ParallaxScroll images={imageCards} />
-    </>
+    </div>
   );
 }
 
@@ -34,6 +45,24 @@ const imageCards = [
     src: "https://images.unsplash.com/photo-1519608487953-e999c86e7455?ixlib=rb-4.0.3&auto=format&fit=crop&w=3488&q=80",
     title: "Generator Tools Collection",
     link: "https://generatortools-five.vercel.app/",
+    target: "blank",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1519608487953-e999c86e7455?ixlib=rb-4.0.3&auto=format&fit=crop&w=3488&q=80",
+    title: "Word Tools Collection",
+    link: "https://word-tools.vercel.app/",
+    target: "blank",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1519608487953-e999c86e7455?ixlib=rb-4.0.3&auto=format&fit=crop&w=3488&q=80",
+    title: "Multimedia Tools Collection",
+    link: "https://multimedia-utility-app.vercel.app/",
+    target: "blank",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1519608487953-e999c86e7455?ixlib=rb-4.0.3&auto=format&fit=crop&w=3488&q=80",
+    title: "Resume builder",
+    link: "https://resume-builder-black-psi.vercel.app/",
     target: "blank",
   },
 ];

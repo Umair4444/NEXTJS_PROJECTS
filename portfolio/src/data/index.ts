@@ -96,7 +96,7 @@ export const projects = [
   {
     id: 2,
     title:
-      "NextJs Projects – Building with React & Next.js and using ShadCN UI",
+      "NextJs E-Commerce Projects – Building with React & Next.js and using ShadCN UI",
     des: "Building web apps with nextjs and using headless CMS for content management with different libraries and framework",
     img: "/p2.svg",
     iconLists: [
@@ -109,7 +109,7 @@ export const projects = [
       "/sass.svg",
       "/nodejs.svg",
     ],
-    link: "/typescript-projects",
+    link: "/e-commerce-projects",
   },
   {
     id: 3,
