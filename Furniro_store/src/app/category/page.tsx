@@ -15,18 +15,12 @@ import { Input } from "@/components/ui/input";
 import CustomerSupport from "@/components/(Category)/CustomerSupport";
 import Pagination2 from "@/components/(Shared)/Pagination2";
 import { ProductData, CategoryData } from "@/lib/mockCategoriesData";
-import {
-  Grid,
-  List,
-  Search,
-  X,
-  SlidersHorizontal,
-  Eye,
-  TrendingUp,
-} from "lucide-react";
+import { Grid, List, Search, X, SlidersHorizontal } from "lucide-react";
 import PaginatedProductsCard from "@/components/(Category)/PaginatedProductsCard";
 import SidebarFilters from "@/components/(Category)/SidebarFilters";
 import FloatingWindow from "@/components/FloatingWindow";
+import CategoryCard from "@/components/(Category)/CategoryCard";
+import QuickFilter from "@/components/(Category)/QuickFilter";
 
 export default function Category() {
   const [sortBy, setSortBy] = useState("default");
@@ -47,13 +41,12 @@ export default function Category() {
     return `PKR ${price.toLocaleString()}`;
   };
 
-  // Calculate maximum price for slider
   const maxPrice = Math.max(
     ...ProductData.map((product) => product.price),
     15000000
   );
 
-  // Filter and sort products
+  // Filter + Sort
   const filteredProducts = ProductData.filter((product) => {
     const matchesSearch =
       product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -86,7 +79,7 @@ export default function Category() {
     }
   });
 
-  // Pagination logic
+  // Pagination
   const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
   const paginatedProducts = filteredProducts.slice(
     (currentPage - 1) * itemsPerPage,
@@ -155,7 +148,7 @@ export default function Category() {
     <div className="min-h-screen bg-background">
       {/* Hero Banner */}
       <section
-        className="relative h-96 bg-cover bg-center bg-no-repeat overflow-hidden"
+        className="relative h-64 sm:h-80 lg:h-96 bg-cover bg-center bg-no-repeat overflow-hidden"
         style={{
           backgroundImage: `url('https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1920&h=600&fit=crop')`,
         }}
@@ -175,130 +168,30 @@ export default function Category() {
                 { label: "Home", href: "/" },
                 { label: "Category", href: "/category" },
               ]}
-              description=" Discover premium furniture, lighting, and decor crafted with
-              exceptional quality and style"
+              description=" Discover premium furniture, lighting, and decor crafted with exceptional quality and style"
             />
           </div>
         </div>
       </section>
 
       {/* Category Showcase */}
-      <section className="py-16 bg-gradient-to-r from-secondary/20 to-secondary/5">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-foreground mb-4">
-              Shop by Category
-            </h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Explore our curated collections of furniture, lighting, decor, and
-              textiles
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {Array.from(
-              new Map(CategoryData.map((item) => [item, item])).values()
-            ).map((category) => (
-              <Link
-                key={category.title}
-                href={`/category/${category.title
-                  .toLowerCase()
-                  .replace(" ", "-")}`}
-                className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2"
-              >
-                <Card className="overflow-hidden border-0">
-                  <CardContent className="p-0 relative">
-                    <img
-                      src={category.image}
-                      alt={category.title}
-                      className="w-full h-48 object-cover transition-transform duration-700 group-hover:scale-110"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                    <div className="absolute bottom-4 left-4 text-white">
-                      <h3 className="font-bold text-xl">{category.title}</h3>
-                      {/* <div className="w-full flex gap-20 font-bold"> */}
-                      <h3 className="text-nowrap">
-                        {category.totalProducts}+ Products
-                      </h3>
-                      {/* </div> */}
-                    </div>
-                    <div className="absolute top-4 right-4 w-10 h-10 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-4 group-hover:translate-x-0">
-                      <Eye className="h-5 w-5 text-white" />
-                    </div>
-                  </CardContent>
-                </Card>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
+      <CategoryCard CategoryData={CategoryData} />
 
       {/* Search & Quick Filters */}
-      <section className="border-b border-border bg-card/30">
-        <div className="container mx-auto px-6 py-6">
-          <div className="flex flex-col lg:flex-row gap-6 items-center">
-            <div className="relative flex-1 max-w-md">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-5 w-5" />
-              <Input
-                type="search"
-                placeholder="Search products..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-10 pr-10 py-3 bg-background border-border shadow-sm text-lg"
-              />
-              {searchQuery && (
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => setSearchQuery("")}
-                  className="absolute right-2 top-1/2 transform -translate-y-1/2 h-7 w-7 p-0"
-                >
-                  <X className="h-4 w-4" />
-                </Button>
-              )}
-            </div>
-
-            <div className="flex flex-wrap gap-3">
-              <Button
-                variant={filters.bestsellers ? "default" : "outline"}
-                size="sm"
-                onClick={() =>
-                  setFilters({ ...filters, bestsellers: !filters.bestsellers })
-                }
-                className="rounded-full"
-              >
-                <TrendingUp className="h-4 w-4 mr-2" />
-                Bestsellers
-              </Button>
-              <Button
-                variant={filters.newArrivals ? "default" : "outline"}
-                size="sm"
-                onClick={() =>
-                  setFilters({ ...filters, newArrivals: !filters.newArrivals })
-                }
-                className="rounded-full"
-              >
-                New Arrivals
-              </Button>
-              <Button
-                variant={filters.onSale ? "default" : "outline"}
-                size="sm"
-                onClick={() =>
-                  setFilters({ ...filters, onSale: !filters.onSale })
-                }
-                className="rounded-full"
-              >
-                On Sale
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
+      <div className="container mx-auto px-4 py-6">
+        <QuickFilter
+          filters={filters}
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
+          setFilters={setFilters}
+        />
+      </div>
 
       {/* Filter Bar */}
       <section className="border-b border-border bg-background">
         <div className="container mx-auto px-6 py-4">
-          <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4">
-            <div className="flex items-center gap-4">
+          <div className="flex flex-col lg:flex-row lg:flex-wrap justify-between items-start lg:items-center gap-4">
+            <div className="flex items-center gap-4 flex-wrap">
               <Button
                 variant="outline"
                 size="sm"
@@ -309,7 +202,7 @@ export default function Category() {
                 Filters
               </Button>
               <span className="text-foreground font-medium">
-                {filteredProducts.length} of {CategoryData.length} products
+                {filteredProducts.length} of {ProductData.length} Products
               </span>
               {hasActiveFilters && (
                 <Button
@@ -324,7 +217,7 @@ export default function Category() {
               )}
             </div>
 
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-4 flex-wrap">
               <div className="flex items-center gap-2">
                 <span className="text-sm text-muted-foreground">Show:</span>
                 <Select
@@ -390,13 +283,14 @@ export default function Category() {
         </div>
       </section>
 
+      {/* Sidebar + Product Grid */}
       <div className="container mx-auto px-6 py-12">
-        <div className="flex gap-12">
+        <div className="flex flex-col lg:flex-row gap-8">
           {/* Sidebar Filters */}
           <aside
             className={`${
               showFilters ? "block" : "hidden"
-            } lg:block w-full lg:w-80 space-y-6`}
+            } lg:block w-full lg:w-80 flex-shrink-0`}
           >
             <SidebarFilters
               filters={filters}
@@ -408,26 +302,26 @@ export default function Category() {
             />
           </aside>
 
-          {/* Product Grid */}
+          {/* Product Grid & Pagination */}
           <main className="flex-1">
             {paginatedProducts.length > 0 ? (
               <>
                 <div
                   className={
                     viewMode === "grid"
-                      ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
+                      ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
                       : "space-y-6"
                   }
                 >
                   {paginatedProducts.map((product) => (
                     <PaginatedProductsCard
+                      key={product.id}
                       product={product}
                       viewMode={viewMode}
                     />
                   ))}
                 </div>
 
-                {/* Pagination */}
                 <Pagination2
                   currentPage={currentPage}
                   setCurrentPage={setCurrentPage}

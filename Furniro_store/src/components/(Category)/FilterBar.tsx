@@ -9,20 +9,58 @@ import { SlidersHorizontal, X, Grid, List } from "lucide-react";
 import React from "react";
 import { Button } from "../ui/button";
 
-const FilterBar = ({
-  CategoryData,
-  filteredProducts,
+// Types
+export interface Product {
+  id: string;
+  name: string;
+  description: string;
+  price: number;
+  image?: string;
+  rating?: number;
+  isOnSale?: boolean;
+}
+
+export type SortOption =
+  | "default"
+  | "price-low"
+  | "price-high"
+  | "name"
+  | "rating"
+  | "newest"
+  | "popular";
+
+export type ViewMode = "grid" | "list";
+
+export interface FilterBarProps {
+  showFilters: boolean;
+  setShowFilters: React.Dispatch<React.SetStateAction<boolean>>;
+  filteredProducts: Product[];
+  CategoryData: Product[];
+  hasActiveFilters: boolean;
+  clearFilters: () => void;
+  itemsPerPage: number;
+  setItemsPerPage: React.Dispatch<React.SetStateAction<number>>;
+  setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
+  sortBy: SortOption;
+  setSortBy: (value: SortOption) => void;
+  viewMode: ViewMode;
+  setViewMode: (mode: ViewMode) => void;
+}
+
+const FilterBar: React.FC<FilterBarProps> = ({
   showFilters,
   setShowFilters,
+  filteredProducts,
+  CategoryData,
   hasActiveFilters,
-  viewMode,
-  setViewMode,
+  clearFilters,
   itemsPerPage,
   setItemsPerPage,
   setCurrentPage,
-  clearFilters,
   sortBy,
   setSortBy,
+  viewMode,
+  setViewMode,
 }) => {
   return (
     <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4">

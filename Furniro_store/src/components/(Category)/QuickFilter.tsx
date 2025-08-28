@@ -1,12 +1,32 @@
 import React from "react";
-import { Search, X, TrendingUp } from "lucide-react";
+import { Search, X, TrendingUp, Sparkles, Tag } from "lucide-react"; // Added icons
 import { Input } from "@/components/ui/input";
 import { Button } from "../ui/button";
 
-const QuickFilter = () => {
+export interface Filters {
+  bestsellers: boolean;
+  newArrivals: boolean;
+  onSale: boolean;
+  rating: number;
+}
+
+export interface QuickFilterProps {
+  searchQuery: string;
+  setSearchQuery: React.Dispatch<React.SetStateAction<string>>;
+  filters: Filters;
+  setFilters: React.Dispatch<React.SetStateAction<Filters>>;
+}
+
+const QuickFilter: React.FC<QuickFilterProps> = ({
+  searchQuery,
+  setSearchQuery,
+  filters,
+  setFilters,
+}) => {
   return (
-    <div className="flex flex-col lg:flex-row gap-6 items-center">
-      <div className="relative flex-1 max-w-md">
+    <div className="flex flex-col md:flex-row gap-6 items-center justify-center px-4">
+      {/* Search Bar */}
+      <div className="relative flex-1 w-full md:max-w-md">
         <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-5 w-5" />
         <Input
           type="search"
@@ -27,7 +47,8 @@ const QuickFilter = () => {
         )}
       </div>
 
-      <div className="flex flex-wrap gap-3">
+      {/* Quick Filters */}
+      <div className="flex flex-wrap gap-5 md:gap-3">
         <Button
           variant={filters.bestsellers ? "default" : "outline"}
           size="sm"
@@ -39,6 +60,7 @@ const QuickFilter = () => {
           <TrendingUp className="h-4 w-4 mr-2" />
           Bestsellers
         </Button>
+
         <Button
           variant={filters.newArrivals ? "default" : "outline"}
           size="sm"
@@ -47,14 +69,17 @@ const QuickFilter = () => {
           }
           className="rounded-full"
         >
+          <Sparkles className="h-4 w-4 mr-2" /> {/* ✨ Icon for New Arrivals */}
           New Arrivals
         </Button>
+
         <Button
           variant={filters.onSale ? "default" : "outline"}
           size="sm"
           onClick={() => setFilters({ ...filters, onSale: !filters.onSale })}
           className="rounded-full"
         >
+          <Tag className="h-4 w-4 mr-2" /> {/* 🏷️ Icon for On Sale */}
           On Sale
         </Button>
       </div>
