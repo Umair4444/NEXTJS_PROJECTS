@@ -1,8 +1,7 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import Header from "@/components/(Shared)/Header";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import {
@@ -34,212 +33,9 @@ import {
   Shield,
   Users,
 } from "lucide-react";
-import { title } from "process";
 
 // Enhanced category data with more products and features
-const categoryData = [
-  {
-    title: "Furniture",
-    description:
-      "Discover our premium furniture collection featuring chairs, tables, sofas, and more crafted with exceptional quality",
-    image:
-      "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1920&h=600&fit=crop",
-    totalProducts: 120,
-    products: [
-      {
-        id: "1",
-        name: "Syltherine Premium Chair",
-        category: "Chair",
-        price: 2500000,
-        originalPrice: 3500000,
-        image:
-          "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=400&fit=crop",
-        description: "Premium oak chair with luxury fabric upholstery",
-        isOnSale: true,
-        discount: 30,
-        rating: 4.8,
-        reviews: 342,
-        isNew: false,
-        isBestseller: true,
-      },
-      {
-        id: "2",
-        name: "Leviosa Modern Chair",
-        category: "Chair",
-        price: 2500000,
-        image:
-          "https://images.unsplash.com/photo-1549497538-303791108f95?w=400&h=400&fit=crop",
-        description: "Sleek modern chair for contemporary spaces",
-        isOnSale: false,
-        rating: 4.3,
-        reviews: 186,
-        isNew: false,
-        isBestseller: false,
-      },
-      {
-        id: "3",
-        name: "Lolito Luxury Sofa",
-        category: "Sofa",
-        price: 7000000,
-        originalPrice: 14000000,
-        image:
-          "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&h=400&fit=crop",
-        description: "Spacious luxury sofa perfect for family gatherings",
-        isOnSale: true,
-        discount: 50,
-        rating: 4.7,
-        reviews: 203,
-        isNew: false,
-        isBestseller: true,
-      },
-      {
-        id: "4",
-        name: "Respira Outdoor Table",
-        category: "Table",
-        price: 500000,
-        image:
-          "https://images.unsplash.com/photo-1631679706909-1844bbd07221?w=400&h=400&fit=crop",
-        description: "Weather-resistant outdoor dining table set",
-        isOnSale: false,
-        isNew: true,
-        rating: 4.5,
-        reviews: 45,
-        isBestseller: false,
-      },
-      {
-        id: "10",
-        name: "Nordic Dining Table",
-        category: "Table",
-        price: 3200000,
-        image:
-          "https://images.unsplash.com/photo-1631679706909-1844bbd07221?w=400&h=400&fit=crop",
-        description: "Scandinavian-inspired solid wood dining table",
-        isOnSale: false,
-        rating: 4.6,
-        reviews: 128,
-        isNew: false,
-        isBestseller: true,
-      },
-      {
-        id: "11",
-        name: "Comfort Lounge Sofa",
-        category: "Sofa",
-        price: 5800000,
-        image:
-          "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&h=400&fit=crop",
-        description: "Ultra-comfortable sectional sofa with premium cushions",
-        isOnSale: false,
-        rating: 4.4,
-        reviews: 92,
-        isNew: true,
-        isBestseller: false,
-      },
-    ],
-  },
-  {
-    title: "Lighting",
-    description:
-      "Illuminate your space with our carefully curated lighting collection featuring modern designs and energy-efficient solutions",
-    image:
-      "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=1920&h=600&fit=crop",
-    totalProducts: 80,
-    products: [
-      {
-        id: "5",
-        name: "Grifo Designer Lamp",
-        category: "Table Lamp",
-        price: 1500000,
-        image:
-          "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=400&h=400&fit=crop",
-        description:
-          "Minimalist designer table lamp with adjustable brightness",
-        isOnSale: true,
-        rating: 4.6,
-        reviews: 67,
-        isNew: false,
-        isBestseller: true,
-      },
-      {
-        id: "9",
-        name: "Aurora Ceiling Light",
-        category: "Ceiling Light",
-        price: 2200000,
-        image:
-          "https://images.unsplash.com/photo-1524484485831-a92ffc0de03f?w=400&h=400&fit=crop",
-        description: "Modern LED ceiling light with smart controls",
-        isOnSale: true,
-        isNew: true,
-        rating: 4.5,
-        reviews: 23,
-        isBestseller: false,
-      },
-    ],
-  },
-  {
-    title: "Home Decor",
-    description:
-      "Beautiful decorative pieces to personalize your living space with style and sophistication",
-    image:
-      "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=1920&h=600&fit=crop",
-    totalProducts: 200,
-    products: [
-      {
-        id: "6",
-        name: "Artisan Coffee Mug",
-        category: "Accessories",
-        price: 150000,
-        image:
-          "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=400&fit=crop",
-        description: "Handcrafted ceramic coffee mug with unique patterns",
-        isOnSale: true,
-        isNew: true,
-        rating: 4.2,
-        reviews: 34,
-        isBestseller: false,
-      },
-      {
-        id: "8",
-        name: "Zen Flower Pot Collection",
-        category: "Accessories",
-        price: 500000,
-        image:
-          "https://images.unsplash.com/photo-1485955900006-10f4d324d411?w=400&h=400&fit=crop",
-        description: "Set of 3 minimalist ceramic planters",
-        isOnSale: false,
-        isNew: true,
-        rating: 4.1,
-        reviews: 28,
-        isBestseller: false,
-      },
-    ],
-  },
-  {
-    title: "Textiles",
-    description:
-      "Soft furnishings and premium textiles to add comfort, warmth, and style to your home",
-    image:
-      "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=1920&h=600&fit=crop",
-    totalProducts: 150,
-    products: [
-      {
-        id: "7",
-        name: "Luxe Bedding Set",
-        category: "Bedding",
-        price: 7000000,
-        originalPrice: 14000000,
-        image:
-          "https://images.unsplash.com/photo-1631679706909-1844bbd07221?w=400&h=400&fit=crop",
-        description: "Premium cotton bedding set with matching accessories",
-        isOnSale: true,
-        discount: 50,
-        rating: 4.7,
-        reviews: 156,
-        isNew: false,
-        isBestseller: true,
-      },
-    ],
-  },
-];
+import { ProductData, CategoryData } from "@/lib/mockCategoriesData";
 
 export default function Category() {
   const params = useParams();
@@ -257,18 +53,24 @@ export default function Category() {
   });
 
   // Get category data
-  const currentCategory = categoryData.find(
+  const currentCategory = CategoryData.find(
     (cat) => cat.title.toLowerCase().replace(" ", "-") == params.category
   );
 
-  // console.log(categoryData[1].title.toLowerCase() == params.category);
-  // console.log(currentCategory);
-  console.log(params.category);
+  // // Get Product data
+  // const currentProduct = ProductData.filter(
+  //   (product) =>
+  //     product.category.toLowerCase().replace(" ", "-") === params.category
+  // );
+
+  // Get Product data from Category Data
+  const currentProducts = currentCategory?.products || [];
+
+  console.log(currentCategory);
 
   if (!currentCategory) {
     return (
       <div className="min-h-screen bg-background">
-        <Header />
         <div className="container mx-auto px-6 py-20 text-center">
           <div className="max-w-md mx-auto">
             <Search className="h-16 w-16 text-muted-foreground mx-auto mb-6" />
@@ -276,8 +78,8 @@ export default function Category() {
               Category Not Found
             </h1>
             <p className="text-muted-foreground mb-8">
-              The category you&apos;re looking for doesn&apos;t exist. Explore our other
-              collections.
+              The category you&apos;re looking for doesn&apos;t exist. Explore
+              our other collections.
             </p>
             <div className="flex gap-4 justify-center">
               <Button asChild>
@@ -294,7 +96,7 @@ export default function Category() {
   }
 
   // Filter and sort products
-  const filteredProducts = currentCategory?.products
+  const filteredProducts = currentProducts
     .filter((product) => {
       const matchesSearch =
         product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -354,9 +156,8 @@ export default function Category() {
 
   return (
     <div className="min-h-screen bg-background">
-      <Header />
-
       {/* Hero Banner */}
+
       <section
         className="relative h-96 bg-cover bg-center bg-no-repeat overflow-hidden"
         style={{
@@ -401,8 +202,11 @@ export default function Category() {
                 Home
               </Link>
               <span className="mx-2">›</span>
-              <Link href="/shop" className="hover:text-white transition-colors">
-                Shop
+              <Link
+                href="/category"
+                className="hover:text-white transition-colors"
+              >
+                Category
               </Link>
               <span className="mx-2">›</span>
               <span className="text-white font-medium">
@@ -415,22 +219,31 @@ export default function Category() {
 
       {/* Category Navigation */}
       <section className="border-b border-border bg-gradient-to-r from-secondary/20 to-secondary/5">
-        <div className="container mx-auto px-6 py-8">
-          <div className="flex flex-wrap gap-4 justify-center">
-            {Object.entries(categoryData).map(([key, data]) => (
+        <div className="container mx-auto px-6 py-4">
+          <div className="flex gap-3 px-2 overflow-x-auto overflow-y-hidden scrollbar-hide">
+            {[
+              // put current category first
+              ...CategoryData.filter(
+                (cat) => cat.title === currentCategory.title
+              ),
+              // then the rest
+              ...CategoryData.filter(
+                (cat) => cat.title !== currentCategory.title
+              ),
+            ].map((cat) => (
               <Link
-                key={key}
-                href={`/category/${data.title.toLowerCase().replace(" ", "-")}`}
-                className={`group px-8 py-4 rounded-full border-2 transition-all duration-300 font-medium ${
-                  category === key
-                    ? "border-primary bg-primary text-primary-foreground shadow-lg scale-105"
+                key={cat.title}
+                href={`/category/${cat.title.toLowerCase().replace(" ", "-")}`}
+                className={`group flex-shrink-0 px-6 py-3 rounded-full border-2 transition-all duration-300 font-medium ${
+                  currentCategory.title === cat.title
+                    ? "border-primary bg-primary text-primary-foreground shadow-md scale-105"
                     : "border-border bg-background text-foreground hover:border-primary hover:text-primary hover:shadow-md hover:scale-102"
                 }`}
               >
                 <div className="flex items-center gap-2">
-                  <span>{data.title}</span>
+                  <span>{cat.title}</span>
                   <Badge variant="secondary" className="text-xs">
-                    {data.totalProducts}+
+                    {cat.totalProducts ?? 0}+
                   </Badge>
                 </div>
               </Link>
@@ -518,8 +331,8 @@ export default function Category() {
                 Filters
               </Button>
               <span className="text-foreground font-medium">
-                {filteredProducts.length} of {currentCategory.products.length}{" "}
-                products
+                {filteredProducts.length} of {currentCategory.totalProducts}{" "}
+                Products
               </span>
               {hasActiveFilters && (
                 <Button
@@ -885,8 +698,8 @@ export default function Category() {
                   No Products Found
                 </h3>
                 <p className="text-muted-foreground mb-8 max-w-md mx-auto">
-                  We couldn&apos;t find any products matching your current filters.
-                  Try adjusting your search criteria.
+                  We couldn&apos;t find any products matching your current
+                  filters. Try adjusting your search criteria.
                 </p>
                 <Button onClick={clearFilters} className="shadow-lg">
                   Clear All Filters
@@ -911,12 +724,11 @@ export default function Category() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {categoryData
-              .filter(
-                (cat) =>
-                  cat.title.toLocaleLowerCase().replace(" ", "-") !==
-                  params.category
-              )
+            {CategoryData.filter(
+              (cat) =>
+                cat.title.toLocaleLowerCase().replace(" ", "-") !==
+                params.category
+            )
               .slice(0, 3)
               .map((data) => (
                 <Link

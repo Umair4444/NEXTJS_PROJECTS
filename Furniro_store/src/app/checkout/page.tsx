@@ -1,7 +1,6 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
-import Header from "@/components/(Shared)/Header";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -18,6 +17,8 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
 import { CreditCard, Truck, Shield, MapPin } from "lucide-react";
+import CustomerPolicy from "@/components/CustomerPolicy";
+import FloatingWindow from "@/components/FloatingWindow";
 
 // Mock order data
 const orderItems = [
@@ -92,31 +93,40 @@ export default function Checkout() {
 
   return (
     <div className="min-h-screen bg-background">
-      <Header />
-
       {/* Hero Section */}
       <section
-        className="relative h-64 bg-cover bg-center bg-no-repeat"
+        className="relative h-96 bg-cover bg-center bg-no-repeat"
         style={{
           backgroundImage:
             "url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1920&h=400&fit=crop')",
         }}
       >
         <div className="absolute inset-0 bg-black/40" />
-        <div className="relative container mx-auto px-6 h-full flex items-center justify-center">
-          <div className="text-center text-white">
-            <h1 className="text-4xl font-bold mb-4">Checkout</h1>
-            <nav className="text-sm">
-              <Link href="/" className="hover:underline">
-                Home
-              </Link>
-              <span className="mx-2">›</span>
-              <Link href="/cart" className="hover:underline">
-                Cart
-              </Link>
-              <span className="mx-2">›</span>
-              <span>Checkout</span>
-            </nav>
+
+        <div className="relative container mx-auto px-6 h-full flex items-center">
+          <div className="max-w-7xl mx-auto flex flex-col items-center justify-center">
+            <span className="inline-block px-6 py-3 bg-primary/20 backdrop-blur-md text-white rounded-full text-sm font-semibold uppercase tracking-wider border border-white/20 mb-2">
+              My Shopping Cart
+            </span>
+
+            <FloatingWindow
+              className="max-w-5xl"
+              breadcrumbs={[
+                {
+                  label: "Home",
+                  href: "/",
+                },
+                {
+                  label: "Cart",
+                  href: "/cart",
+                },
+                {
+                  label: "Checkout",
+                  href: "/checkout",
+                },
+              ]}
+              description="Your Product Checkout Summary"
+            />
           </div>
         </div>
       </section>
@@ -514,50 +524,8 @@ export default function Checkout() {
         </form>
       </div>
 
-      {/* Features Section */}
-      <section className="py-16 bg-secondary/20">
-        <div className="container mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center">
-                <Truck className="w-6 h-6 text-primary-foreground" />
-              </div>
-              <div>
-                <h3 className="font-semibold text-foreground">Free Delivery</h3>
-                <p className="text-sm text-muted-foreground">
-                  For all orders over Rp 2,000,000
-                </p>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center">
-                <Shield className="w-6 h-6 text-primary-foreground" />
-              </div>
-              <div>
-                <h3 className="font-semibold text-foreground">
-                  Secure Payment
-                </h3>
-                <p className="text-sm text-muted-foreground">
-                  100% secure payment
-                </p>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center">
-                <CreditCard className="w-6 h-6 text-primary-foreground" />
-              </div>
-              <div>
-                <h3 className="font-semibold text-foreground">Easy Returns</h3>
-                <p className="text-sm text-muted-foreground">
-                  90 day return policy
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* CustomerPolicy Section */}
+      <CustomerPolicy />
     </div>
   );
 }

@@ -31,8 +31,8 @@ export default function ProductDetail() {
                   Product Not Found
                 </h1>
                 <p className="text-muted-foreground">
-                  Sorry, the product you&apos;re looking for does not exist or is no
-                  longer available.
+                  Sorry, the product you&apos;re looking for does not exist or
+                  is no longer available.
                 </p>
                 <Button asChild className="mt-6">
                   <Link href="/shop">Return to Shop</Link>
@@ -53,8 +53,16 @@ export default function ProductDetail() {
     <div className="min-h-screen bg-background">
       {/* Breadcrumb */}
       <BreadCrumb
-        current={"Shop"}
-        previous={"Home"}
+        variant="withBg"
+        className="text-black hover:text-black "
+        items={[
+          { label: "Home", href: "/" },
+          { label: "Shop", href: "/shop" },
+          {
+            label: productData.category,
+            href: `/category/${productData.category.toLowerCase()}`,
+          },
+        ]}
         productData={productData}
       />
 

@@ -715,7 +715,7 @@ export default function Footer() {
         </div>
 
         <Separator className="my-8 bg-border" />
-
+        {/* Footer Note */}
         <div className="flex flex-col sm:flex-row justify-between items-center gap-4 text-sm">
           <p className="text-muted-foreground whitespace-nowrap">
             &copy; 2024 Furniro. All rights reserved.

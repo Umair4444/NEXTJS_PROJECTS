@@ -8,7 +8,6 @@ import { Home, Search, ArrowLeft, ShoppingBag } from "lucide-react";
 const NotFound = () => {
   return (
     <div className="min-h-screen bg-background">
-      <Header />
 
       <div className="container mx-auto px-6 py-20">
         <div className="max-w-2xl mx-auto text-center">

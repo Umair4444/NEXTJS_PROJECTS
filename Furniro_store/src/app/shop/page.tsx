@@ -94,25 +94,33 @@ export default function Shop() {
     <div className="min-h-screen bg-gradient-to-tl from-primary/20 to-secondary/10">
       {/* Hero Banner */}
       <section
-        className="relative h-80 bg-cover bg-center bg-no-repeat overflow-hidden "
+        className="relative h-96 bg-cover bg-center bg-no-repeat overflow-hidden "
         style={{
           backgroundImage:
             "url('https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=1920&h=400&fit=crop')",
         }}
       >
         <div className="absolute inset-0 bg-black/50" />
-
         {/* Floating Elements */}
         <div className="absolute top-10 left-20 w-16 h-16 bg-white/10 rounded-full blur-lg animate-pulse"></div>
         <div className="absolute bottom-20 right-32 w-24 h-24 bg-primary/20 rounded-full blur-md animate-pulse delay-1000"></div>
+
         {/* Floating Window Component */}
-        <FloatingWindow
-          current={"Shop"}
-          previous={"Home"}
-          description={
-            " Discover our complete collection of premium furniture and home accessories"
-          }
-        />
+        <div className="relative container mx-auto px-6 h-full flex items-center">
+          <div className="max-w-7xl mx-auto flex flex-col items-center justify-center">
+            <span className="inline-block px-6 py-3 bg-primary/20 backdrop-blur-md text-white rounded-full text-sm font-semibold uppercase tracking-wider border border-white/20 mb-2">
+               Shop From the Best
+            </span>
+
+            <FloatingWindow
+              breadcrumbs={[
+                { label: "Home", href: "/" },
+                { label: "Shop", href: "/shop" },
+              ]}
+              description=" Discover our complete collection of premium furniture and home accessories"
+            />
+          </div>
+        </div>
       </section>
 
       {/* Search & Quick Filters */}
@@ -234,8 +242,8 @@ export default function Shop() {
                   No Products Found
                 </h3>
                 <p className="text-muted-foreground mb-8 max-w-md mx-auto">
-                  We couldn&apos;t find any products matching your current filters.
-                  Try adjusting your search criteria.
+                  We couldn&apos;t find any products matching your current
+                  filters. Try adjusting your search criteria.
                 </p>
                 <Button onClick={clearFilters} className="shadow-lg">
                   Clear All Filters

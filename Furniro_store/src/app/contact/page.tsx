@@ -23,16 +23,21 @@ export default function Contact() {
         {/* Floating Elements */}
         <div className="absolute top-16 left-20 w-24 h-24 bg-primary/20 rounded-full blur-2xl animate-pulse"></div>
         <div className="absolute bottom-20 right-32 w-32 h-32 bg-secondary/30 rounded-full blur-3xl animate-pulse delay-1000"></div>
-        <div className="flex flex-col items-center justify-center mt-8">
-          <span className="inline-block px-6 py-3 bg-primary/20 backdrop-blur-md text-white rounded-full text-sm font-semibold uppercase tracking-wider border border-white/20 mb-6">
-            Get In Touch
-          </span>
-          <FloatingWindow
-            current="Contact"
-            previous="Home"
-            description="     Have questions? We'd love to hear from you. Send us a message and
-          we'll respond as soon as possible."
-          />
+    
+        <div className="relative container mx-auto px-6 h-full flex items-center">
+          <div className="max-w-7xl mx-auto flex flex-col items-center justify-center">
+            <span className="inline-block px-6 py-3 bg-primary/20 backdrop-blur-md text-white rounded-full text-sm font-semibold uppercase tracking-wider border border-white/20 mb-2">
+              Get In Touch
+            </span>
+            <FloatingWindow
+              breadcrumbs={[
+                { label: "Home", href: "/home" },
+                { label: "Contact", href: "/contact" },
+              ]}
+              description=" Have questions? We'd love to hear from you. Send us a message and
+          we'll respond as soon as possible"
+            />
+          </div>
         </div>
       </section>
 
