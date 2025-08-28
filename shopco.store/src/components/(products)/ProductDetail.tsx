@@ -19,6 +19,8 @@ const ProductDetail = ({ product }: ProductDetailProps) => {
   const [selectedColor, setSelectedColor] = useState("");
   const [quantity, setQuantity] = useState(1);
   const { addItem: addToCart } = useCart();
+  const [isExpanded, setIsExpanded] = useState(false);
+
   const {
     addItem: addToWishlist,
     removeItem: removeFromWishlist,
@@ -56,7 +58,9 @@ const ProductDetail = ({ product }: ProductDetailProps) => {
     <>
       <div className="space-y-4">
         <div className="">
-          <h1 className="text-3xl font-bold mb-4">{product.name}</h1>
+          <h1 className="text-3xl font-bold mb-4 line-clamp-2">
+            {product.name}
+          </h1>
           <div className="flex items-center gap-4 mb-4">
             <div className="flex items-center">
               {[...Array(5)].map((_, i) => (
@@ -92,7 +96,28 @@ const ProductDetail = ({ product }: ProductDetailProps) => {
               </>
             )}
           </div>
-          <p className="text-gray-600 leading-relaxed">{product.description}</p>
+          <div className="relative">
+            {/* Description */}
+            <p
+              className={`text-gray-600 leading-relaxed transition-all duration-300 pb-2 ${
+                !isExpanded ? "line-clamp-2" : ""
+              }`}
+            >
+              {product.description}
+            </p>
+
+            {/* Toggle button */}
+            <button
+              onClick={() => setIsExpanded(!isExpanded)}
+              className={`absolute  font-medium hover:underline ${
+                isExpanded
+                  ? "text-red-600 right-0  -bottom-0"
+                  : "text-blue-600 right-0 -bottom-4"
+              }`}
+            >
+              {isExpanded ? "View Less" : "View More"}
+            </button>
+          </div>
         </div>
 
         <Separator />
