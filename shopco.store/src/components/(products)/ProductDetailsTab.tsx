@@ -10,7 +10,7 @@ interface ProductImageProps {
 const ProductDetailsTab = ({ product }: ProductImageProps) => {
   return (
     <>
-      <div className="mt-16">
+      <div className="mt-14 xl:mt-0">
         <Tabs defaultValue="details" className="w-full">
           <TabsList className="grid w-full grid-cols-3">
             <TabsTrigger value="details">Product Details</TabsTrigger>

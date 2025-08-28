@@ -54,8 +54,8 @@ const ProductDetail = ({ product }: ProductDetailProps) => {
   };
   return (
     <>
-      <div className="space-y-6">
-        <div>
+      <div className="space-y-4">
+        <div className="">
           <h1 className="text-3xl font-bold mb-4">{product.name}</h1>
           <div className="flex items-center gap-4 mb-4">
             <div className="flex items-center">
@@ -77,7 +77,7 @@ const ProductDetail = ({ product }: ProductDetailProps) => {
               {product.rating}/5 (reviews)
             </span>
           </div>
-          <div className="flex items-center gap-4 mb-6">
+          <div className="flex items-center gap-4 mb-3">
             <span className="text-3xl font-bold">${product.price}</span>
             {product.originalPrice && (
               <>
@@ -107,7 +107,7 @@ const ProductDetail = ({ product }: ProductDetailProps) => {
                   key={size._id}
                   onClick={() => setSelectedSize(size.productSize)}
                   className={cn(
-                    "px-6 py-3 border rounded-full transition-colors",
+                    "px-4 py-2 border rounded-full transition-colors",
                     selectedSize === size.productSize
                       ? "border-black bg-black text-white"
                       : "border-gray-300 hover:border-gray-400"
@@ -130,7 +130,7 @@ const ProductDetail = ({ product }: ProductDetailProps) => {
                   key={color._id}
                   onClick={() => setSelectedColor(color.productColor)}
                   className={cn(
-                    "px-6 py-3 border rounded-full transition-colors",
+                    "px-4 py-2 border rounded-full transition-colors",
                     selectedColor === color.productColor
                       ? "border-black bg-black text-white"
                       : "border-gray-300 hover:border-gray-400"

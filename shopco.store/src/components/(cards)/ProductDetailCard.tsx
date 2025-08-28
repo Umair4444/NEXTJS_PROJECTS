@@ -11,8 +11,8 @@ interface ProductProps {
 const ProductDetailCard = ({ product }: ProductProps) => {
   return (
     <>
-      <div className="max-w-7xl mx-auto px-4 py-8">
-        <div className="grid md:grid-cols-2 gap-12">
+      <div className="max-w-7xl mx-auto px-4 pt-4">
+        <div className="grid md:grid-cols-2 gap-12 ">
           {/* Product Images */}
           <ProductImages key={product.slug} product={product} />
 

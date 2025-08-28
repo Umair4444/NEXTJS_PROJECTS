@@ -26,7 +26,6 @@ export function ProductCard({ product }: ProductCardProps) {
 
   const handleWishlistToggle = async () => {
     setIsTogglingWishlist(true);
-    // Simulate API call
     await new Promise((resolve) => setTimeout(resolve, 500));
 
     if (isInWishlist(product._id)) {
@@ -45,16 +44,19 @@ export function ProductCard({ product }: ProductCardProps) {
   };
 
   return (
-    <div className={`group relative`}>
-      <div className="relative bg-gray-100 rounded-2xl overflow-hidden aspect-[1.2]">
+    <div className="group relative flex flex-col h-full rounded-2xl overflow-hidden bg-white shadow-md">
+      {/* Image Section */}
+      <div className="relative bg-gray-100 aspect-[1.2]">
         <Link href={`/products/${product.slug}`}>
           <Image
             src={product.image || "/placeholder.svg"}
             alt={product.name}
             fill
-            className="object-cover group-hover:scale-105 transition-transform duration-300 object-right-top"
+            className="object-contain"
           />
         </Link>
+
+        {/* Wishlist Button */}
         <Button
           variant="ghost"
           size="sm"
@@ -75,6 +77,8 @@ export function ProductCard({ product }: ProductCardProps) {
             />
           )}
         </Button>
+
+        {/* Discount Badge */}
         {product.discount && (
           <Badge className="absolute top-3 left-3 bg-red-500 hover:bg-red-600">
             -{product.discount}%
@@ -82,50 +86,50 @@ export function ProductCard({ product }: ProductCardProps) {
         )}
       </div>
 
-      <div className="mt-4 space-y-2">
-        <Link href={`/products/${product.slug}`}>
-          <h3 className="font-bold text-lg hover:text-gray-600 transition-colors">
-            {product.name}
-          </h3>
-        </Link>
+      {/* Info Section */}
+      <div className="flex-1 p-4 flex flex-col justify-between">
+        <div className="space-y-2">
+          <Link href={`/products/${product.slug}`}>
+            <h3 className="font-bold text-lg hover:text-gray-600 transition-colors line-clamp-2">
+              {product.name}
+            </h3>
+          </Link>
 
-        <div className="flex items-center gap-2">
-          <div className="flex items-center">
-            {[...Array(5)].map((_, i) => (
-              <Star
-                key={i}
-                className={cn(
-                  "w-4 h-4",
-                  i < Math.floor(product.rating)
-                    ? "fill-yellow-400 text-yellow-400"
-                    : i < product.rating
-                      ? "fill-yellow-400/50 text-yellow-400"
-                      : "fill-gray-200 text-gray-200"
-                )}
-              />
-            ))}
+          <div className="flex items-center gap-2">
+            <div className="flex items-center">
+              {[...Array(5)].map((_, i) => (
+                <Star
+                  key={i}
+                  className={cn(
+                    "w-4 h-4",
+                    i < Math.floor(product.rating)
+                      ? "fill-yellow-400 text-yellow-400"
+                      : i < product.rating
+                        ? "fill-yellow-400/50 text-yellow-400"
+                        : "fill-gray-200 text-gray-200"
+                  )}
+                />
+              ))}
+            </div>
+            <span className="text-sm text-gray-600">{product.rating}/5</span>
           </div>
-          <span className="text-sm text-gray-600">{product.rating}/5</span>
+
+          <div className="flex items-center gap-2">
+            <span className="text-2xl font-bold">${product.price}</span>
+            {product.originalPrice && (
+              <span className="text-xl text-gray-400 line-through">
+                ${product.originalPrice}
+              </span>
+            )}
+          </div>
         </div>
 
-        <div className="flex items-center gap-2">
-          <span className="text-2xl font-bold">${product.price}</span>
-          {product.originalPrice && (
-            <span className="text-xl text-gray-400 line-through">
-              ${product.originalPrice}
-            </span>
-          )}
-        </div>
-        {(product.btnText || "Shop Now") && (
-          <Button
-            asChild
-            className="w-full mt-3 rounded-md group-hover:opacity-100 transition-opacity"
-          >
-            <Link href={`/products/${product.slug}`}>
-              {product.btnText || "Shop Now"}
-            </Link>
-          </Button>
-        )}
+        {/* Shop Now Button at Bottom */}
+        <Button asChild className="mt-4 w-full rounded-md">
+          <Link href={`/products/${product.slug}`}>
+            {product.btnText || "Shop Now"}
+          </Link>
+        </Button>
       </div>
     </div>
   );
