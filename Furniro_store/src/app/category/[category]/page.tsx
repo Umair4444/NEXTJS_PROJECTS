@@ -66,7 +66,6 @@ export default function Category() {
   // Get Product data from Category Data
   const currentProducts = currentCategory?.products || [];
 
-  console.log(currentCategory);
 
   if (!currentCategory) {
     return (
