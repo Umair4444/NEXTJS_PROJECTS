@@ -5,7 +5,15 @@ import { Card, CardContent } from "../ui/card";
 import { Label } from "../ui/label";
 import { Checkbox } from "../ui/checkbox";
 
-const TermsAndPlaceOrder = () => {
+interface TermsAndPlaceOrderProps {
+  acceptTerms: boolean;
+  setAcceptTerms: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const TermsAndPlaceOrder: React.FC<TermsAndPlaceOrderProps> = ({
+  acceptTerms,
+  setAcceptTerms,
+}) => {
   return (
     <Card>
       <CardContent className="p-6 space-y-4">

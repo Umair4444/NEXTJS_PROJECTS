@@ -1,11 +1,34 @@
-import React from "react";
+import React, { ChangeEvent, useState } from "react";
 import { MapPin } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardContent } from "../ui/card";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../ui/select";
 
-const BillingForm = () => {
+interface FormData {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  address: string;
+  city: string;
+  province: string;
+  postalCode: string;
+  country: string;
+}
+
+interface FormProps {
+  formData: FormData;
+  handleInputChange: any;
+}
+
+const BillingForm: React.FC<FormProps> = ({ formData, handleInputChange }) => {
   return (
     <Card>
       <CardHeader>
@@ -15,7 +38,7 @@ const BillingForm = () => {
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 ">
           <div>
             <Label htmlFor="firstName">First Name *</Label>
             <Input

@@ -1,10 +1,19 @@
-import { Truck, Badge } from "lucide-react";
 import React from "react";
+import { Truck } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardContent } from "../ui/card";
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
 import { Label } from "../ui/label";
+import { Badge } from "../ui/badge";
 
-const ShippingMethod = () => {
+interface ShippingMethodProps {
+  shippingMethod: string;
+  setShippingMethod: (value: string) => void;
+}
+
+const ShippingMethod: React.FC<ShippingMethodProps> = ({
+  shippingMethod,
+  setShippingMethod,
+}) => {
   return (
     <Card>
       <CardHeader>
@@ -15,6 +24,7 @@ const ShippingMethod = () => {
       </CardHeader>
       <CardContent>
         <RadioGroup value={shippingMethod} onValueChange={setShippingMethod}>
+          {/* Standard Delivery */}
           <div className="flex items-center space-x-2 p-4 border border-border rounded-lg">
             <RadioGroupItem value="standard" id="standard" />
             <div className="flex-1 flex justify-between items-center">
@@ -26,9 +36,11 @@ const ShippingMethod = () => {
                   5-7 business days
                 </p>
               </div>
-              <Badge className="bg-green-500">FREE</Badge>
+              <Badge className="bg-green-500 text-white">FREE</Badge>
             </div>
           </div>
+
+          {/* Express Delivery */}
           <div className="flex items-center space-x-2 p-4 border border-border rounded-lg">
             <RadioGroupItem value="express" id="express" />
             <div className="flex-1 flex justify-between items-center">
@@ -43,6 +55,8 @@ const ShippingMethod = () => {
               <span className="font-medium">Rp 50,000</span>
             </div>
           </div>
+
+          {/* Same Day Delivery */}
           <div className="flex items-center space-x-2 p-4 border border-border rounded-lg">
             <RadioGroupItem value="same-day" id="same-day" />
             <div className="flex-1 flex justify-between items-center">
