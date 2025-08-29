@@ -8,9 +8,9 @@ import { Footer } from "@/components/(shared)/footer";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "SHOP.CO - Find Clothes That Match Your Style",
+  title: "ShopCo Store | Modern Headless E-Commerce with Next.js & Sanity",
   description:
-    "Browse through our diverse range of meticulously crafted garments, designed to bring out your individuality and cater to your sense of style.",
+    "ShopCo Store is a modern headless e-commerce platform built with Next.js 14, Tailwind CSS, Sanity CMS, and Shadcn UI. Explore a sleek shopping experience with dynamic product pages, responsive design, and scalable architecture..",
 };
 
 export default function RootLayout({
@@ -20,7 +20,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className} >
+      <body className={inter.className}>
         <Header />
         <main className="min-h-screen">{children}</main>
         <Footer />

@@ -1,40 +1,82 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🛍️ ShopCo Store – Modern E-Commerce Platform
 
-## Getting Started
+![Next.js](https://img.shields.io/badge/Next.js-14-black?style=flat&logo=next.js)  
+![TailwindCSS](https://img.shields.io/badge/TailwindCSS-3.0-06B6D4?style=flat&logo=tailwind-css)  
+![Sanity](https://img.shields.io/badge/HeadlessCMS-Sanity-FF2D20?style=flat&logo=sanity)  
+![Shadcn/UI](https://img.shields.io/badge/UI-shadcn/ui-000000?style=flat&logo=radix-ui)
 
-First, run the development server:
+**ShopCo Store** is a modern **headless e-commerce platform** built with **Next.js 14 (App Router)**, styled using **TailwindCSS**, powered by **Sanity CMS**, and enhanced with **Shadcn UI**.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🚀 Quick Links
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- 🌍 **Live Demo** → [shopcostore-phi.vercel.app](https://shopcostore-phi.vercel.app/)
+- 📂 **Repository** → [github.com/Umair4444/shopco.store](https://github.com/Umair4444/NEXTJS_PROJECTS/tree/main/shopco.store)
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+---
 
-## Learn More
+## ✨ Features
 
-To learn more about Next.js, take a look at the following resources:
+- ⚡ **Next.js 14 (App Router)** – Optimized server-first architecture
+- 🎨 **TailwindCSS** – Utility-first, responsive styling
+- 🧩 **Shadcn/UI** – Accessible, customizable UI components
+- 🗂 **Sanity CMS** – Headless CMS for dynamic product/content management
+- 🛒 **E-Commerce Ready** – Product listings & categories
+- 📱 **Responsive** – Works across all devices
+- 🌑 **Dark Mode** – Modern UI experience
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## 🛠️ Tech Stack
 
-## Deploy on Vercel
+- **Framework:** [Next.js 14](https://nextjs.org/)
+- **Styling:** [TailwindCSS](https://tailwindcss.com/)
+- **UI:** [Shadcn/UI](https://ui.shadcn.com/)
+- **CMS:** [Sanity](https://www.sanity.io/)
+- **Deploy:** [Vercel](https://vercel.com/)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## ⚙️ Setup
 
+Clone repo & install dependencies:
 
-## Sanity Schema
+git clone https://github.com/Umair4444/NEXTJS_PROJECTS.git
+cd NEXTJS_PROJECTS/shopco.store
+npm install
+Create .env.local:
 
+## Environment Variable
+
+NEXT_PUBLIC_SANITY_PROJECT_ID=your_project_id
+NEXT_PUBLIC_SANITY_DATASET=production
+NEXT_PUBLIC_SANITY_API_VERSION=2024-01-01
+Run locally:
+
+App → http://localhost:3000
+
+## 📌 Roadmap
+
+Cart & Wishlist (Redux/Zustand)
+
+Stripe Payments
+
+Authentication (NextAuth.js)
+
+Search & Filters
+
+Order History & Dashboard
+
+## 🤝 Contributing
+
+Contributions are welcome!
+Fork, open issues, or submit PRs.
+
+## 📜 License
+
+Licensed under the MIT License.
+
+## 👨‍💻 Author
+
+Umair Khan
