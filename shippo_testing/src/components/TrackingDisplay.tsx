@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
+import { useState } from "react";
 
 interface TrackingDisplayProps {
   transaction: any;
@@ -16,18 +16,21 @@ export default function TrackingDisplay({ transaction }: TrackingDisplayProps) {
     setLoading(true);
     try {
       const response = await fetch(
-        `/api/shippo/track?trackingNumber=${transaction.trackingNumber}&carrier=${transaction.rate?.provider?.toLowerCase() || 'usps'}`
+        `/api/shippo/track?trackingNumber=${
+          transaction.trackingNumber
+        }&carrier=${transaction.rate?.provider?.toLowerCase() || "usps"}`
       );
       const data = await response.json();
-      
+      console.log("track", data);
+
       if (data.success) {
         setTrackingData(data.tracking);
       } else {
-        alert('Error tracking package: ' + data.error);
+        alert("Error tracking package: " + data.error);
       }
     } catch (error) {
-      console.error('Error tracking package:', error);
-      alert('Error tracking package');
+      console.error("Error tracking package:", error);
+      alert("Error tracking package");
     } finally {
       setLoading(false);
     }
@@ -37,8 +40,10 @@ export default function TrackingDisplay({ transaction }: TrackingDisplayProps) {
 
   return (
     <div className="bg-white p-6 rounded-lg shadow-lg border-l-4 border-green-500">
-      <h3 className="text-xl font-bold mb-4 text-green-600">🎉 Shipment Created Successfully!</h3>
-      
+      <h3 className="text-xl font-bold mb-4 text-green-600">
+        🎉 Shipment Created Successfully!
+      </h3>
+
       <div className="bg-gray-50 p-4 rounded-lg mb-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
@@ -49,9 +54,13 @@ export default function TrackingDisplay({ transaction }: TrackingDisplayProps) {
           </div>
           <div>
             <strong className="text-gray-700">Status:</strong>
-            <div className={`text-lg font-semibold mt-1 ${
-              transaction.status === 'SUCCESS' ? 'text-green-600' : 'text-yellow-600'
-            }`}>
+            <div
+              className={`text-lg font-semibold mt-1 ${
+                transaction.status === "SUCCESS"
+                  ? "text-green-600"
+                  : "text-yellow-600"
+              }`}
+            >
               {transaction.status}
             </div>
           </div>
@@ -86,7 +95,7 @@ export default function TrackingDisplay({ transaction }: TrackingDisplayProps) {
         disabled={loading || !transaction.trackingNumber}
         className="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
       >
-        {loading ? '🔄 Tracking...' : '📦 Get Detailed Tracking Info'}
+        {loading ? "🔄 Tracking..." : "📦 Get Detailed Tracking Info"}
       </button>
 
       {trackingData && (
