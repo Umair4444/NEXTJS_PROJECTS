@@ -62,7 +62,7 @@ const Testimonials: React.FC<TestimonialsProps> = ({ testimonials }) => {
 
                 {/* Testimonial Content */}
                 <CardDescription className="text-base leading-relaxed">
-                  "{testimonial.content}"
+                  &apos;{testimonial.content}&apos;
                 </CardDescription>
               </CardHeader>
 
